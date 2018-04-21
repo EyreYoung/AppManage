@@ -1,5 +1,6 @@
-package com.saas.appmanage;
+package com.saas.appmanage.Mapper;
 
+import com.saas.appmanage.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;

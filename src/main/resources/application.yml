@@ -4,6 +4,14 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/saas
+    url: jdbc:mysql://localhost:3306/saas?useSSL=false
     username: root
     password: yyd961031
+
+  thymeleaf:
+    cache: false
+    prefix: classpath:/templates/
+    check-template-location: true
+    suffix: .html
+    encoding: UTF-8
+    mode: HTML
