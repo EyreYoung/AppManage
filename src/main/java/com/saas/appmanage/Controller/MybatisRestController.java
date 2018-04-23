@@ -1,6 +1,6 @@
 package com.saas.appmanage.Controller;
 
-import com.saas.appmanage.Admin;
+import com.saas.appmanage.Entity.Admin;
 import com.saas.appmanage.Mapper.AdminMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -1,4 +1,4 @@
-package com.saas.appmanage;
+package com.saas.appmanage.Entity;
 
 public class User {
     private int ID;

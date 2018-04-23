@@ -1,5 +1,6 @@
 package com.saas.appmanage;
 
+import com.saas.appmanage.Entity.Admin;
 import com.saas.appmanage.Mapper.AdminMapper;
 import com.saas.appmanage.Mapper.UserMapper;
 import org.junit.Assert;

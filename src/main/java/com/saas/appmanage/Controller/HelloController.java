@@ -12,27 +12,29 @@ import java.util.Map;
 import java.util.logging.Logger;
 
 @Controller
-@RequestMapping("/admin")
 public class HelloController {
     @Autowired
     private AdminMapper adminMapper;
 
-    @RequestMapping(value = "", method = RequestMethod.POST)
-    public JsonResult doAdminLogin(@RequestParam("account") String account,
-                                   @RequestParam("password") String password){
-        int adminID = -1;
-
-        try{
-            adminID = adminMapper.findID(account, password);
-        }catch (Exception e){
-            adminID = -1;
-        }
-        return adminID != -1 ? JsonResult.ok(adminID) : JsonResult.build(StatusCode.FAIL_RES_NOT_FOUND);
-    }
-
-    @RequestMapping(value = "/login")
+    @RequestMapping(value = "/index")
     public String index(){
         return "index";
     }
+
+    @RequestMapping(value = "/admin/login")
+    public String adminLogin(){
+        return "admin/adminLogin";
+    }
+
+    @RequestMapping(value = "/company/login")
+    public String companyLogin(){
+        return "company/companyLogin";
+    }
+
+    @RequestMapping(value = "/company/register")
+    public String companyRegister(){
+        return "company/companyRegister";
+    }
+
 
 }

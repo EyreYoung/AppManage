@@ -1,4 +1,4 @@
-package com.saas.appmanage;
+package com.saas.appmanage.Entity;
 
 import org.hibernate.validator.constraints.Length;
 
