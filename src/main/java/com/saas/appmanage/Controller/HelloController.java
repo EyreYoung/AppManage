@@ -26,6 +26,11 @@ public class HelloController {
         return "admin/adminLogin";
     }
 
+    @RequestMapping(value = "/admin/manage")
+    public String companyManage(){
+        return "admin/adminManage";
+    }
+
     @RequestMapping(value = "/company/login")
     public String companyLogin(){
         return "company/companyLogin";
@@ -35,6 +40,8 @@ public class HelloController {
     public String companyRegister(){
         return "company/companyRegister";
     }
+
+
 
 
 }

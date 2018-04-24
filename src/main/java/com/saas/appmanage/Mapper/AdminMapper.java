@@ -17,5 +17,5 @@ public interface  AdminMapper {
 
     @Select("select count(*) from admin where Account = #{account} and Password = #{password}")
     int findAdmin(@Param("account") String account,
-               @Param("password") String password);
+                  @Param("password") String password);
 }

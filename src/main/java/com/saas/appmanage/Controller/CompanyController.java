@@ -35,4 +35,20 @@ public class CompanyController {
         return map;
     }
 
+
+    @RequestMapping(value = "/doLogin", method = RequestMethod.POST)
+    public Map<String,Object> doCpyLogin(@RequestParam("account") String account,
+                                           @RequestParam("password") String password){
+        Map<String,Object> map = new HashMap<String,Object>();
+        int exist = 0;
+
+        try{
+            exist = svenderMapper.findCpy(account, password);
+        }catch (Exception e){
+            exist = 0;
+        }
+        map.put("response",exist);
+        return map;
+    }
+
 }
