@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>SaaS平台系统管理员登录</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link th:href="@{~/js/libs/bootstrap-3.3.7-dist/css/bootstrap.min.css}" rel="stylesheet">
+
+</head>
+<body>
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <nav class="navbar navbar-inverse" role="navigation">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">SaaS平台</a>
+                </div>
+
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <a href="../index">首页</a>
+                        </li>
+                        <li>
+                            <a href="#">分类</a>
+                        </li>
+                        <li>
+                            <a href="#">关于我们</a>
+                        </li>
+                    </ul>
+                    <form class="navbar-form navbar-left" role="search">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="请输入您要搜索的应用"/>
+                        </div> <button type="submit" class="btn btn-default">搜索</button>
+                    </form>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">登录<strong class="caret"></strong></a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="#">用户登录</a>
+                                </li>
+                                <li>
+                                    <a href="../admin/login">管理员登录</a>
+                                </li>
+                                <li>
+                                    <a href="login">开发者登录</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">开发者中心<strong class="caret"></strong></a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="register">开发者注册</a>
+                                </li>
+                                <li class="active">
+                                    <a href="#">接入应用</a>
+                                </li>
+                                <li>
+                                    <a href="#">应用管理</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+         </div>
+
+        <div class="row clearfix">
+
+            <div class="col-md-12 column">
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label for="appName" class="col-sm-2 control-label">应用名称</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" placeholder="请输入应用名称" required="required" id="appName" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="appCpy" class="col-sm-2 control-label">开发者名称</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" placeholder="请输入开发者名称" required="required" id="appCpy" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="appCata" class="col-sm-2 control-label">应用类别</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" id="appCata">
+                                <option>协同办公</option>
+                                <option>人力资源</option>
+                                <option>销售管理</option>
+                                <option>综合类</option>
+                                <option>考勤绩效</option>
+                                <option>财务管理</option>
+                                <option>便民工具</option>
+                                <option>文档处理</option>
+                                <option>协同审批</option>
+                                <option>3D展示</option>
+                                <option>图形图像处理</option>
+                                <option>设计工具</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="appVer" class="col-sm-2 control-label">应用版本</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" placeholder="请输入应用版本" id="appVer" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="appIntro" class="col-sm-2 control-label">应用介绍</label>
+                        <div class="col-sm-10">
+                            <textarea class="form-control" rows="3" placeholder="请输入应用简介" id="appIntro"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit" class="btn btn-primary" id="registerApp">注册应用</button>
+                            <button type="reset" class="btn btn-default">清除</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+
+
+        </div>
+
+
+    </div>
+</div>
+
+
+<script th:src="@{~/js/libs/bootstrap-3.3.7-dist/css/bootstrap-theme.min.css}"></script>
+<script th:src="@{~/js/libs/jquery-3.1.1/jquery-3.1.1.min.js}"></script>
+<script th:src="@{~/js/libs/bootstrap-3.3.7-dist/js/bootstrap.min.js}"></script>
+<script th:src="@{~/js/company.js}"></script>
+
+</body>
+</html>

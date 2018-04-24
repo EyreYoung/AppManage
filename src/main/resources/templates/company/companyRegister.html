@@ -11,7 +11,7 @@
 <div class="container">
     <div class="row clearfix">
         <div class="col-md-12 column">
-            <nav class="navbar navbar-default" role="navigation">
+            <nav class="navbar navbar-inverse" role="navigation">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                         <span class="sr-only">Toggle navigation</span>
@@ -47,21 +47,21 @@
                                     <a href="#">用户登录</a>
                                 </li>
                                 <li>
-                                    <a href="/admin/login">管理员登录</a>
+                                    <a href="../admin/login">管理员登录</a>
                                 </li>
                                 <li>
-                                    <a href="company/login">开发者登录</a>
+                                    <a href="login">开发者登录</a>
                                 </li>
                             </ul>
                         </li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">开发者中心<strong class="caret"></strong></a>
                             <ul class="dropdown-menu">
-                                <li>
-                                    <a href="company/register">开发者注册</a>
+                                <li class="active">
+                                    <a href="#">开发者注册</a>
                                 </li>
                                 <li>
-                                    <a href="#">接入应用</a>
+                                    <a href="registerapp">接入应用</a>
                                 </li>
                                 <li>
                                     <a href="#">应用管理</a>
@@ -89,9 +89,9 @@
                 <div class="col-md-5 column">
                     <form class="form-horizontal" role="form">
                         <div class="form-group">
-                            <label for="regAcc" class="col-sm-2 control-label">用户名</label>
+                            <label for="appName" class="col-sm-2 control-label">应用名称</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" placeholder="请输入用户名" required="required" id="regAcc" />
+                                <input type="text" class="form-control" placeholder="请输入用户名" required="required" id="appName" />
                             </div>
                         </div>
 

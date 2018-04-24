@@ -41,7 +41,10 @@ public class HelloController {
         return "company/companyRegister";
     }
 
-
+    @RequestMapping(value = "/company/registerapp")
+    public String companyRegisterApp(){
+        return "company/RegisterApp";
+    }
 
 
 }

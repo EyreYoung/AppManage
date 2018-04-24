@@ -47,3 +47,27 @@ $('#companyLogin').click(function () {
 });
 
 
+$('#registerApp').click(function (){
+    var name = $('#appName').val();
+    var cpy = $('#appCpy').val();
+    var cata = $('#appCata').val();
+    var intro = $('#appIntro').val();
+    var ver = $('#appVer').val();
+    console.log(name+cpy+cata+intro+ver);
+    $.post(
+        '/company/doRegisterApp',
+        {
+            name:name,
+            svname:cpy,
+            catagory:cata,
+            intro:intro,
+            version:ver
+        },
+        function (data) {
+            console.log(data);
+            window.alert(data.response);
+        }
+        );
+});
+
+

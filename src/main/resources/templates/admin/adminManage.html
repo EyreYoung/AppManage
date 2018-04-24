@@ -5,13 +5,16 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link th:href="@{~/js/libs/bootstrap-3.3.7-dist/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{~/js/libs/bootstrap-table-1.11.0/dist/bootstrap-table.css}" rel="stylesheet">
+
+
 <body>
 
 
 <div class="container">
     <div class="row clearfix">
         <div class="col-md-12 column">
-            <nav class="navbar navbar-default" role="navigation">
+            <nav class="navbar navbar-inverse" role="navigation">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                         <span class="sr-only">Toggle navigation</span>
@@ -61,7 +64,7 @@
                                     <a href="../company/register">开发者注册</a>
                                 </li>
                                 <li>
-                                    <a href="#">接入应用</a>
+                                    <a href="../company/registerapp">接入应用</a>
                                 </li>
                                 <li>
                                     <a href="#">应用管理</a>
@@ -70,172 +73,37 @@
                         </li>
                     </ul>
                 </div>
-
             </nav>
 
-            <div class="container-fluid">
-                <div class="row-fluid">
-                    <div class="span12">
-                        <table class="table table-bordered table-hover">
-                            <thead>
-                            <tr>
-                                <th>
-                                    编号
-                                </th>
-                                <th>
-                                    应用名
-                                </th>
-                                <th>
-                                    注册时间
-                                </th>
-                                <th>
-                                    类别
-                                </th>
-                                <th>
-                                    开发者
-                                </th>
-                                <th>
-                                    应用评分
-                                </th>
-                                <th>
-                                    应用版本
-                                </th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>
-                                    1
-                                </td>
-                                <td>
-                                    TB - Monthly
-                                </td>
-                                <td>
-                                    01/04/2012
-                                </td>
-                                <td>
-                                    Default
-                                </td>
-                                <td>
-                                </td>
-                                <td>
-                                </td>
-                                <td>
-                                </td>
-                            </tr>
-                            <tr class="success">
-                                <td>
-                                    1
-                                </td>
-                                <td>
-                                    TB - Monthly
-                                </td>
-                                <td>
-                                    01/04/2012
-                                </td>
-                                <td>
-                                    Approved
-                                </td>
-                                <td>
-                                </td>
-                                <td>
-                                </td>
-                                <td>
-                                </td>
-                            </tr>
-                            <tr class="error">
-                                <td>
-                                    2
-                                </td>
-                                <td>
-                                    TB - Monthly
-                                </td>
-                                <td>
-                                    02/04/2012
-                                </td>
-                                <td>
-                                    Declined
-                                </td>
-                                <td>
-                                </td>
-                                <td>
-                                </td>
-                                <td>
-                                </td>
-                            </tr>
-                            <tr class="warning">
-                                <td>
-                                    3
-                                </td>
-                                <td>
-                                    TB - Monthly
-                                </td>
-                                <td>
-                                    03/04/2012
-                                </td>
-                                <td>
-                                    Pending
-                                </td>
-                                <td>
-                                </td>
-                                <td>
-                                </td>
-                                <td>
-                                </td>
-                            </tr>
-                            <tr class="info">
-                                <td>
-                                    4
-                                </td>
-                                <td>
-                                    TB - Monthly
-                                </td>
-                                <td>
-                                    04/04/2012
-                                </td>
-                                <td>
-                                    Call in to confirm
-                                </td>
-                                <td>
-                                </td>
-                                <td>
-                                </td>
-                                <td>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
+
+    <div class="row clearfix">
+        <div class="col-md-3 column">
+
+
+
+        </div>
+        <div class="col-md-9">
+
+            <table id="appTable" class="table"></table>
+
+        </div>
+    </div>
+
+
+
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
 <script th:src="@{~/js/libs/bootstrap-3.3.7-dist/css/bootstrap-theme.min.css}"></script>
 <script th:src="@{~/js/libs/jquery-3.1.1/jquery-3.1.1.min.js}"></script>
 <script th:src="@{~/js/libs/bootstrap-3.3.7-dist/js/bootstrap.min.js}"></script>
+<script th:src="@{~/js/libs/bootstrap-table-1.11.0/dist/bootstrap-table.js}"></script>
+<script th:src="@{~/js/libs/bootstrap-table-1.11.0/dist/locale/bootstrap-table-zh-CN.js}"></script>
+
+<script th:src="@{~/js/admin.js}"></script>
 
 </body>
 </html>

@@ -37,7 +37,7 @@ public class CompanyController {
 
 
     @RequestMapping(value = "/doLogin", method = RequestMethod.POST)
-    public Map<String,Object> doCpyLogin(@RequestParam("account") String account,
+    public Map<String,Object> doAdminLogin(@RequestParam("account") String account,
                                            @RequestParam("password") String password){
         Map<String,Object> map = new HashMap<String,Object>();
         int exist = 0;
