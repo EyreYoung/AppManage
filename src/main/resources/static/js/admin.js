@@ -23,12 +23,12 @@ $('#login').click(function () {
 var $table;
 
 
-// function InitAppTable() {
+function InitAppTable() {
 //     $table =
-        $('#appTable').bootstrapTable({
+    $('#appTable').bootstrapTable({
         url: '/admin/doManage',
         method: 'POST',
-        toolbar:'#toolbar',
+        toolbar: '#toolbar',
         striped: true,                      //是否显示行间隔色
         cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
         pagination: true,                   //是否显示分页（*）
@@ -46,39 +46,53 @@ var $table;
         clickToSelect: true,                //是否启用点击选中行
         singleSelect: true,
         //height: 500,                      //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
-        uniqueId: "id",                     //每一行的唯一标识，一般为主键列
+        //uniqueId: "ID",                     //每一行的唯一标识，一般为主键列
         showToggle: true,                   //是否显示详细视图和列表视图的切换按钮
         cardView: false,                    //是否显示详细视图
         detailView: false,                  //是否显示父子表
 
-        columns:[
+        columns: [
             {
-                field:'id',
-                title:'序号'
-            },{
-            field:'name',
-                title:'应用名称'
-            },{
-            field:'type',
-                title:'收费方式'
-            },{
-            field:'catagory',
-                title:'应用类别'
-            },{
-            field:'star',
-                title:'评分'
-            },{
-            field:'svenderName',
-                title:'开发者'
-            },{
-            field:'regDate',
-                title:'注册日期'
-            },{
-            field:'version',
-                title:'版本'
+                field: 'no',
+                title: '序号'
+            }, {
+                field: 'name',
+                title: '应用名称'
+            }, {
+                field: 'type',
+                title: '收费方式'
+            }, {
+                field: 'catagory',
+                title: '应用类别'
+            }, {
+                field: 'star',
+                title: '评分'
+            }, {
+                field: 'svenderName',
+                title: '开发者'
+            }, {
+                field: 'regDate',
+                title: '注册日期'
+            }, {
+                field: 'version',
+                title: '版本'
             }
         ]
 
     });
+}
 
+InitAppTable();
 
+$(document).ready(function() {
+    $('#viewapps').click(function () {
+        document.getElementById("admin-manage-main").innerHTML = "<table id=\"appTable\" class=\"table\"></table>";
+        InitAppTable();
+    });
+    $('#viewadmins').click(function () {
+        document.getElementById("admin-manage-main").innerHTML = "<p> 查看管理员们 </p>";
+    });
+    $('#viewcpys').click(function () {
+        document.getElementById("admin-manage-main").innerHTML = "<p> 查看开发者们 </p>";
+    });
+});

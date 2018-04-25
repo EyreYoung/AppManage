@@ -6,7 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link th:href="@{~/js/libs/bootstrap-3.3.7-dist/css/bootstrap.min.css}" rel="stylesheet">
     <link th:href="@{~/js/libs/bootstrap-table-1.11.0/dist/bootstrap-table.css}" rel="stylesheet">
+    <link th:herf="@{~/css/admincollapse.css}" rel="stylesheet" type="text/css"/>
 
+
+
+
+
+
+
+</head>
 
 <body>
 
@@ -83,8 +91,58 @@
 
 
 
+            <ul id="main-nav" class="nav nav-tabs nav-stacked" style="">
+
+                <li>
+                    <a href="#userManage" class="nav-header collapsed" data-toggle="collapse">
+                        <i class="glyphicon glyphicon-cog"></i>
+                        用户管理
+                        <span class="pull-right glyphicon glyphicon-chevron-down"></span>
+                    </a>
+                    <ul id="userManage" class="nav nav-list collapse secondmenu" style="height: 10px;">
+                        <li id="viewadmins"><a href="#"><i class="glyphicon glyphicon-user"></i>查看用户</a></li>
+                        <li id="viewcpys"><a href="#"><i class="glyphicon glyphicon-asterisk"></i>查看开发者</a></li>
+                        <li><a href="#"><i class="glyphicon glyphicon-edit"></i>修改密码</a></li>
+                        <li><a href="#"><i class="glyphicon glyphicon-eye-open"></i>日志查看</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#systemSetting" class="nav-header collapsed" data-toggle="collapse">
+                        <i class="glyphicon glyphicon-credit-card"></i>
+                        应用管理
+                        <span class="pull-right glyphicon glyphicon-chevron-down"></span>
+                    </a>
+                    <ul id="systemSetting" class="nav nav-list collapse secondmenu" style="height: 10px;">
+                        <li id="viewapps"><a href="#"><i class="glyphicon glyphicon-user"></i>查看应用</a></li>
+                        <li><a href="#"><i class="glyphicon glyphicon-asterisk"></i>角色管理</a></li>
+                        <li><a href="#"><i class="glyphicon glyphicon-edit"></i>修改密码</a></li>
+                        <li><a href="#"><i class="glyphicon glyphicon-eye-open"></i>日志查看</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="glyphicon glyphicon-globe"></i>
+                        分发配置
+                    </a>
+                </li>
+                <li>
+                    <a href="./charts.html">
+                        <i class="glyphicon glyphicon-calendar"></i>
+                        图表统计
+                    </a>
+                </li>
+                <li>
+                    <a href="/admin/login">
+                        <i class="glyphicon glyphicon-fire"></i>
+                        退出登录
+                    </a>
+                </li>
+            </ul>
+
+
+
         </div>
-        <div class="col-md-9">
+        <div class="col-md-9" id="admin-manage-main">
 
             <table id="appTable" class="table"></table>
 

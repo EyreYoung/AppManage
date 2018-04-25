@@ -11,7 +11,7 @@ import java.util.List;
 
 @Mapper
 public interface AppMapper {
-    @Select("select a.Name,s.Company as SVenderName,regDate,Type,Catagory,Intro,Star,Rec,Version from app as a,svender as s where a.SVID = s.ID")
+    @Select("select (@i:=@i+1) as No,a.ID,a.Name,s.Company as SVenderName,regDate,Type,Catagory,Intro,Star,Rec,Version from app as a,(select @i:=0) as it,svender as s where a.SVID = s.ID order by regDate")
     List<App> SelectApp();
 
     @Insert("insert into app(Name,SVID,regDate,Catagory,Intro,Version) values(#{name},(select ID from svender where Company = #{svname}),#{regdate},#{catagory},#{intro},#{version})")

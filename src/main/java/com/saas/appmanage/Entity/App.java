@@ -3,7 +3,8 @@ package com.saas.appmanage.Entity;
 import java.util.Date;
 
 public class App {
-//    private int ID;
+    private int No;
+    private int ID;
     private String Name;
     private String SVenderName;
     private String regDate;
@@ -14,13 +15,21 @@ public class App {
     private String Rec;
     private String Version;
 
-//    public int getID() {
-//        return ID;
-//    }
-//
-//    public void setID(int ID) {
-//        this.ID = ID;
-//    }
+    public int getNo() {
+        return No;
+    }
+
+    public void setNo(int no) {
+        No = no;
+    }
+
+    public int getID() {
+        return ID;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
+    }
 
     public String getName() {
         return Name;
