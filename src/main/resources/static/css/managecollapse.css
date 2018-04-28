@@ -1,14 +1,6 @@
-#test {
-    color:red;
-}
-
-
-#main-nav {
-    margin-left: 1px;
-}
 #main-nav.nav-tabs.nav-stacked > li > a {
     padding: 10px 8px;
-    font-size: 12px;
+    font-size: 16px;
     font-weight: 600;
     color: #4A515B;
     background: #E9E9E9;
@@ -47,18 +39,11 @@
 }
 /*定义二级菜单样式*/
 .secondmenu a {
-    font-size: 10px;
+    font-size: 14px;
     color: #4A515B;
     text-align: center;
 }
 .navbar-static-top {
     background-color: #212121;
     margin-bottom: 5px;
-}
-.navbar-brand {
-    background: url('') no-repeat 10px 8px;
-    display: inline-block;
-    vertical-align: middle;
-    padding-left: 50px;
-    color: #fff;
 }

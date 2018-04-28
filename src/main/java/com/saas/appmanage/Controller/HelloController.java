@@ -13,8 +13,6 @@ import java.util.logging.Logger;
 
 @Controller
 public class HelloController {
-    @Autowired
-    private AdminMapper adminMapper;
 
     @RequestMapping(value = "/index")
     public String index(){
@@ -44,6 +42,11 @@ public class HelloController {
     @RequestMapping(value = "/company/registerapp")
     public String companyRegisterApp(){
         return "company/RegisterApp";
+    }
+
+    @RequestMapping(value = "/apps")
+    public String showApps(){
+        return "app/appCatagory";
     }
 
 

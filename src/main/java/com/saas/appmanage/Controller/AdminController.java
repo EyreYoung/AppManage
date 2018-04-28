@@ -1,10 +1,13 @@
 package com.saas.appmanage.Controller;
 
 
+import com.saas.appmanage.Entity.Admin;
 import com.saas.appmanage.Entity.App;
+import com.saas.appmanage.Entity.SVender;
 import com.saas.appmanage.JsonResult;
 import com.saas.appmanage.Mapper.AdminMapper;
 import com.saas.appmanage.Mapper.AppMapper;
+import com.saas.appmanage.Mapper.SVenderMapper;
 import com.saas.appmanage.StatusCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +28,9 @@ public class AdminController {
     @Autowired
     private AppMapper appMapper;
 
+    @Autowired
+    private SVenderMapper svenderMapper;
+
     @RequestMapping(value = {"/doLogin","/doLogin/"}, method = RequestMethod.POST)
     public Map<String,Object> doAdminLogin(@RequestParam("account") String account,
                                            @RequestParam("password") String password){
@@ -40,9 +46,20 @@ public class AdminController {
         return map;
     }
 
-    @RequestMapping(value = "/doManage", method = RequestMethod.POST)
+    @RequestMapping(value = "/queryApps")
     public List<App> selectAllApp(){
         return appMapper.SelectApp();
     }
+
+    @RequestMapping(value = "/queryAdmins",method = RequestMethod.POST)
+    public List<Admin> queryAdmins(){
+        return adminMapper.queryAdmins();
+    }
+
+    @RequestMapping(value = "/queryCpys",method = RequestMethod.POST)
+    public List<SVender> queryCpys(){
+        return svenderMapper.queryCpys();
+    }
+
 
 }

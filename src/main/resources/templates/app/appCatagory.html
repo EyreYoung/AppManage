@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>SaaS平台系统管理员登录</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link th:href="@{~/js/libs/bootstrap-3.3.7-dist/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{~/css/bodypadding.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{~/css/managecollapse.css}" rel="stylesheet" type="text/css">
+
+</head>
+<body>
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+                <div class="container">
+
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="#">SaaS平台</a>
+                    </div>
+
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav">
+                            <li>
+                                <a href="/index">首页</a>
+                            </li>
+                            <li class="active">
+                                <a href="#">分类</a>
+                            </li>
+                            <li>
+                                <a href="#">关于我们</a>
+                            </li>
+                        </ul>
+                        <form class="navbar-form navbar-left" role="search">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="请输入您要搜索的应用"/>
+                            </div> <button type="submit" class="btn btn-default">搜索</button>
+                        </form>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">登录<strong class="caret"></strong></a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a href="#">用户登录</a>
+                                    </li>
+                                    <li>
+                                        <a href="/admin/login">管理员登录</a>
+                                    </li>
+                                    <li>
+                                        <a href="company/login">开发者登录</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">开发者中心<strong class="caret"></strong></a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a href="company/register">开发者注册</a>
+                                    </li>
+                                    <li>
+                                        <a href="company/registerapp">接入应用</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">应用管理</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+
+    <div class="row clearfix">
+        <div class="col-md-3 column">
+            <ul id="main-nav" class="nav nav-tabs nav-stacked" style="">
+                <li>
+                    <a href="#">
+                        <i class="glyphicon glyphicon-cog"></i>
+                        全部应用
+                    </a>
+
+                <li>
+                    <a href="#CompanyManage" class="nav-header collapsed" data-toggle="collapse">
+                        <i class="glyphicon glyphicon-cog"></i>
+                        企业管理
+                        <span class="pull-right glyphicon glyphicon-chevron-down"></span>
+                    </a>
+                    <ul id="CompanyManage" class="nav nav-list collapse secondmenu" style="height: 10px;">
+                        <li><a href="#"><i class="glyphicon glyphicon-user"></i>协同办公</a></li>
+                        <li><a href="#"><i class="glyphicon glyphicon-asterisk"></i>人力资源</a></li>
+                        <li><a href="#"><i class="glyphicon glyphicon-edit"></i>销售管理</a></li>
+                        <li><a href="#"><i class="glyphicon glyphicon-eye-open"></i>综合类</a></li>
+                        <li><a href="#"><i class="glyphicon glyphicon-eye-open"></i>考勤绩效</a></li>
+                        <li><a href="#"><i class="glyphicon glyphicon-eye-open"></i>财务管理</a></li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="#ToolType" class="nav-header collapsed" data-toggle="collapse">
+                        <i class="glyphicon glyphicon-credit-card"></i>
+                        工具类
+                        <span class="pull-right glyphicon glyphicon-chevron-down"></span>
+                    </a>
+                    <ul id="ToolType" class="nav nav-list collapse secondmenu" style="height: 10px;">
+                        <li><a href="#"><i class="glyphicon glyphicon-user"></i>便民工具</a></li>
+                        <li><a href="#"><i class="glyphicon glyphicon-asterisk"></i>文档处理</a></li>
+                        <li><a href="#"><i class="glyphicon glyphicon-edit"></i>协同审批</a></li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="#IndustrialDesign" class="nav-header collapsed" data-toggle="collapse">
+                        <i class="glyphicon glyphicon-globe"></i>
+                        工业设计
+                        <span class="pull-right glyphicon glyphicon-chevron-down"></span>
+                    </a>
+                    <ul id="IndustrialDesign" class="nav nav-list collapse secondmenu" style="height: 10px;">
+                        <li><a href="#"><i class="glyphicon glyphicon-user"></i>3D展示</a></li>
+                        <li><a href="#"><i class="glyphicon glyphicon-asterisk"></i>图形图像处理</a></li>
+                        <li><a href="#"><i class="glyphicon glyphicon-edit"></i>设计工具</a></li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="#BigDate" class="nav-header collapsed" data-toggle="collapse">
+                        <i class="glyphicon glyphicon-calendar"></i>
+                        大数据
+                        <span class="pull-right glyphicon glyphicon-chevron-down"></span>
+                    </a>
+                    <ul id="BigDate" class="nav nav-list collapse secondmenu" style="height: 10px;">
+                        <li><a href="#"><i class="glyphicon glyphicon-user"></i>数据分析</a></li>
+                        <li><a href="#"><i class="glyphicon glyphicon-asterisk"></i>数据展示</a></li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="#EngineerSoftware" class="nav-header collapsed" data-toggle="collapse">
+                        <i class="glyphicon glyphicon-fire"></i>
+                        工程软件
+                        <span class="pull-right glyphicon glyphicon-chevron-down"></span>
+                    </a>
+                    <ul id="EngineerSoftware" class="nav nav-list collapse secondmenu" style="height: 10px;">
+                        <li><a href="#"><i class="glyphicon glyphicon-user"></i>生产制造</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-9" id="admin-manage-main">
+
+            <ol class="breadcrumb">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">2013</a></li>
+                <li class="active">十一月</li>
+            </ol>
+
+            <p style="font-size: 30px;font-style: normal">应用列表</p>
+
+            <div class="row">
+                <div class="col-md-12" id="appList">
+                    <div class="thumbnail">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <img alt="300x300" th:src="@{~/img/1489646065480.jpg}" th:height="100px" th:width="100px" />
+                            </div>
+                            <div class="col-md-8">
+                                <a href="#">应用名称</a>
+                                <p>应用介绍....................</p>
+                                <span>
+                                    <b>开发者：</b>
+                                    开发者...
+                                </span>
+                            </div>
+                            <div class="col-md-2">
+                                <div style="vertical-align: middle;horiz-align: center">
+                                    <div>
+                                        <a>用户评分：</a>
+                                        <b>分数...</b>
+                                    </div>
+                                    <a class="btn btn-primary" href="#">查看详情</a>
+                                    <a class="btn btn-secondary" href="#">立即试用</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+
+<script th:src="@{~/js/libs/bootstrap-3.3.7-dist/css/bootstrap-theme.min.css}"></script>
+<script th:src="@{~/js/libs/jquery-3.1.1/jquery-3.1.1.min.js}"></script>
+<script th:src="@{~/js/libs/bootstrap-3.3.7-dist/js/bootstrap.min.js}"></script>
+<script th:src="@{~/js/applist.js}"></script>
+
+
+</body>
+</html>

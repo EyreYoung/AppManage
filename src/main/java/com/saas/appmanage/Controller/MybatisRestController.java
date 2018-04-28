@@ -20,9 +20,9 @@ public class MybatisRestController {
         return admin;
     }
 
-    @RequestMapping(value = "/queryAll", method = RequestMethod.GET)
+    @RequestMapping(value = "/admin/queryAll", method = RequestMethod.POST)
     public List<Admin> findAllAdmin(){
-        List<Admin> admins = adminMapper.query();
+        List<Admin> admins = adminMapper.queryAdmins();
         return admins;
     }
 }

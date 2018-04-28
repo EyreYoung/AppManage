@@ -7,8 +7,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 //import java.sql.Date;
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -42,6 +44,15 @@ public class AppController {
         }
         map.put("response",response);
         return map;
+    }
+
+    @RequestMapping(value = "/company/uploadimg",method = RequestMethod.POST)
+    public String uploadImg(@RequestParam("file")CommonsMultipartFile file) throws Exception{
+        String path="D:/GitHub/AppManage/src/main/resources/static/img/"+file.getOriginalFilename();
+        File newFile = new File(path);
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("pathUrl", path);
+        return path;
     }
 
 }

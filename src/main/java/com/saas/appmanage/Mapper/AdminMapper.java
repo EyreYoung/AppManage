@@ -13,9 +13,10 @@ public interface  AdminMapper {
     Admin findByAccount(@Param("Account") String Account);
 
     @Select("select * from admin")
-    List<Admin> query();
+    List<Admin> queryAdmins();
 
     @Select("select count(*) from admin where Account = #{account} and Password = #{password}")
     int findAdmin(@Param("account") String account,
                   @Param("password") String password);
+
 }

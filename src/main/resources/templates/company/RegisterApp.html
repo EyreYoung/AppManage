@@ -4,75 +4,82 @@
     <title>SaaS平台系统管理员登录</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link th:href="@{~/js/libs/bootstrap-3.3.7-dist/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{~/js/libs/bootstrap-3.3.7-dist/css/bootstrap.css}" rel="stylesheet">
+    <link th:href="@{~/js/libs/bootstrap-select-1.12.4/dist/css/bootstrap-select.min.css}" rel="stylesheet">
+    <link th:href="@{~/js/libs/bootstrap-fileinput-master/css/fileinput.css}" rel="stylesheet">
+    <link th:href="@{~/css/bodypadding.css}" rel="stylesheet" type="text/css"/>
 
 </head>
 <body>
 <div class="container">
     <div class="row clearfix">
         <div class="col-md-12 column">
-            <nav class="navbar navbar-inverse" role="navigation">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="#">SaaS平台</a>
-                </div>
+            <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="#">SaaS平台</a>
+                    </div>
 
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav">
-                        <li>
-                            <a href="../index">首页</a>
-                        </li>
-                        <li>
-                            <a href="#">分类</a>
-                        </li>
-                        <li>
-                            <a href="#">关于我们</a>
-                        </li>
-                    </ul>
-                    <form class="navbar-form navbar-left" role="search">
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="请输入您要搜索的应用"/>
-                        </div> <button type="submit" class="btn btn-default">搜索</button>
-                    </form>
-                    <ul class="nav navbar-nav navbar-right">
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">登录<strong class="caret"></strong></a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a href="#">用户登录</a>
-                                </li>
-                                <li>
-                                    <a href="../admin/login">管理员登录</a>
-                                </li>
-                                <li>
-                                    <a href="login">开发者登录</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">开发者中心<strong class="caret"></strong></a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a href="register">开发者注册</a>
-                                </li>
-                                <li class="active">
-                                    <a href="#">接入应用</a>
-                                </li>
-                                <li>
-                                    <a href="#">应用管理</a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav">
+                            <li>
+                                <a href="../index">首页</a>
+                            </li>
+                            <li>
+                                <a href="/apps">分类</a>
+                            </li>
+                            <li>
+                                <a href="#">关于我们</a>
+                            </li>
+                        </ul>
+                        <form class="navbar-form navbar-left" role="search">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="请输入您要搜索的应用"/>
+                            </div> <button type="submit" class="btn btn-default">搜索</button>
+                        </form>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">登录<strong class="caret"></strong></a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a href="#">用户登录</a>
+                                    </li>
+                                    <li>
+                                        <a href="../admin/login">管理员登录</a>
+                                    </li>
+                                    <li>
+                                        <a href="login">开发者登录</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">开发者中心<strong class="caret"></strong></a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a href="register">开发者注册</a>
+                                    </li>
+                                    <li class="active">
+                                        <a href="#">接入应用</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">应用管理</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </nav>
          </div>
-
+    </div>
+</div>
+<div class="container">
         <div class="row clearfix">
 
             <div class="col-md-12 column">
@@ -94,19 +101,32 @@
                     <div class="form-group">
                         <label for="appCata" class="col-sm-2 control-label">应用类别</label>
                         <div class="col-sm-10">
-                            <select class="form-control" id="appCata">
-                                <option>协同办公</option>
-                                <option>人力资源</option>
-                                <option>销售管理</option>
-                                <option>综合类</option>
-                                <option>考勤绩效</option>
-                                <option>财务管理</option>
-                                <option>便民工具</option>
-                                <option>文档处理</option>
-                                <option>协同审批</option>
-                                <option>3D展示</option>
-                                <option>图形图像处理</option>
-                                <option>设计工具</option>
+                            <select class="selectpicker form-control" title="请选择应用类型" data-live-search="true" required="required" id="appCata">
+                                <optgroup label="企业管理">
+                                    <option>协同办公</option>
+                                    <option>人力资源</option>
+                                    <option>销售管理</option>
+                                    <option>综合类</option>
+                                    <option>考勤绩效</option>
+                                    <option>财务管理</option>
+                                </optgroup>
+                                <optgroup label="工具类">
+                                    <option>便民工具</option>
+                                    <option>文档处理</option>
+                                    <option>协同审批</option>
+                                </optgroup>
+                                <optgroup label="工业设计">
+                                    <option>3D展示</option>
+                                    <option>图形图像处理</option>
+                                    <option>设计工具</option>
+                                </optgroup>
+                                <optgroup label="大数据">
+                                    <option>数据分析</option>
+                                    <option>数据展示</option>
+                                </optgroup>
+                                <optgroup label="工程软件">
+                                    <option>生产制造</option>
+                                </optgroup>
                             </select>
                         </div>
                     </div>
@@ -115,6 +135,14 @@
                         <label for="appVer" class="col-sm-2 control-label">应用版本</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" placeholder="请输入应用版本" id="appVer" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="appImg" class="col-sm-2 control-label">应用图片</label>
+                        <div class="col-sm-10">
+                            <input type="file"  data-show-caption="true" class="form-control" placeholder="请输入应用版本" id="appImg" />
+                            <p class="help-block">支持jpg、jpeg、png格式，大小不超过2.0M</p>
                         </div>
                     </div>
 
@@ -133,19 +161,16 @@
                     </div>
                 </form>
             </div>
-
-
-
         </div>
 
-
-    </div>
 </div>
 
-
-<script th:src="@{~/js/libs/bootstrap-3.3.7-dist/css/bootstrap-theme.min.css}"></script>
+<script th:src="@{~/js/libs/bootstrap-3.3.7-dist/css/bootstrap-theme.css}"></script>
 <script th:src="@{~/js/libs/jquery-3.1.1/jquery-3.1.1.min.js}"></script>
 <script th:src="@{~/js/libs/bootstrap-3.3.7-dist/js/bootstrap.min.js}"></script>
+<script th:src="@{~/js/libs/bootstrap-select-1.12.4/dist/js/bootstrap-select.min.js}"></script>
+<script th:src="@{~/js/libs/bootstrap-fileinput-master/js/fileinput.min.js}"></script>
+<script th:src="@{~/js/libs/bootstrap-fileinput-master/js/locales/zh.js}"></script>
 <script th:src="@{~/js/company.js}"></script>
 
 </body>
