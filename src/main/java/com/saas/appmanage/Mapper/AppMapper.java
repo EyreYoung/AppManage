@@ -21,4 +21,7 @@ public interface AppMapper {
                   @Param("catagory") String catagory,
                   @Param("intro") String intro,
                   @Param("version") String version);
+
+    @Select("select (@i:=@i+1) as No,a.ID,a.Name,s.Company as SVenderName,regDate,Type,Catagory,Intro,Star,Rec,Version from app as a,(select @i:=0) as it,svender as s where a.SVID = s.ID and a.Catagory = #{catagory} order by regDate")
+    List<App> SelectAppByCata(@Param("catagory") String catagory);
 }

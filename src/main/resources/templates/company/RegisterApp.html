@@ -1,16 +1,24 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>SaaS平台系统管理员登录</title>
+    <title>SaaS平台开发者中心</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link th:href="@{~/js/libs/bootstrap-3.3.7-dist/css/bootstrap.css}" rel="stylesheet">
     <link th:href="@{~/js/libs/bootstrap-select-1.12.4/dist/css/bootstrap-select.min.css}" rel="stylesheet">
     <link th:href="@{~/js/libs/bootstrap-fileinput-master/css/fileinput.css}" rel="stylesheet">
+    <link th:href="@{~/css/managecollapse.css}" rel="stylesheet" type="text/css">
     <link th:href="@{~/css/bodypadding.css}" rel="stylesheet" type="text/css"/>
 
 </head>
 <body>
+
+
+<textarea id="step2" style="display:none">
+
+</textarea>
+
+
 <div class="container">
     <div class="row clearfix">
         <div class="col-md-12 column">
@@ -23,7 +31,7 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="#">SaaS平台</a>
+                        <a class="navbar-brand" href="/index">SaaS平台</a>
                     </div>
 
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -81,8 +89,51 @@
 </div>
 <div class="container">
         <div class="row clearfix">
+            <div class="col-md-3 column">
+                <ul id="main-nav" class="nav nav-tabs nav-stacked" style="">
+                    <li id="regApp">
+                        <a href="#">
+                            <i class="glyphicon glyphicon-globe"></i>
+                            注册应用
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#systemSetting" class="nav-header collapsed" data-toggle="collapse" bgcolor="#080808">
+                            <i class="glyphicon glyphicon-credit-card"></i>
+                            应用管理
+                            <span class="pull-right glyphicon glyphicon-chevron-down"></span>
+                        </a>
+                        <ul id="systemSetting" class="nav nav-list collapse secondmenu" style="height: 10px;">
+                            <li id="viewapps"><a href="#"><i class="glyphicon glyphicon-user"></i>查看应用</a></li>
+                            <li><a href="#"><i class="glyphicon glyphicon-asterisk"></i>角色管理</a></li>
+                            <li><a href="#"><i class="glyphicon glyphicon-edit"></i>修改密码</a></li>
+                            <li><a href="#"><i class="glyphicon glyphicon-eye-open"></i>日志查看</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="glyphicon glyphicon-globe"></i>
+                            分发配置
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="glyphicon glyphicon-calendar"></i>
+                            图表统计
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/company/login">
+                            <i class="glyphicon glyphicon-fire"></i>
+                            退出登录
+                        </a>
+                    </li>
+                </ul>
+                <input type="hidden" th:value="${cpy_id}" id="cpyID"/>
+            </div>
 
-            <div class="col-md-12 column">
+            <div class="col-md-9 column" id="company-manage-main">
+                <h1>填写基本信息</h1>
                 <form class="form-horizontal" role="form">
                     <div class="form-group">
                         <label for="appName" class="col-sm-2 control-label">应用名称</label>
@@ -141,7 +192,7 @@
                     <div class="form-group">
                         <label for="appImg" class="col-sm-2 control-label">应用图片</label>
                         <div class="col-sm-10">
-                            <input type="file"  data-show-caption="true" class="form-control" placeholder="请输入应用版本" id="appImg" />
+                            <input type="file"  data-show-caption="true" class="form-control" placeholder="请上传软件图标" id="appImg" />
                             <p class="help-block">支持jpg、jpeg、png格式，大小不超过2.0M</p>
                         </div>
                     </div>
@@ -155,14 +206,13 @@
 
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
-                            <button type="submit" class="btn btn-primary" id="registerApp">注册应用</button>
+                            <button type="submit" class="btn btn-primary" id="registerApp">下一步</button>
                             <button type="reset" class="btn btn-default">清除</button>
                         </div>
                     </div>
                 </form>
             </div>
         </div>
-
 </div>
 
 <script th:src="@{~/js/libs/bootstrap-3.3.7-dist/css/bootstrap-theme.css}"></script>
@@ -172,6 +222,7 @@
 <script th:src="@{~/js/libs/bootstrap-fileinput-master/js/fileinput.min.js}"></script>
 <script th:src="@{~/js/libs/bootstrap-fileinput-master/js/locales/zh.js}"></script>
 <script th:src="@{~/js/company.js}"></script>
+<script th:src="@{~/js/cpymanage.js}"></script>
 
 </body>
 </html>

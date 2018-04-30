@@ -6,6 +6,7 @@ import com.saas.appmanage.StatusCode;
 import org.apache.juli.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -49,5 +50,9 @@ public class HelloController {
         return "app/appCatagory";
     }
 
-
+    @RequestMapping(value = "/company/manage")
+    public String companyManage(Model model, @RequestParam("cpy_id") int cpyid){
+        model.addAttribute("cpy_id",cpyid);
+        return "company/RegisterApp";
+    }
 }

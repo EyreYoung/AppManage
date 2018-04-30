@@ -18,10 +18,13 @@ public interface SVenderMapper {
                        @Param("tel") String tel);
 
 
-    @Select("select count(*) from svender where Account = #{account} and Password = #{password}")
+    @Select("select id from svender where Account = #{account} and Password = #{password}")
     int findCpy (@Param("account") String account,
                  @Param("password") String password);
 
     @Select("select * from svender")
     List<SVender> queryCpys();
+
+    @Select("select Company from svender where ID = #{id}")
+    String findCpyByID(@Param("id") int id);
 }

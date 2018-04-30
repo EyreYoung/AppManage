@@ -40,7 +40,9 @@ $('#companyLogin').click(function () {
         },
         function (data) {
             console.log(data);
-            window.alert(data.response);
+            if(data.response != 0){
+                window.location.replace("/company/manage?cpy_id="+data.response);
+            }
 
         }
     );
@@ -98,6 +100,5 @@ function initFileInput(ctrlName,uploadUrl) {
 $(function () {
     var path="/company/uploadimg";
     initFileInput("appImg",path);
-
 })
 

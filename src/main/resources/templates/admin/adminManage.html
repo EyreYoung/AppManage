@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>SaaS管理员应用管理</title>
+    <title>SaaS平台管理员应用管理</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link th:href="@{~/js/libs/bootstrap-3.3.7-dist/css/bootstrap.min.css}" rel="stylesheet">
@@ -26,7 +26,7 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="#">SaaS平台</a>
+                        <a class="navbar-brand" href="/index">SaaS平台</a>
                     </div>
 
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -79,17 +79,11 @@
                     </div>
                 </div>
             </nav>
-
         </div>
     </div>
-
     <div class="row clearfix">
         <div class="col-md-3 column">
-
-
-
             <ul id="main-nav" class="nav nav-tabs nav-stacked" style="">
-
                 <li>
                     <a href="#userManage" class="nav-header collapsed" data-toggle="collapse">
                         <i class="glyphicon glyphicon-cog"></i>
@@ -118,46 +112,29 @@
                 </li>
                 <li>
                     <a href="#">
-                        <i class="glyphicon glyphicon-globe"></i>
-                        分发配置
-                    </a>
-                </li>
-                <li>
-                    <a href="./charts.html">
                         <i class="glyphicon glyphicon-calendar"></i>
                         图表统计
                     </a>
                 </li>
                 <li>
                     <a href="/admin/login">
-                        <i class="glyphicon glyphicon-fire"></i>
+                        <i class="glyphicon glyphicon-log-out"></i>
                         退出登录
                     </a>
                 </li>
             </ul>
-
-
-
         </div>
         <div class="col-md-9" id="admin-manage-main">
-
             <table id="appTable" class="table"></table>
-
         </div>
     </div>
-
-
-
 </div>
-
-
 
 <script th:src="@{~/js/libs/bootstrap-3.3.7-dist/css/bootstrap-theme.min.css}"></script>
 <script th:src="@{~/js/libs/jquery-3.1.1/jquery-3.1.1.min.js}"></script>
 <script th:src="@{~/js/libs/bootstrap-3.3.7-dist/js/bootstrap.min.js}"></script>
 <script th:src="@{~/js/libs/bootstrap-table-1.11.0/dist/bootstrap-table.js}"></script>
 <script th:src="@{~/js/libs/bootstrap-table-1.11.0/dist/locale/bootstrap-table-zh-CN.js}"></script>
-
 <script th:src="@{~/js/admin.js}"></script>
 
 </body>

@@ -18,7 +18,7 @@ public class CompanyController {
     @Autowired
     private SVenderMapper svenderMapper;
 
-    @RequestMapping(value = "/doRegister", method = RequestMethod.POST)
+    @RequestMapping(value = "/doRegister", method = RequestMethod.POST)//开发者注册
     public Map<String,Object> doCompanyRegister(@RequestParam("account") String account,
                                                 @RequestParam("password") String password,
                                                 @RequestParam("company") String company,
@@ -51,4 +51,10 @@ public class CompanyController {
         return map;
     }
 
+    @RequestMapping(value = "/queryCpy", method = RequestMethod.POST)//用id获取公司名
+    public Map<String,Object> queryCpy(@RequestParam("id") int id){
+        Map<String,Object> map = new HashMap<String,Object>();
+        map.put("cpy",svenderMapper.findCpyByID(id));
+        return map;
+    }
 }

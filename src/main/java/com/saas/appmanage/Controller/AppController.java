@@ -1,5 +1,6 @@
 package com.saas.appmanage.Controller;
 
+import com.saas.appmanage.Entity.App;
 import com.saas.appmanage.Mapper.AppMapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -53,6 +55,11 @@ public class AppController {
         Map<String, String> map = new HashMap<String, String>();
         map.put("pathUrl", path);
         return path;
+    }
+
+    @RequestMapping(value = "/queryAppByCata",method = RequestMethod.POST)
+    public List<App> queryAppByCata(@RequestParam("cata") String catagory){
+        return appMapper.SelectAppByCata(catagory);
     }
 
 }

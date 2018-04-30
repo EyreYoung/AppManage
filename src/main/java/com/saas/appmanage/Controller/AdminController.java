@@ -51,12 +51,12 @@ public class AdminController {
         return appMapper.SelectApp();
     }
 
-    @RequestMapping(value = "/queryAdmins",method = RequestMethod.POST)
+    @RequestMapping(value = "/queryAdmins")
     public List<Admin> queryAdmins(){
         return adminMapper.queryAdmins();
     }
 
-    @RequestMapping(value = "/queryCpys",method = RequestMethod.POST)
+    @RequestMapping(value = "/queryCpys")
     public List<SVender> queryCpys(){
         return svenderMapper.queryCpys();
     }
