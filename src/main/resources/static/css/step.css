@@ -1,0 +1,50 @@
+ul{
+    margin: 0;
+    padding: 0;
+}
+li{
+    margin: 0;
+    padding: 0;
+}
+
+#myTab li{
+    width:25%;
+    float:left;
+    height:40px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+#myTab li img{
+    float:left;
+    height: 40px;
+}
+
+#myTab li a{
+    color:white;
+    text-align: center;
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+}
+
+.blue{
+    background:#0f9af2;
+}
+.gray{
+    background: #dfdfdf;
+}
+.tabPaneUl{
+    width: 700px;
+    margin: 0 auto;
+    list-style: none;
+}
+
+.tabPaneUl li{
+    height: 40px;
+    line-height: 40px;
+}
+.tab-pane{
+    margin-top: 50px;
+}

@@ -2,6 +2,7 @@ package com.saas.appmanage;
 
 import com.saas.appmanage.Entity.Admin;
 import com.saas.appmanage.Mapper.AdminMapper;
+import com.saas.appmanage.Mapper.ModuleMapper;
 import com.saas.appmanage.Mapper.UserMapper;
 import org.junit.Assert;
 import org.junit.Test;
@@ -10,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import javax.annotation.Resource;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -20,6 +23,9 @@ public class AppmanageApplicationTests {
 	@Autowired
 	private AdminMapper adminMapper;
 
+	@Resource
+	private ModuleMapper moduleMapper;
+
 	@Test
     @Rollback
 //	public void findByName() throws Exception {
@@ -28,8 +34,7 @@ public class AppmanageApplicationTests {
 //	}
 
 	public void findPwdByAccount() throws Exception {
-		Admin a = adminMapper.findByAccount("yyd");
-		Assert.assertEquals("yyd",a.getPassword());
+		System.out.println(moduleMapper.selectModule("交大人事"));
 	}
 
 }
