@@ -10,7 +10,7 @@ import java.util.List;
 @Mapper
 public interface SVenderMapper {
     @Insert("insert into svender(Account,Password,Company,Mail,Tel) values(#{account},#{password},#{company},#{mail},#{tel})")
-    @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "ID")
+    @Options(useGeneratedKeys = true, keyProperty = "ID", keyColumn = "ID")
     int insertSVender (@Param("account") String account,
                        @Param("password") String password,
                        @Param("company") String company,

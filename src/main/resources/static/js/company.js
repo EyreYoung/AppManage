@@ -1,3 +1,4 @@
+//开发商注册
 $('#companyRegister').click(function (){
     var acc = $('#regAcc').val();
     var pwd = $('#regPwd').val();
@@ -27,7 +28,7 @@ $('#companyRegister').click(function (){
 });
 
 
-
+//开发商登录
 $('#companyLogin').click(function () {
     var acc = $('#cpyLoginAcc').val();
     var pwd = $('#cpyLoginPwd').val();
@@ -77,6 +78,8 @@ $(function () {
     initFileInput("appImg",path);
 })
 
+
+//进入页面根据开发商id初始化页面
 $(document).ready(function () {
     var cpyid = $('#cpyID').val();
     console.log(cpyid);
@@ -93,6 +96,7 @@ $(document).ready(function () {
 
 });
 
+//注册应用第一步 填写基本信息（应用名、类别、应用简介、应用版本）
 $('#registerAppStep1').click(function (){
     var name = $('#appName').val();
     var cpy = $('#appCpy').val();
@@ -100,6 +104,7 @@ $('#registerAppStep1').click(function (){
     var intro = $('#appIntro').val();
     var ver = $('#appVer').val();
     console.log(name+cpy+cata+intro+ver);
+    //传递基本信息，成功则进行第二步 注册模块
     $.post(
         '/company/doRegisterAppStep1',
         {
@@ -114,43 +119,95 @@ $('#registerAppStep1').click(function (){
             if(data.response == "插入失败"){
                 window.alert("插入失败");
             }else {
+                //进入注册第二步
                 $('#company-manage-main').empty();
                 var step2 = $('#step2').html();
                 $('#step2').remove();
                 $('#company-manage-main').append(step2);
                 //等待DOM更新，否则找不到新加入的元素
                 window.setTimeout(function() {
+                    //默认填好应用名和开发商名
                     $('#showappName').val(name);
                     $('#showcpyName').val(cpy);
                     $('#showappName').attr("disabled",true);
                     $('#showcpyName').attr("disabled",true);
                 }, 0);
+                //弹出添加模块模态框时触发：复选框放入该应用已注册的模块
+                $('#addModule').on('show.bs.modal',function () {
+                    //获取该应用已有的模块
+                    $.post(
+                        '/showModuleByAppName',
+                        {
+                            appname:name
+                        },
+                        function (data) {
+                            $('#moduleDep').empty();
+                            for(var module in data){
+                                $('#moduleDep').append('<label class="btn btn-default">\n' +
+                                    '                                        <input type="checkbox" name="dependModule" value="' + data[module].mID + '"> ' + data[module].mName + '\n' +
+                                    '                                    </label>')
+                            }
+                        }
+
+                    );
+                    $('#moduleName').val("");
+                    $('#moduleVer').val("");
+                });
+                //关闭添加模块模态框时触发
+                $('#addModule').on('hide.bs.modal',function () {
+                    //刷新模块表
+                    InitModuleTable(name);
+                })
                 InitModuleTable(name);
+                //模态框中点击保存时
                 $('#regModule').click(function () {
                     var modname = $('#moduleName').val();
                     var modver = $('#moduleVer').val();
+                    var modreq = $('#moduleReq input:radio:checked').val();
+                    //获取所有选择的依赖模块
+                    var depmods = document.getElementsByName('dependModule');
+                    var modid = 0;
                     $.post(
                         '/insertModule',
                         {
+                            appname:name,
                             name:modname,
-                            ver:modver
+                            ver:modver,
+                            req:modreq
                         },
                         function (data) {
                             console.log(data);
                             InitModuleTable(name);
                             if(data.response != "插入失败"){
-
+                                modid = data.mID;
+                                //把选中的依赖模块注册进数据库的依赖表
+                                for(var i = 0; i < depmods.length; i++){
+                                    //如果模块被选中
+                                    if(depmods[i].checked){
+                                        $.post(
+                                            '/insertModuleDepend',
+                                            {
+                                                moduleID1:modid,
+                                                dependID:depmods[i].value
+                                            },
+                                            function (data) {
+                                                console.log(data.response);
+                                            }
+                                        );
+                                    }
+                                }
+                                window.alert("模块注册成功")
                             }
-                            $('#addModule').modal('hide');
                         }
-                    )
+                    );
+                    $('#addModule').modal('hide');
                 });
             }
         }
     );
 });
 
-
+//初始化模块表
 function InitModuleTable(appname) {
     $('#moduleTable').bootstrapTable({
         url: '/showModuleByAppName?appname='+appname,

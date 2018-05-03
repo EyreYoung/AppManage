@@ -4,6 +4,7 @@ import com.saas.appmanage.Entity.App;
 import com.saas.appmanage.Entity.Module;
 import com.saas.appmanage.Mapper.AppMapper;
 import com.saas.appmanage.Mapper.ModuleMapper;
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,25 +29,57 @@ public class AppController {
     @Autowired
     ModuleMapper moduleMapper;
 
-    @RequestMapping(value = "/insertModule",method = RequestMethod.POST)
-    public Map<String,String> insertModule(@RequestParam("name") String name,
-                            @RequestParam("ver") String ver){
-        Map<String,String> map = new HashMap<String,String>();
-        String response = "插入失败";
+    //插入模块依赖关系
+    @RequestMapping(value = "/insertModuleDepend",method = RequestMethod.POST)
+    public Map<String,Object> insertModuleDepend(@RequestParam("moduleID1") String moduleID1,
+                                                 @RequestParam("dependID") String dependID){
+        Map<String,Object> map = new HashMap<String,Object>();
+        String response = "模块依赖插入失败";
         int exist = 0;
-        if(name == ""||ver == ""){
+        try{
+            exist = moduleMapper.insertModuleDependence(moduleID1,dependID);
+        }catch (Exception e){
+            exist = 0;
+        }
+        if(exist !=0){
+            response = "success";
+        }
+        map.put("response",response);
+        return map;
+    }
+
+    //插入模块
+    @RequestMapping(value = "/insertModule",method = RequestMethod.POST)
+    public Map<String,Object> insertModule(@RequestParam("appname") String appname,
+                                           @RequestParam("name") String name,
+                                           @RequestParam("ver") String ver,
+                                           @RequestParam("req") String req){
+        Map<String,Object> map = new HashMap<String,Object>();
+        String response = "插入失败";
+        int exist1 = 0;
+        int exist2 = 0;
+        Module module = new Module();
+        module.setmName(name);
+        module.setVer(ver);
+        if(name == ""||ver == ""||req ==""){
 
         }else{
             try{
-                exist = moduleMapper.insertModule(name,ver);
+                //插入模块
+                moduleMapper.insertModule(module);
+                exist1 = module.getmID();
+                //插入应用-模块关系
+                exist2 = moduleMapper.insertAppModule(appname,module.getmID(),req);
             }catch (Exception e){
-                exist = 0;
+                exist1 = 0;
             }
         }
-        if(exist == 1){
-            response = name;
+        if(exist1 != 0 && exist2 !=0){
+            response = "模块插入成功";
         }
         map.put("response",response);
+        map.put("mID",module.getmID());
+        map.put(("mName"),module.getmName());
         return map;
     }
 
