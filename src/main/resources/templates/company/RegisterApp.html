@@ -14,6 +14,8 @@
 </head>
 <body>
 
+<input type="hidden" th:value="${cpy_id}" id="cpyID"/>
+
 <div id="step2" style="display:none">
     <h1>注册应用模块</h1>
     <form class="form">
@@ -145,8 +147,9 @@
                         </ul>
                         <form class="navbar-form navbar-left" role="search">
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="请输入您要搜索的应用"/>
-                            </div> <button type="submit" class="btn btn-default">搜索</button>
+                                <input id="querywordinput" type="text" class="form-control" placeholder="请输入您要搜索的应用"/>
+                            </div>
+                            <button type="button" class="btn btn-default" id="searchapp">搜索</button>
                         </form>
                         <ul class="nav navbar-nav navbar-right">
                             <li class="dropdown">
@@ -226,7 +229,6 @@
                         </a>
                     </li>
                 </ul>
-                <input type="hidden" th:value="${cpy_id}" id="cpyID"/>
             </div>
 
             <div class="col-md-9 column" id="company-manage-main">
@@ -323,6 +325,7 @@
 <script th:src="@{~/js/libs/bootstrap-table-1.11.0/dist/bootstrap-table.js}"></script>
 <script th:src="@{~/js/libs/bootstrap-table-1.11.0/dist/locale/bootstrap-table-zh-CN.js}"></script>
 <script th:src="@{~/js/company.js}"></script>
+<script th:src="@{~/js/searchapp.js}"></script>
 
 </body>
 </html>

@@ -125,9 +125,16 @@ public class AppController {
         return path;
     }
 
+    //分类查询应用
     @RequestMapping(value = "/queryAppByCata",method = RequestMethod.POST)
     public List<App> queryAppByCata(@RequestParam("cata") String catagory){
         return appMapper.SelectAppByCata(catagory);
+    }
+
+    //模糊搜索应用
+    @RequestMapping(value = "/queryAppByQW",method = RequestMethod.POST)
+    public List<App> queryAppByQW(@RequestParam("qw") String QW){
+        return appMapper.SearchApp(QW);
     }
 
 }

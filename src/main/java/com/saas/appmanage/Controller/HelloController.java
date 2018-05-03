@@ -55,4 +55,10 @@ public class HelloController {
         model.addAttribute("cpy_id",cpyid);
         return "company/RegisterApp";
     }
+
+    @RequestMapping(value = "/appsearch")
+    public String searchApp(Model model,@RequestParam("qw") String qw){
+        model.addAttribute("queryword",qw);
+        return "app/appCatagory";
+    }
 }

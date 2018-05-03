@@ -11,6 +11,7 @@ import java.util.List;
 
 @Mapper
 public interface AppMapper {
+    //查询出所有应用
     @Select("select (@i:=@i+1) as No,a.ID,a.Name,s.Company as SVenderName,regDate,Type,Catagory,Intro,Star,Rec,Version from app as a,(select @i:=0) as it,svender as s where a.SVID = s.ID order by regDate")
     List<App> SelectApp();
 
@@ -22,6 +23,11 @@ public interface AppMapper {
                   @Param("intro") String intro,
                   @Param("version") String version);
 
+    //根据分类查询应用
     @Select("select (@i:=@i+1) as No,a.ID,a.Name,s.Company as SVenderName,regDate,Type,Catagory,Intro,Star,Rec,Version from app as a,(select @i:=0) as it,svender as s where a.SVID = s.ID and a.Catagory = #{catagory} order by regDate")
     List<App> SelectAppByCata(@Param("catagory") String catagory);
+
+    //模糊查询应用（应用名、开发者、应用介绍）
+    @Select("select (@i:=@i+1) as No,a.ID,a.Name,s.Company as SVenderName,regDate,Type,Catagory,Intro,Star,Rec,Version from app as a,(select @i:=0) as it,svender as s where a.SVID = s.ID and (a.Name LIKE '%${queryword}%' or a.Intro like '%${queryword}%' or s.Company like '%${queryword}%') order by regDate")
+    List<App> SearchApp(@Param("queryword") String queryword);
 }

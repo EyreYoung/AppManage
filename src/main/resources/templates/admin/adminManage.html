@@ -43,8 +43,9 @@
                         </ul>
                         <form class="navbar-form navbar-left" role="search">
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="请输入您要搜索的应用"/>
-                            </div> <button type="submit" class="btn btn-default">搜索</button>
+                                <input id="querywordinput" type="text" class="form-control" placeholder="请输入您要搜索的应用"/>
+                            </div>
+                            <button type="button" class="btn btn-default" id="searchapp">搜索</button>
                         </form>
                         <ul class="nav navbar-nav navbar-right">
                             <li class="dropdown">
@@ -136,6 +137,7 @@
 <script th:src="@{~/js/libs/bootstrap-table-1.11.0/dist/bootstrap-table.js}"></script>
 <script th:src="@{~/js/libs/bootstrap-table-1.11.0/dist/locale/bootstrap-table-zh-CN.js}"></script>
 <script th:src="@{~/js/admin.js}"></script>
+<script th:src="@{~/js/searchapp.js}"></script>
 
 </body>
 </html>
