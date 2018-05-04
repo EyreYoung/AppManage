@@ -45,10 +45,22 @@
     <button type="button" class="btn btn-success" id="addmodulebutton" data-toggle="modal" data-target="#addModule">
         <span class="glyphicon glyphicon  glyphicon-plus" aria-hidden="true"></span>增加
     </button>
+
     <button type="button" class="btn btn-warning" id="editmodule">
         <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>修改
     </button>
+
     <table id="moduleTable" class="table"></table>
+
+    <button type="button" class="btn btn-default" id="registerAppStep2back">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        上一步
+    </button>
+
+    <button type="button" class="btn btn-primary" id="registerAppStep2">
+        下一步
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+    </button>
     <!-- 模态框（Modal） -->
     <div class="modal fade" id="addModule" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -115,6 +127,128 @@
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
+</div>
+
+
+<div id="step3" style="display:none">
+    <h1>注册模块服务</h1>
+    <form class="form">
+        <table class="table table-bordered">
+            <tbody>
+            <tr>
+                <td>
+                    <label for="showmoduleName" class="control-label">模块名称</label>
+                    <select id="showmoduleName" class="form-control">
+                        <option value="模块ID">模块名</option>
+                    </select>
+                </td>
+                <td>
+                    <label for="showappName" class="control-label">应用名称</label>
+                    <input type="text" id="showappName2" class="form-control"/>
+
+                </td>
+                <td>
+                    <label for="showcpyName" class="control-label">开发者名称</label>
+                    <input type="text" id="showcpyName2" class="form-control">
+                </td>
+
+                <!--<td>   &lt;!&ndash; 按钮触发模态框 &ndash;&gt;-->
+                <!--<button class="btn btn-primary btn-lg" data-toggle="modal"  data-target="#addModule">-->
+                <!--添加模块-->
+                <!--</button>-->
+                <!--</td>-->
+            </tr>
+            </tbody>
+        </table>
+    </form>
+
+    <h3>服务列表</h3>
+    <button type="button" class="btn btn-success" id="addservicebutton" data-toggle="modal" data-target="#addService">
+        <span class="glyphicon glyphicon  glyphicon-plus" aria-hidden="true"></span>增加
+    </button>
+
+    <button type="button" class="btn btn-warning" id="editservice">
+        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>修改
+    </button>
+
+    <table id="serviceTable" class="table"></table>
+
+    <button type="button" class="btn btn-default" id="registerAppStep3back">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        上一步
+    </button>
+
+    <button type="button" class="btn btn-primary" id="registerAppStep3">
+        <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+        完成注册
+    </button>
+    <!-- 模态框（Modal） -->
+    <div class="modal fade" id="addService" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"
+                            aria-hidden="true">×
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel2">
+                        添加服务
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <label for="serviceName" class="col-sm-2 control-label">服务名</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" placeholder="请输入服务名称" required="required" id="serviceName" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="serviceReq" class="col-sm-2 control-label">是否必选</label>
+                            <div class="col-sm-10">
+                                <div class="btn-group" id="serviceReq" data-toggle="buttons">
+                                    <label class="btn btn-default">
+                                        <input type="radio" class="toggle" value="是"> 是
+                                    </label>
+                                    <label class="btn btn-default">
+                                        <input type="radio" class="toggle" value="否"> 否
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="serviceDep" class="col-sm-2 control-label">依赖服务</label>
+                            <div class="col-sm-10">
+                                <div class="btn-group" data-toggle="buttons" id="serviceDep">
+                                    <label class="btn btn-default">
+                                        <input type="checkbox" name="dependService" value="服务ID"> 服务名
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="serviceVer" class="col-sm-2 control-label">服务版本</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" placeholder="请输入服务版本" id="serviceVer" />
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default"
+                            data-dismiss="modal">关闭
+                    </button>
+                    <button type="button" class="btn btn-primary" id="regService">
+                        保存
+                    </button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
 </div>
 
 

@@ -132,6 +132,7 @@ $('#registerAppStep1').click(function (){
                     $('#showappName').attr("disabled",true);
                     $('#showcpyName').attr("disabled",true);
                 }, 0);
+
                 //弹出添加模块模态框时触发：复选框放入该应用已注册的模块
                 $('#addModule').on('show.bs.modal',function () {
                     //获取该应用已有的模块
@@ -153,13 +154,9 @@ $('#registerAppStep1').click(function (){
                     $('#moduleName').val("");
                     $('#moduleVer').val("");
                 });
-                //关闭添加模块模态框时触发
-                $('#addModule').on('hide.bs.modal',function () {
-                    //刷新模块表
-                    InitModuleTable(name);
-                })
                 InitModuleTable(name);
-                //模态框中点击保存时
+
+                //模块注册模态框中点击保存时
                 $('#regModule').click(function () {
                     var modname = $('#moduleName').val();
                     var modver = $('#moduleVer').val();
@@ -202,6 +199,116 @@ $('#registerAppStep1').click(function (){
                     );
                     $('#addModule').modal('hide');
                 });
+                //模态框关闭时触发
+                $('#addModule').on('hide.bs.modal',function () {
+                    //刷新模块表
+                    $('#moduleTable').bootstrapTable('refresh',{url: '/showModuleByAppName?appname='+name});
+                });
+
+                //第二步中点击下一步进入第三步
+                $('#registerAppStep2').click(function () {
+                    $('#company-manage-main').empty();
+                    var step3 = $('#step3').html();
+                    $('#step3').remove();
+                    $('#company-manage-main').append(step3);
+                    //等待DOM更新，否则找不到新加入的元素
+                    window.setTimeout(function() {
+                        //默认填好应用名和开发商名
+                        $('#showappName2').val(name);
+                        $('#showcpyName2').val(cpy);
+                        $('#showappName2').attr("disabled",true);
+                        $('#showcpyName2').attr("disabled",true);
+                    }, 0);
+                    //进入第三步时在下拉框加载出上一步已注册的模块以供选择
+                    $.post(
+                        '/showModuleByAppName',
+                        {
+                            appname:name
+                        },
+                        function (data) {
+                            $('#showmoduleName').empty();
+                            for(var module in data){
+                                $('#showmoduleName').append('<option value="' + data[module].mID + '">' + data[module].mName + '</option>');
+                            }
+                        }
+                    );
+                    var moduleid = $('#showmoduleName option:selected').val();
+                    InitServiceTable(moduleid);
+                    //选择模块时触发
+                    $('#showmoduleName').on("change",function () {
+                        var moduleid = $('#showmoduleName option:selected').val();
+                        ('#serviceTable').bootstrapTable('refresh',{url: '/showServiceByModuleID?moduleid='+moduleid});
+                    });
+
+                    //进入注册服务模态框时
+                    $('#addService').on('show.bs.modal',function () {
+                        var moduleid = $('#showmoduleName option:selected').val();
+                        //获取该应用已有的服务
+                        $.post(
+                            '/showServiceByModuleID',
+                            {
+                                moduleid:moduleid
+                            },
+                            function (data) {
+                                $('#serviceDep').empty();
+                                for(var service in data){
+                                    $('#serviceDep').append('<label class="btn btn-default">\n' +
+                                        '                                        <input type="checkbox" name="dependService" value="' + data[service].sID + '"> ' + data[service].sName + '\n' +
+                                        '                                    </label>')
+                                }
+                            }
+
+                        );
+                        $('#serviceName').val("");
+                        $('#serviceVer').val("");
+                    });
+
+                    //服务注册模态框点击保存时
+                    $('#regService').on("click",function () {
+                        var moduleid = $('#showmoduleName option:selected').val();
+                        var sername = $('#serviceName').val();
+                        var server = $('#serviceVer').val();
+                        var serreq = $('#serviceReq input:radio:checked').val();
+                        //获取所有选择的依赖服务
+                        var depsers = document.getElementsByName('dependService');
+                        var serid = 0;
+                        //post插入服务
+                        $.post(
+                            '/insertService',
+                            {
+                                mid:moduleid,
+                                name:sername,
+                                ver:server,
+                                req:serreq
+                            },
+                            function (data) {
+                                console.log(data);
+                                if(data.response != "插入失败"){
+                                    serid = data.sID;
+                                    //把选中的依赖服务注册进数据库的依赖表
+                                    for(var i = 0; i < depsers.length; i++){
+                                        //如果服务被选中
+                                        if(depsers[i].checked){
+                                            $.post(
+                                                '/insertServiceDepend',
+                                                {
+                                                    ServiceID:serid,
+                                                    DependID:depsers[i].value
+                                                },
+                                                function (data) {
+                                                    console.log(data.response);
+                                                }
+                                            );
+                                        }
+                                    }
+                                    window.alert("服务注册成功")
+                                }
+                            }
+                        );
+                        $('#addService').modal('hide');
+                        ('#serviceTable').bootstrapTable('refresh',{url: '/showServiceByModuleID?moduleid='+moduleid});
+                    })
+                })
             }
         }
     );
@@ -247,6 +354,55 @@ function InitModuleTable(appname) {
                 title: '依赖模块'
             }, {
                 field: 'ver',
+                title: '版本'
+            }
+        ]
+    });
+}
+
+//初始化模块的服务表
+function InitServiceTable(moduleid) {
+    $('#serviceTable').bootstrapTable({
+        url: '/showServiceByModuleID?moduleid='+moduleid,
+        method: 'POST',
+        toolbar: '#toolbar',
+        striped: true,                      //是否显示行间隔色
+        cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+        pagination: true,                   //是否显示分页（*）
+        sortable: true,                     //是否启用排序
+        sortOrder: "asc",                   //排序方式
+        sidePagination: "client",           //分页方式：client客户端分页，server服务端分页（*）
+        pageNumber: 1,                      //初始化加载第一页，默认第一页,并记录
+        pageSize: 10,                      //每页的记录行数（*）
+        pageList: [10, 25, 50, 100],        //可供选择的每页的行数（*）
+        search: true,                      //是否显示表格搜索
+        strictSearch: false,
+        showColumns: true,                  //是否显示所有的列（选择显示的列）
+        showRefresh: true,                  //是否显示刷新按钮
+        minimumCountColumns: 2,             //最少允许的列数
+        clickToSelect: true,                //是否启用点击选中行
+        singleSelect: true,
+        //height: 500,                      //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
+        //uniqueId: "ID",                     //每一行的唯一标识，一般为主键列
+        showToggle: true,                   //是否显示详细视图和列表视图的切换按钮
+        cardView: false,                    //是否显示详细视图
+        detailView: false,                  //是否显示父子表
+
+        columns: [
+            {
+                field: 'sID',
+                title: '服务ID'
+            }, {
+                field: 'sName',
+                title: '服务名'
+            }, {
+                field: 'sDepen',
+                title: '依赖服务'
+            }, {
+                field: 'sReq',
+                title: '必选'
+            }, {
+                field: 'sVer',
                 title: '版本'
             }
         ]

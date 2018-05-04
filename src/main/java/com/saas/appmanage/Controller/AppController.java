@@ -2,8 +2,10 @@ package com.saas.appmanage.Controller;
 
 import com.saas.appmanage.Entity.App;
 import com.saas.appmanage.Entity.Module;
+import com.saas.appmanage.Entity.Service;
 import com.saas.appmanage.Mapper.AppMapper;
 import com.saas.appmanage.Mapper.ModuleMapper;
+import com.saas.appmanage.Mapper.ServiceMapper;
 import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +30,69 @@ public class AppController {
 
     @Autowired
     ModuleMapper moduleMapper;
+
+    @Autowired
+    ServiceMapper serviceMapper;
+
+    //插入服务
+    @RequestMapping(value = "/insertService",method = RequestMethod.POST)
+    public Map<String,Object> insertService(@RequestParam("mid") int mid,
+                                           @RequestParam("name") String name,
+                                           @RequestParam("ver") String ver,
+                                           @RequestParam("req") String req){
+        Map<String,Object> map = new HashMap<String,Object>();
+        String response = "服务插入失败";
+        int exist1 = 0;
+        int exist2 = 0;
+        Service service = new Service();
+        service.setsName(name);
+        service.setsVer(ver);
+        if(name == ""||ver == ""||req ==""){
+
+        }else{
+            try{
+                //插入服务
+                serviceMapper.insertService(service);
+                exist1 = service.getsID();
+                //插入模块-服务关系
+                exist2 = serviceMapper.insertModuleService(mid,service.getsID(),req);
+            }catch (Exception e){
+                exist1 = 0;
+            }
+        }
+        if(exist1 != 0 && exist2 !=0){
+            response = "服务插入成功";
+        }
+        map.put("response",response);
+        map.put("sID",service.getsID());
+        map.put(("sName"),service.getsName());
+        return map;
+    }
+
+    //插入服务依赖关系
+    @RequestMapping(value = "/insertServiceDepend",method = RequestMethod.POST)
+    public Map<String,Object> insertServiceDepend(@RequestParam("ServiceID") String ServiceID,
+                                                 @RequestParam("DependID") String DependID){
+        Map<String,Object> map = new HashMap<String,Object>();
+        String response = "服务依赖插入失败";
+        int exist = 0;
+        try{
+            exist = serviceMapper.insertServiceDependence(ServiceID,DependID);
+        }catch (Exception e){
+            exist = 0;
+        }
+        if(exist !=0){
+            response = "服务依赖插入成功";
+        }
+        map.put("response",response);
+        return map;
+    }
+
+    //根据模块ID查询服务信息
+    @RequestMapping(value = "/showServiceByModuleID",method = RequestMethod.POST)
+    public List<Service> queryServices(@RequestParam("moduleid") int moduleid){
+        return serviceMapper.selectService(moduleid);
+    }
 
     //插入模块依赖关系
     @RequestMapping(value = "/insertModuleDepend",method = RequestMethod.POST)
@@ -55,7 +120,7 @@ public class AppController {
                                            @RequestParam("ver") String ver,
                                            @RequestParam("req") String req){
         Map<String,Object> map = new HashMap<String,Object>();
-        String response = "插入失败";
+        String response = "模块插入失败";
         int exist1 = 0;
         int exist2 = 0;
         Module module = new Module();
@@ -83,11 +148,13 @@ public class AppController {
         return map;
     }
 
+    //根据应用名查询模块
     @RequestMapping(value = "/showModuleByAppName",method = RequestMethod.POST)
     public List<Module> queryModules(@RequestParam("appname") String appname){
         return moduleMapper.selectModule(appname);
     }
 
+    //注册应用基本信息
     @RequestMapping(value = "/company/doRegisterAppStep1",method = RequestMethod.POST)
     public Map<String,String> doRegisterApp(@RequestParam("name") String name,
                                             @RequestParam("svname") String svname,
