@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>SaaS平台首页</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link th:href="@{~/js/libs/bootstrap-3.3.7-dist/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{~/css/bodypadding.css}" rel="stylesheet" type="text/css"/>
+
+</head>
+<body>
+
+<input type="hidden" th:value="${app_id}" id="app_id"/>
+
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="#">SaaS平台</a>
+                    </div>
+
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav">
+                            <li class="active">
+                                <a href="#">首页</a>
+                            </li>
+                            <li>
+                                <a href="/apps">分类</a>
+                            </li>
+                            <li>
+                                <a href="#">关于我们</a>
+                            </li>
+                        </ul>
+                        <form class="navbar-form navbar-left" role="search">
+                            <div class="form-group">
+                                <input id="querywordinput" type="text" class="form-control" placeholder="请输入您要搜索的应用"/>
+                            </div>
+                            <button type="button" class="btn btn-default" id="searchapp">搜索</button>
+                        </form>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">登录<strong class="caret"></strong></a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a href="#">用户登录</a>
+                                    </li>
+                                    <li>
+                                        <a href="/admin/login">管理员登录</a>
+                                    </li>
+                                    <li>
+                                        <a href="company/login">开发者登录</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">开发者中心<strong class="caret"></strong></a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a href="company/register">开发者注册</a>
+                                    </li>
+                                    <li>
+                                        <a href="company/registerapp">接入应用</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">应用管理</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+        </div>
+
+    </div>
+
+    <!--main-->
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <ol class="breadcrumb">
+                <li>当前位置:</li>
+                <li><a href="#">首页</a></li>
+                <li><a href="#">类别</a></li>
+                <li class="active" id="appname">应用名</li>
+            </ol>
+        </div>
+    </div>
+
+    <!--应用信息-->
+    <div class="row clearfix">
+        <div class="col-md-9 column">
+            <!--应用图片-->
+            <div class="col-md-4 column">
+                <img src="/img/1498011226287.jpg" class="img-thumbnail" alt="应用图片" th:height="550px" th:width="550px">
+            </div>
+            <!--大概信息-->
+            <div class="col-md-8 column">
+                <h1 id="app_name">应用名称</h1>
+                <p id="app_intro" class="lead" style="height:80px;overflow: hidden">应用简介</p>
+                <div class="well price_detail">
+                    <p class="text-primary" style="font-size: x-large;color: #0f0f0f">
+                        租用价格：
+                        <span style="font-size: xx-large;color: #265a88">"价格"</span>
+                        <span style="font-size: medium;color: #9d9d9d">元/月/套</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!--服务商信息-->
+        <div class="col-md-3 column">
+            <table class="table table-bordered">
+                <tbody>
+                <tr>
+                    <td class="text-center">开发者信息</td>
+                </tr>
+                <tr>
+                    <td>
+                        <img src="/img/1504749784005.jpg" class="center-block" alt="开发商图片" th:height="100px" th:width="100px">
+                        <p id="cpy_name" class="text-center" style="font-size: medium">开发商名称</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p style="font-size: medium;color: #4A515B">在线时间:8：00——18：00</p>
+                        <p style="font-size: medium;color: #4A515B" id="cpy_tel">电 话:</p>
+                        <p style="font-size: medium;color: #4A515B" id="cpy_mail">邮 箱:</p>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<script th:src="@{~/js/libs/bootstrap-3.3.7-dist/css/bootstrap-theme.min.css}"></script>
+<script th:src="@{~/js/libs/jquery-3.1.1/jquery-3.1.1.min.js}"></script>
+<script th:src="@{~/js/libs/bootstrap-3.3.7-dist/js/bootstrap.min.js}"></script>
+<script th:src="@{~/js/searchapp.js}"></script>
+<script th:src="@{~/js/app.js}"></script>
+
+</body>
+</html>

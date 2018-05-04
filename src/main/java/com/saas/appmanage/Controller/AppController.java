@@ -2,9 +2,11 @@ package com.saas.appmanage.Controller;
 
 import com.saas.appmanage.Entity.App;
 import com.saas.appmanage.Entity.Module;
+import com.saas.appmanage.Entity.SVender;
 import com.saas.appmanage.Entity.Service;
 import com.saas.appmanage.Mapper.AppMapper;
 import com.saas.appmanage.Mapper.ModuleMapper;
+import com.saas.appmanage.Mapper.SVenderMapper;
 import com.saas.appmanage.Mapper.ServiceMapper;
 import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.apache.ibatis.annotations.Param;
@@ -33,6 +35,21 @@ public class AppController {
 
     @Autowired
     ServiceMapper serviceMapper;
+
+    @Autowired
+    SVenderMapper svenderMapper;
+
+    //根据应用ID查询开发商信息
+    @RequestMapping(value = "/queryCpyByAppID",method = RequestMethod.POST)
+    public SVender queryCpyByAppID(@RequestParam("app_id") int appid){
+        return svenderMapper.selectSVenderByAppid(appid);
+    }
+
+    //根据应用ID查询应用信息
+    @RequestMapping(value = "/queryAppByID",method = RequestMethod.POST)
+    public App queryAppByID(@RequestParam("app_id") int appid){
+        return appMapper.SearchAppByID(appid);
+    }
 
     //插入服务
     @RequestMapping(value = "/insertService",method = RequestMethod.POST)

@@ -30,4 +30,8 @@ public interface AppMapper {
     //模糊查询应用（应用名、开发者、应用介绍）
     @Select("select (@i:=@i+1) as No,a.ID,a.Name,s.Company as SVenderName,regDate,Type,Catagory,Intro,Star,Rec,Version from app as a,(select @i:=0) as it,svender as s where a.SVID = s.ID and (a.Name LIKE '%${queryword}%' or a.Intro like '%${queryword}%' or s.Company like '%${queryword}%') order by regDate")
     List<App> SearchApp(@Param("queryword") String queryword);
+
+    //根据应用ID查询应用信息
+    @Select("select * from app where ID = #{app_id}")
+    App SearchAppByID(@Param("app_id") int appid);
 }
