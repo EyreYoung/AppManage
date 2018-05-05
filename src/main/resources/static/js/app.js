@@ -24,27 +24,34 @@ $(document).ready(function () {
                 function (data) {
                     console.log(data);
                     $('#modTable').empty();
-                    for(var module in data){
-                        $('#modTable').append('<h4>' + data[module].mName + '</h4>\n' +
-                            '                            <ul id="mod' + data[module].mID + '">\n' +
+                    for(var i = 0;i < data.length;i++){
+                        $('#modTable').append('<h4>' + data[i].mName + '</h4>\n' +
+                            '                            <ul id="mod' + i + '">\n' +
                             '                            </ul>');
-                        $.post(
-                            '/showServiceByModuleID',
-                            {
-                                moduleid: data[module].mID
+                    }
+                    for(var i = 0;i < data.length;i++){
+                        //selectService(data,i);
+                        var mid = data[i].mID;
+                        //执行同步POST
+                        $.ajax({
+                            type: "POST",
+                            url: '/showServiceByModuleID',
+                            async: false,
+                            data: {
+                                moduleid: mid
                             },
-                            function (data2) {
-                                console.log(data2);
-                                for(var service in data2){
-                                    $('#mod' + data[module].mID).append('<li>\n' +
-                                        '                                    ' + data2[service].sName + '\n' +
+                            success: function (result) {
+                                console.log(result);
+                                for(var service in result){
+                                    var id = "mod"+i;
+                                    $('#'+id).append('<li>\n' +
+                                        '                                    ' + result[service].sName + '\n' +
                                         '                                </li>');
                                 }
-
                             }
-                        );
-
+                        });
                     }
+
                 }
             );
         }
@@ -64,6 +71,24 @@ $(document).ready(function () {
     );
 
 })
+
+
+/*
+闭包问题
+$.post（）属于异步请求，所以在执行for 循环的时候，JS 发送了一个异步的post请求，但是在该请求还没有返回结果的同时 ，JS继续执行了第二次for 循环，依次类推，有可能js把for 循环都执行完了，第一次的post 请求还没有结束，此时就可能出现种种问题；
+而解决该问题的办法 就是把post请求换成同步请求，当post结束之后，才会进行下一次循环；
+但问题又来了，$.post()的格式 为$.post(url,para,function,type)    这四个参数依次为请求url,请求参数，请求回调函数，请求类型，并没有一个参数是设置异步还是同步的，所以，此时就应该换一种请求方 法，$.ajax(); 参数如下：
+$.ajax({
+ type: "POST",
+ url: url,
+ async : false,//是否为异步
+ data: data,
+ success: success,
+ dataType: dataType
+});
+所以在for循环中使用请求方法，最好使用$.ajax ，而非使用post
+*/
+
 
 $('#toA').click(function () {
     document.getElementById("A").scrollIntoView(true);
