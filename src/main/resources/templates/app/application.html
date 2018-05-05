@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link th:href="@{~/js/libs/bootstrap-3.3.7-dist/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{~/js/libs/bootstrap-table-1.11.0/dist/bootstrap-table.css}" rel="stylesheet">
     <link th:href="@{~/css/bodypadding.css}" rel="stylesheet" type="text/css"/>
 
 </head>
@@ -88,8 +89,8 @@
         <div class="col-md-12 column">
             <ol class="breadcrumb">
                 <li>当前位置:</li>
-                <li><a href="#">首页</a></li>
-                <li><a href="#">类别</a></li>
+                <li><a href="/index">首页</a></li>
+                <li id="appcata"><a href="#">类别</a></li>
                 <li class="active" id="appname">应用名</li>
             </ol>
         </div>
@@ -98,22 +99,101 @@
     <!--应用信息-->
     <div class="row clearfix">
         <div class="col-md-9 column">
-            <!--应用图片-->
-            <div class="col-md-4 column">
-                <img src="/img/1498011226287.jpg" class="img-thumbnail" alt="应用图片" th:height="550px" th:width="550px">
-            </div>
-            <!--大概信息-->
-            <div class="col-md-8 column">
-                <h1 id="app_name">应用名称</h1>
-                <p id="app_intro" class="lead" style="height:80px;overflow: hidden">应用简介</p>
-                <div class="well price_detail">
-                    <p class="text-primary" style="font-size: x-large;color: #0f0f0f">
-                        租用价格：
-                        <span style="font-size: xx-large;color: #265a88">"价格"</span>
-                        <span style="font-size: medium;color: #9d9d9d">元/月/套</span>
+            <div class="row clearfix">
+                <!--应用图片-->
+                <div class="col-md-4 column">
+                    <img src="/img/1498011226287.jpg" class="img-thumbnail" alt="应用图片" th:height="550px" th:width="550px">
+                </div>
+                <!--大概信息-->
+                <div class="col-md-8 column">
+                    <h1 id="app_name">应用名称</h1>
+                    <p id="app_intro" class="lead" style="font-size:medium;height:60px;overflow: hidden;">
+                        应用简介
                     </p>
+                    <div class="well price_detail">
+                        <p class="text-primary" style="font-size: x-large;color: #0f0f0f">
+                            租用价格：
+                            <span style="font-size: xx-large;color: #265a88">"价格"</span>
+                            <span style="font-size: medium;color: #9d9d9d">元/月/套</span>
+                            <span style="padding-left: 60px;"><button type="button" class="btn btn-primary btn-lg">立即租用</button> </span>
+                        </p>
+                    </div>
                 </div>
             </div>
+
+            <div class="row clearfix" style="padding-top: 30px">
+                <div class="col-md-12 column">
+                    <!--页内导航-->
+                    <table class="table table-bordered">
+                        <tbody>
+                        <tr>
+                            <td class="text-center">
+                                <a id="toA">应用介绍</a>
+                            </td>
+                            <td class="text-center">
+                                <a id="toB">模块服务</a>
+                            </td>
+                            <td class="text-center">
+                                <a id="toC">界面展示</a>
+                            </td>
+                            <td class="text-center">
+                                <a id="toD">产品评论</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="row clearfix" style="padding-top: 30px">
+                <div class="col-md-12 column">
+
+                    <hr style="width: 800px;height: 3px;color: #555555">
+
+                    <div id="A">
+                        <h2>
+                            应用介绍
+                        </h2>
+                        <p id="app_intro2" class="lead">
+                            应用简介
+                        </p>
+                    </div>
+
+                    <hr style="width: 800px;height: 3px;color: #555555">
+
+                    <div id="B">
+                        <h2>
+                            模块服务
+                        </h2>
+
+                        <div id="modTable">
+                            <h4>模块列表</h4>
+                            <ul>
+                                <li>
+                                    服务列表
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <hr style="width: 800px;height: 3px;color: #555555">
+
+                    <div id="C">
+                        <h2>
+                            界面展示
+                        </h2>
+                    </div>
+
+                    <hr style="width: 800px;height: 3px;color: #555555">
+
+                    <div id="D">
+                        <h2>
+                            产品评论
+                        </h2>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
         <!--服务商信息-->
@@ -145,7 +225,10 @@
 
 <script th:src="@{~/js/libs/bootstrap-3.3.7-dist/css/bootstrap-theme.min.css}"></script>
 <script th:src="@{~/js/libs/jquery-3.1.1/jquery-3.1.1.min.js}"></script>
+<script th:src="@{~/js/libs/jQuery.scrollIntoView-master/jquery.scrollIntoView.js}"></script>
 <script th:src="@{~/js/libs/bootstrap-3.3.7-dist/js/bootstrap.min.js}"></script>
+<script th:src="@{~/js/libs/bootstrap-table-1.11.0/dist/bootstrap-table.js}"></script>
+<script th:src="@{~/js/libs/bootstrap-table-1.11.0/dist/locale/bootstrap-table-zh-CN.js}"></script>
 <script th:src="@{~/js/searchapp.js}"></script>
 <script th:src="@{~/js/app.js}"></script>
 

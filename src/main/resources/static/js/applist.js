@@ -21,7 +21,7 @@ function showAllApps () {
                     '                                    <div>\n' +
                     '                                        <p>用户评分：<b>' + data[app].star + '</b></p>\n' +
                     '                                    </div>\n' +
-                    '                                    <a class="btn btn-primary viewmore" href="#">查看详情</a>\n' +
+                    '                                    <a class="btn btn-primary viewmore" href="/app?app_id=' + data[app].id + '">查看详情</a>\n' +
                     '                                    <a class="btn btn-secondary" href="#">立即试用</a>\n' +
                     '                                </div>\n' +
                     '                            </div>\n' +
@@ -65,7 +65,7 @@ $(document).ready(function(){
                         '                                    <div>\n' +
                         '                                        <p>用户评分：<b>' + data[app].star + '</b></p>\n' +
                         '                                    </div>\n' +
-                        '                                    <a class="btn btn-primary viewmore" href="#">查看详情</a>\n' +
+                        '                                    <a class="btn btn-primary viewmore" href="/app?app_id=' + data[app].id + '">查看详情</a>\n' +
                         '                                    <a class="btn btn-secondary" href="#">立即试用</a>\n' +
                         '                                </div>\n' +
                         '                            </div>\n' +
@@ -104,7 +104,7 @@ $(document).ready(function(){
                         '                                    <div>\n' +
                         '                                        <p>用户评分：<b>' + data[app].star + '</b></p>\n' +
                         '                                    </div>\n' +
-                        '                                    <a class="btn btn-primary viewmore" href="#">查看详情</a>\n' +
+                        '                                    <a class="btn btn-primary viewmore" href="/app?app_id=' + data[app].id + '">查看详情</a>\n' +
                         '                                    <a class="btn btn-secondary" href="#">立即试用</a>\n' +
                         '                                </div>\n' +
                         '                            </div>\n' +
