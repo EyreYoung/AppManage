@@ -163,6 +163,9 @@ function InitAppTable() {
             }, {
                 field: 'version',
                 title: '版本'
+            },{
+                field: 'status',
+                title: '状态'
             }
         ]
 

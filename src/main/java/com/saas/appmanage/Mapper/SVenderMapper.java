@@ -32,6 +32,7 @@ public interface SVenderMapper {
     @Select("select * from svender")
     List<SVender> queryCpys();
 
+    //根据ID查开发商名
     @Select("select Company from svender where ID = #{id}")
     String findCpyByID(@Param("id") int id);
 }

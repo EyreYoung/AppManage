@@ -14,6 +14,7 @@ public class App {
     private int Star;
     private String Rec;
     private String Version;
+    private String Status;
 
     public int getNo() {
         return No;
@@ -101,5 +102,13 @@ public class App {
 
     public void setVersion(String version) {
         Version = version;
+    }
+
+    public String getStatus() {
+        return Status;
+    }
+
+    public void setStatus(String status) {
+        Status = status;
     }
 }

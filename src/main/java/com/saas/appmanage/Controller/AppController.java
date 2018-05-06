@@ -39,6 +39,12 @@ public class AppController {
     @Autowired
     SVenderMapper svenderMapper;
 
+    //根据开发商ID查询应用信息
+    @RequestMapping(value = "/queryAppByCpyID",method = RequestMethod.POST)
+    List<App> queryAppByCpyID(@RequestParam("cpy_id") int cpyid){
+        return appMapper.SelectAppByCpyID(cpyid);
+    }
+
     //根据应用ID查询开发商信息
     @RequestMapping(value = "/queryCpyByAppID",method = RequestMethod.POST)
     public SVender queryCpyByAppID(@RequestParam("app_id") int appid){

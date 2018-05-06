@@ -36,7 +36,7 @@ $(document).ready(function () {
                         $.ajax({
                             type: "POST",
                             url: '/showServiceByModuleID',
-                            async: false,
+                            async: false,//是否异步
                             data: {
                                 moduleid: mid
                             },
@@ -44,14 +44,24 @@ $(document).ready(function () {
                                 console.log(result);
                                 for(var service in result){
                                     var id = "mod"+i;
-                                    $('#'+id).append('<li>\n' +
-                                        '                                    ' + result[service].sName + '\n' +
-                                        '                                </li>');
+                                    if(result[service].sDepen!=null){
+                                        if(result[service].sReq=="是"){
+                                            $('#'+id).append('<li>' + result[service].sName + '(必选)<p>(依赖服务：' + result[service].sDepen + ')</p></li>');
+                                        }else{
+                                            $('#'+id).append('<li>' + result[service].sName + '<p>(依赖服务：' + result[service].sDepen + ')</p></li>');
+                                        }
+                                    }else{
+                                        if(result[service].sReq=="是"){
+                                            $('#'+id).append('<li>' + result[service].sName + '(必选)</li>');
+                                        }else{
+                                            $('#'+id).append('<li>' + result[service].sName + '</li>');
+                                        }
+
+                                    }
                                 }
                             }
                         });
                     }
-
                 }
             );
         }

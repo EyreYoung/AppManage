@@ -93,6 +93,7 @@ $(document).ready(function () {
             $('#appCpy').attr("disabled",true);
         }
     );
+    initApptable(cpyid);
 
 });
 
@@ -117,13 +118,13 @@ $('#registerAppStep1').click(function (){
         function (data) {
             console.log(data);
             if(data.response == "插入失败"){
-                window.alert("插入失败");
+                window.alert("注册失败。原因可能为：必填项为空/应用名重复。");
             }else {
                 //进入注册第二步
-                $('#company-manage-main').empty();
+                $('#reg').empty();
                 var step2 = $('#step2').html();
                 $('#step2').remove();
-                $('#company-manage-main').append(step2);
+                $('#reg').append(step2);
                 //等待DOM更新，否则找不到新加入的元素
                 window.setTimeout(function() {
                     //默认填好应用名和开发商名
@@ -160,7 +161,7 @@ $('#registerAppStep1').click(function (){
                 $('#regModule').click(function () {
                     var modname = $('#moduleName').val();
                     var modver = $('#moduleVer').val();
-                    var modreq = $('#moduleReq input:radio:checked').val();
+                    var modreq = $("input[name='modReq']:checked").val();
                     //获取所有选择的依赖模块
                     var depmods = document.getElementsByName('dependModule');
                     var modid = 0;
@@ -207,10 +208,10 @@ $('#registerAppStep1').click(function (){
 
                 //第二步中点击下一步进入第三步
                 $('#registerAppStep2').click(function () {
-                    $('#company-manage-main').empty();
+                    $('#reg').empty();
                     var step3 = $('#step3').html();
                     $('#step3').remove();
-                    $('#company-manage-main').append(step3);
+                    $('#reg').append(step3);
                     //等待DOM更新，否则找不到新加入的元素
                     window.setTimeout(function() {
                         //默认填好应用名和开发商名
@@ -237,7 +238,7 @@ $('#registerAppStep1').click(function (){
                     //选择模块时触发
                     $('#showmoduleName').on("change",function () {
                         var moduleid = $('#showmoduleName option:selected').val();
-                        ('#serviceTable').bootstrapTable('refresh',{url: '/showServiceByModuleID?moduleid='+moduleid});
+                        $('#serviceTable').bootstrapTable('refresh',{url: '/showServiceByModuleID?moduleid='+moduleid});
                     });
 
                     //进入注册服务模态框时
@@ -268,7 +269,7 @@ $('#registerAppStep1').click(function (){
                         var moduleid = $('#showmoduleName option:selected').val();
                         var sername = $('#serviceName').val();
                         var server = $('#serviceVer').val();
-                        var serreq = $('#serviceReq input:radio:checked').val();
+                        var serreq = $("input[name='serReq']:checked").val();
                         //获取所有选择的依赖服务
                         var depsers = document.getElementsByName('dependService');
                         var serid = 0;
@@ -306,7 +307,7 @@ $('#registerAppStep1').click(function (){
                             }
                         );
                         $('#addService').modal('hide');
-                        ('#serviceTable').bootstrapTable('refresh',{url: '/showServiceByModuleID?moduleid='+moduleid});
+                        $('#serviceTable').bootstrapTable('refresh',{url: '/showServiceByModuleID?moduleid='+moduleid});
                     })
                 })
             }
@@ -319,7 +320,7 @@ function InitModuleTable(appname) {
     $('#moduleTable').bootstrapTable({
         url: '/showModuleByAppName?appname='+appname,
         method: 'POST',
-        toolbar: '#toolbar',
+        toolbar: '#moduletoolbar',
         striped: true,                      //是否显示行间隔色
         cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
         pagination: true,                   //是否显示分页（*）
@@ -408,3 +409,65 @@ function InitServiceTable(moduleid) {
         ]
     });
 }
+
+//开发商应用管理
+function initApptable(cpyid) {
+    $('#appmanage').bootstrapTable({
+        url: '/queryAppByCpyID?cpy_id='+cpyid,
+        method: 'POST',
+        toolbar: '#appmanagetoolbar',
+        striped: true,                      //是否显示行间隔色
+        cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+        pagination: true,                   //是否显示分页（*）
+        sortable: true,                     //是否启用排序
+        sortOrder: "asc",                   //排序方式
+        sidePagination: "client",           //分页方式：client客户端分页，server服务端分页（*）
+        pageNumber: 1,                      //初始化加载第一页，默认第一页,并记录
+        pageSize: 10,                      //每页的记录行数（*）
+        pageList: [10, 25, 50, 100],        //可供选择的每页的行数（*）
+        search: true,                      //是否显示表格搜索
+        strictSearch: false,
+        showColumns: true,                  //是否显示所有的列（选择显示的列）
+        showRefresh: true,                  //是否显示刷新按钮
+        minimumCountColumns: 2,             //最少允许的列数
+        clickToSelect: true,                //是否启用点击选中行
+        singleSelect: true,
+        //height: 500,                      //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
+        //uniqueId: "ID",                     //每一行的唯一标识，一般为主键列
+        showToggle: true,                   //是否显示详细视图和列表视图的切换按钮
+        cardView: false,                    //是否显示详细视图
+        detailView: false,                  //是否显示父子表
+
+        columns: [
+            {
+                field: 'name',
+                title: '应用名'
+            }, {
+                field: 'catagory',
+                title: '类别'
+            }, {
+                field: 'regDate',
+                title: '注册时间'
+            }, {
+                field: 'star',
+                title: '评分'
+            }, {
+                field: 'intro',
+                title: '简介'
+            }, {
+                field: 'version',
+                title: '版本'
+            },{
+                field: 'status',
+                title: '状态'
+            }
+        ]
+    });
+}
+
+// $(document).ready(function () {
+//     $('#regApp').click(function () {
+//         $('#company-manage-main').empty();
+//         $('#company-manage-main').append(step1);
+//     })
+// })
