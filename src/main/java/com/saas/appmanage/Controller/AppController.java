@@ -1,13 +1,7 @@
 package com.saas.appmanage.Controller;
 
-import com.saas.appmanage.Entity.App;
-import com.saas.appmanage.Entity.Module;
-import com.saas.appmanage.Entity.SVender;
-import com.saas.appmanage.Entity.Service;
-import com.saas.appmanage.Mapper.AppMapper;
-import com.saas.appmanage.Mapper.ModuleMapper;
-import com.saas.appmanage.Mapper.SVenderMapper;
-import com.saas.appmanage.Mapper.ServiceMapper;
+import com.saas.appmanage.Entity.*;
+import com.saas.appmanage.Mapper.*;
 import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +32,46 @@ public class AppController {
 
     @Autowired
     SVenderMapper svenderMapper;
+
+    @Autowired
+    AuthorityMapper authorityMapper;
+
+    //插入权限
+    @RequestMapping(value = "/insertAuthority",method = RequestMethod.POST)
+    public Map<String,Object> insertAuthority(@RequestParam("auth_name") String auth_name,
+                                              @RequestParam("app_name") String app_name){
+        Map<String,Object> map = new HashMap<String,Object>();
+        String response = "权限插入失败";
+        int exist1 = 0;
+        int exist2 = 0;
+        Authority authority = new Authority();
+        authority.setAuth_name(auth_name);
+        authority.setApp_name(app_name);
+        if(auth_name == ""||app_name == ""){
+
+        }else{
+            try{
+                //插入权限
+                authorityMapper.insertAuthority(authority);
+                exist1 = authority.getAuth_id();
+            }catch (Exception e){
+                exist1 = 0;
+            }
+        }
+        if(exist1 != 0){
+            response = "权限插入成功";
+        }
+        map.put("response",response);
+        map.put("auth_id",authority.getAuth_id());
+        map.put(("auth_name"),authority.getAuth_name());
+        return map;
+    }
+
+    //根据App_id查询所有权限
+    @RequestMapping(value = "/queryAuthorityByAppName",method = RequestMethod.POST)
+    List<Authority> queryAuthorityByAppID(@RequestParam("appname") String appname){
+        return authorityMapper.selectAuthority(appname);
+    }
 
     //根据开发商ID查询应用信息
     @RequestMapping(value = "/queryAppByCpyID",method = RequestMethod.POST)
