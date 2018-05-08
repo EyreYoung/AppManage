@@ -1,10 +1,7 @@
 package com.saas.appmanage.Mapper;
 
 import com.saas.appmanage.Entity.App;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.Date;
 import java.util.List;
@@ -40,4 +37,19 @@ public interface AppMapper {
     //根据应用ID查询应用信息
     @Select("select * from app where ID = #{app_id}")
     App SearchAppByID(@Param("app_id") int appid);
+
+    //应用下架
+    @Update("update app set Status = '下架' where ID = ${app_id} and Status = '在售'")
+    int dropAppByID(@Param("app_id") int appid);
+
+    //删除应用
+    @Delete("delete from app where ID = ${app_id}")
+    int deleteAppByID(@Param("app_id") int appid);
+
+    //修改应用
+    @Update("update app set Name = #{newname} , Catagory = #{newcata} , Intro = #{newintro} where ID = ${app_id}")
+    int updateAppByID(@Param("newname") String newname,
+                      @Param("newcata") String newcata,
+                      @Param("newintro") String newintro,
+                      @Param("app_id") int appid);
 }

@@ -227,4 +227,64 @@ public class AppController {
         return appMapper.SearchApp(QW);
     }
 
+    //开发商下架应用
+    @RequestMapping(value = "/dropAppByID",method = RequestMethod.POST)
+    public Map<String,String> dropAppByID(@RequestParam("app_id") int appid){
+        Map<String,String> map = new HashMap<String,String>();
+        String response = "下架失败";
+        int exist = 0;
+        try{
+            exist = appMapper.dropAppByID(appid);
+        }catch (Exception e){
+            exist = 0;
+        }
+        if(exist == 1){
+            response = "下架应用成功";
+        }
+        map.put("response",response);
+        return map;
+    }
+
+    //开发商删除应用
+    @RequestMapping(value = "/deleteAppByID",method = RequestMethod.POST)
+    public Map<String,String> deleteAppByID(@RequestParam("app_id") int appid){
+        Map<String,String> map = new HashMap<String,String>();
+        String response = "删除失败";
+        int exist = 0;
+        try{
+            exist = appMapper.deleteAppByID(appid);
+        }catch (Exception e){
+            exist = 0;
+        }
+        if(exist == 1){
+            response = "删除应用成功";
+        }
+        map.put("response",response);
+        return map;
+    }
+
+    //开发商修改应用基本信息
+    @RequestMapping(value = "/updateAppByID",method = RequestMethod.POST)
+    public Map<String,String> updateAppByID(@RequestParam("app_id") int appid,
+                                            @RequestParam("newname") String newname,
+                                            @RequestParam("newcata") String newcata,
+                                            @RequestParam("newintro") String newintro){
+        Map<String,String> map = new HashMap<String,String>();
+        String response = "修改失败";
+        int exist = 0;
+        if(newname!=null||newname!=""||newcata!=null||newcata!=""||newintro!=null||newintro!=""){
+            try{
+                exist = appMapper.updateAppByID(newname,newcata,newintro,appid);
+            }catch (Exception e){
+                exist = 0;
+            }
+        }else{
+            response = "有空值，修改失败";
+        }
+        if(exist == 1){
+            response = "修改应用成功";
+        }
+        map.put("response",response);
+        return map;
+    }
 }

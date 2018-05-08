@@ -93,6 +93,7 @@ $(document).ready(function () {
             $('#appCpy').attr("disabled",true);
         }
     );
+
     initApptable(cpyid);
 
 });
@@ -423,23 +424,24 @@ function initApptable(cpyid) {
         sortOrder: "asc",                   //排序方式
         sidePagination: "client",           //分页方式：client客户端分页，server服务端分页（*）
         pageNumber: 1,                      //初始化加载第一页，默认第一页,并记录
-        pageSize: 10,                      //每页的记录行数（*）
+        pageSize: 10,                       //每页的记录行数（*）
         pageList: [10, 25, 50, 100],        //可供选择的每页的行数（*）
-        search: true,                      //是否显示表格搜索
+        search: true,                       //是否显示表格搜索
         strictSearch: false,
         showColumns: true,                  //是否显示所有的列（选择显示的列）
         showRefresh: true,                  //是否显示刷新按钮
         minimumCountColumns: 2,             //最少允许的列数
         clickToSelect: true,                //是否启用点击选中行
-        singleSelect: true,
-        //height: 500,                      //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
-        //uniqueId: "ID",                     //每一行的唯一标识，一般为主键列
+        singleSelect: true,                 //每一行的唯一标识，一般为主键列
         showToggle: true,                   //是否显示详细视图和列表视图的切换按钮
         cardView: false,                    //是否显示详细视图
         detailView: false,                  //是否显示父子表
+        singleSelect: true,                 //单选checkbox
 
         columns: [
             {
+               checkbox: true
+            }, {
                 field: 'name',
                 title: '应用名'
             }, {
@@ -447,7 +449,8 @@ function initApptable(cpyid) {
                 title: '类别'
             }, {
                 field: 'regDate',
-                title: '注册时间'
+                title: '注册时间',
+                sortable: true
             }, {
                 field: 'star',
                 title: '评分'
@@ -461,13 +464,116 @@ function initApptable(cpyid) {
                 field: 'status',
                 title: '状态'
             }
+            // ,{
+            //     field: 'operate',
+            //     title: '操作',
+            //     width: '202px',
+            //     event: manageEvents,
+            //     formatter: operateFormatter
+            // }
         ]
     });
 }
 
-// $(document).ready(function () {
-//     $('#regApp').click(function () {
-//         $('#company-manage-main').empty();
-//         $('#company-manage-main').append(step1);
-//     })
-// })
+
+// function operateFormatter(value, row, index) {
+//     return [
+//         '<button type="button" class="RoleOfedit btn btn-success btn-sm">编辑</button>',
+//         // '<button type="cbutton" class="RoleOfdrop btn btn-warning btn-sm">下架</button>',
+//         // '<button type="cbutton" class="RoleOfdele btn btn-danger btn-sm">删除</button>',
+//         // '<button type="cbutton" class="RoleOfmana btn btn-info btn-sm">管理</button>',
+//     ].join('');
+// }
+
+// window.manageEvents = {
+//     'click .RoleOfedit': function (e, value, row, index) {
+//         window.alert("ccc");
+//     },
+//     'click .RoleOfdrop': function (e, value, row, index) {
+//         window.alert("ccc");
+//     },
+//     'click .RoleOfdele': function (e, value, row, index) {
+//         window.alert("ccc");
+//     },
+//     'click .RoleOfmana': function (e, value, row, index) {
+//         window.alert("ccc");
+//     }
+// };
+
+//应用下架
+$('#manage-dropbutton').click(function () {
+    var selectContent = $('#appmanage').bootstrapTable('getSelections');
+    if(selectContent.length!=1){
+        alert("请选择一个应用");
+    }else {
+        console.log(selectContent[0]);
+        $.post(
+            '/dropAppByID',
+            {
+                app_id: selectContent[0].id
+            },
+            function (data) {
+                alert(data.response);
+                $('#appmanage').bootstrapTable('refresh');
+            }
+        );
+    }
+});
+
+//删除应用
+$('#manage-deletebutton').click(function () {
+    var selectContent = $('#appmanage').bootstrapTable('getSelections');
+    if(selectContent.length!=1){
+        alert("请选择一个应用");
+    }else {
+        console.log(selectContent[0]);
+        $.post(
+            '/deleteAppByID',
+            {
+                app_id: selectContent[0].id
+            },
+            function (data) {
+                alert(data.response);
+                $('#appmanage').bootstrapTable('refresh');
+            }
+        );
+    }
+});
+
+//修改应用
+$('#manage-editbutton').on('click',function () {
+    var selectContent = $('#appmanage').bootstrapTable('getSelections');
+    if(selectContent.length!=1){
+        alert("请选择一个应用");
+    }else {
+        console.log(selectContent[0]);
+        $('#editapp-modal').modal("show");
+        $('#editappName').val(selectContent[0].name);
+        $('#editappCata').selectpicker('val', selectContent[0].catagory);
+        $('#editappIntro').val(selectContent[0].intro);
+    }
+});
+
+//修改应用模态框中点击保存
+//如果放在修改应用点击事件里会导致多次点击模态框后，再次保存会多次post
+$('#modal-editapp-save').on('click',function () {
+    var selectContent = $('#appmanage').bootstrapTable('getSelections');
+    var newname = $('#editappName').val();
+    var newcata = $('#editappCata').val();
+    var newintro = $('#editappIntro').val();
+    $.post(
+        '/updateAppByID',
+        {
+            newname: newname,
+            newcata: newcata,
+            newintro: newintro,
+            app_id: selectContent[0].id
+        },
+        function (data) {
+            console.log(data);
+            alert(data.response);
+            $('#appmanage').bootstrapTable('refresh');
+            $('#editapp-modal').modal("hide");
+        }
+    );
+});
