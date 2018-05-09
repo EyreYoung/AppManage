@@ -36,6 +36,25 @@ public class AppController {
     @Autowired
     AuthorityMapper authorityMapper;
 
+    //插入服务-权限关系
+    @RequestMapping(value = "/insertAuthorityService",method = RequestMethod.POST)
+    public Map<String,Object> insertAuthorityService(@RequestParam("auth_id") int auth_id,
+                                                    @RequestParam("ser_id") int ser_id){
+        Map<String,Object> map = new HashMap<String,Object>();
+        String response = "服务-权限关系插入失败";
+        int exist = 0;
+        try{
+            exist = authorityMapper.insertAuthorityService(auth_id,ser_id);
+        }catch (Exception e){
+            exist = 0;
+        }
+        if(exist !=0){
+            response = "服务-权限关系插入成功";
+        }
+        map.put("response",response);
+        return map;
+    }
+
     //插入权限
     @RequestMapping(value = "/insertAuthority",method = RequestMethod.POST)
     public Map<String,Object> insertAuthority(@RequestParam("auth_name") String auth_name,
@@ -67,7 +86,7 @@ public class AppController {
         return map;
     }
 
-    //根据App_id查询所有权限
+    //根据App_Name查询所有权限
     @RequestMapping(value = "/queryAuthorityByAppName",method = RequestMethod.POST)
     List<Authority> queryAuthorityByAppID(@RequestParam("appname") String appname){
         return authorityMapper.selectAuthority(appname);

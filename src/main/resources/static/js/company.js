@@ -274,17 +274,22 @@ $('#registerAppStep1').click(function (){
                                 }
                             }
                         );
-                        var moduleid = $('#showmoduleName option:selected').val();
-                        InitServiceTable(moduleid);
+                        var moduleid = $("#showmoduleName option:selected").val();
+                        InitServiceTable();
                         //选择模块时触发
                         $('#showmoduleName').on("change",function () {
-                            var moduleid = $('#showmoduleName option:selected').val();
+                            var moduleid = $("#showmoduleName option:selected").val();
+                            $('#serviceTable').bootstrapTable('refresh',{url: '/showServiceByModuleID?moduleid='+moduleid});
+                        });
+
+                        $('#refreshservice').click(function () {
+                            var moduleid = $("#showmoduleName option:selected").val();
                             $('#serviceTable').bootstrapTable('refresh',{url: '/showServiceByModuleID?moduleid='+moduleid});
                         });
 
                         //进入注册服务模态框时
                         $('#addService').on('show.bs.modal',function () {
-                            var moduleid = $('#showmoduleName option:selected').val();
+                            var moduleid = $("#showmoduleName option:selected").val();
                             //获取该应用已有的服务
                             $.post(
                                 '/showServiceByModuleID',
@@ -295,11 +300,26 @@ $('#registerAppStep1').click(function (){
                                     $('#serviceDep').empty();
                                     for(var service in data){
                                         $('#serviceDep').append('<label class="btn btn-default">\n' +
-                                            '                                        <input type="checkbox" name="dependService" value="' + data[service].sID + '"> ' + data[service].sName + '\n' +
-                                            '                                    </label>')
+                                            '                        <input type="checkbox" name="dependService" value="' + data[service].sID + '"> ' + data[service].sName + '\n' +
+                                            '                    </label>')
                                     }
                                 }
 
+                            );
+                            //获取该应用已有的权限
+                            $.post(
+                                '/queryAuthorityByAppName',
+                                {
+                                    appname: name
+                                },
+                                function (data) {
+                                    $('#serviceAuth').empty();
+                                    for(var auth in data){
+                                        $('#serviceAuth').append('<label class="btn btn-default">\n' +
+                                            '                         <input type="checkbox" name="dependAuth" value="' + data[auth].auth_id + '"> ' + data[auth].auth_name + '\n' +
+                                            '                     </label>')
+                                    }
+                                }
                             );
                             $('#serviceName').val("");
                             $('#serviceVer').val("");
@@ -307,12 +327,13 @@ $('#registerAppStep1').click(function (){
 
                         //服务注册模态框点击保存时
                         $('#regService').on("click",function () {
-                            var moduleid = $('#showmoduleName option:selected').val();
+                            var moduleid = $("#showmoduleName option:selected").val();
                             var sername = $('#serviceName').val();
                             var server = $('#serviceVer').val();
                             var serreq = $("input[name='serReq']:checked").val();
                             //获取所有选择的依赖服务
                             var depsers = document.getElementsByName('dependService');
+                            var depauths = document.getElementsByName('dependAuth');
                             var serid = 0;
                             //post插入服务
                             $.post(
@@ -343,11 +364,28 @@ $('#registerAppStep1').click(function (){
                                                 );
                                             }
                                         }
+                                        //把选中的权限注册进服务-权限关系表
+                                        for(var i = 0; i < depauths.length; i++){
+                                            //如果服务被选中
+                                            if(depauths[i].checked){
+                                                $.post(
+                                                    '/insertAuthorityService',
+                                                    {
+                                                        auth_id: depauths[i].value,
+                                                        ser_id: serid
+                                                    },
+                                                    function (data) {
+                                                        console.log(data.response);
+                                                    }
+                                                );
+                                            }
+                                        }
                                         window.alert("服务注册成功")
                                     }
                                 }
                             );
                             $('#addService').modal('hide');
+                            var moduleid = $("#showmoduleName option:selected").val();
                             $('#serviceTable').bootstrapTable('refresh',{url: '/showServiceByModuleID?moduleid='+moduleid});
                         })
                     })
@@ -445,11 +483,12 @@ function InitModuleTable(appname) {
 }
 
 //初始化模块的服务表
-function InitServiceTable(moduleid) {
+function InitServiceTable() {
+    var moduleid = $("#showmoduleName option:selected").val();
     $('#serviceTable').bootstrapTable({
         url: '/showServiceByModuleID?moduleid='+moduleid,
         method: 'POST',
-        toolbar: '#toolbar',
+        toolbar: '#servicetoolbar',
         striped: true,                      //是否显示行间隔色
         cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
         pagination: true,                   //是否显示分页（*）
@@ -462,7 +501,7 @@ function InitServiceTable(moduleid) {
         search: true,                      //是否显示表格搜索
         strictSearch: false,
         showColumns: true,                  //是否显示所有的列（选择显示的列）
-        showRefresh: true,                  //是否显示刷新按钮
+        showRefresh: false,                  //是否显示刷新按钮
         minimumCountColumns: 2,             //最少允许的列数
         clickToSelect: true,                //是否启用点击选中行
         singleSelect: true,
@@ -483,6 +522,9 @@ function InitServiceTable(moduleid) {
                 field: 'sDepen',
                 title: '依赖服务'
             }, {
+                field: 'sAuth',
+                title: '所需权限'
+            },{
                 field: 'sReq',
                 title: '必选'
             }, {

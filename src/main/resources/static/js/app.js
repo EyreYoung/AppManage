@@ -46,15 +46,15 @@ $(document).ready(function () {
                                     var id = "mod"+i;
                                     if(result[service].sDepen!=null){
                                         if(result[service].sReq=="是"){
-                                            $('#'+id).append('<li>' + result[service].sName + '(必选)<p>(依赖服务：' + result[service].sDepen + ')</p></li>');
+                                            $('#'+id).append('<li>' + result[service].sName + '(必选)<p>(依赖服务：' + result[service].sDepen + ')</p><p>(所需权限：' + result[service].sAuth + ')</p></li>');
                                         }else{
-                                            $('#'+id).append('<li>' + result[service].sName + '<p>(依赖服务：' + result[service].sDepen + ')</p></li>');
+                                            $('#'+id).append('<li>' + result[service].sName + '<p>(依赖服务：' + result[service].sDepen + ')</p><p>(所需权限：' + result[service].sAuth + ')</p></li>');
                                         }
                                     }else{
                                         if(result[service].sReq=="是"){
-                                            $('#'+id).append('<li>' + result[service].sName + '(必选)</li>');
+                                            $('#'+id).append('<li>' + result[service].sName + '(必选)<p>(所需权限：' + result[service].sAuth + ')</p></li>');
                                         }else{
-                                            $('#'+id).append('<li>' + result[service].sName + '</li>');
+                                            $('#'+id).append('<li>' + result[service].sName + '<p>(所需权限：' + result[service].sAuth + ')</p></li>');
                                         }
 
                                     }

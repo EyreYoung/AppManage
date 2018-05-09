@@ -6,6 +6,7 @@ public class Service {
     private String sDepen;
     private String sReq;
     private String sVer;
+    private String sAuth;
 
     public int getsID() {
         return sID;
@@ -45,5 +46,13 @@ public class Service {
 
     public void setsVer(String sVer) {
         this.sVer = sVer;
+    }
+
+    public String getsAuth() {
+        return sAuth;
+    }
+
+    public void setsAuth(String sAuth) {
+        this.sAuth = sAuth;
     }
 }
