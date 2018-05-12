@@ -10,7 +10,7 @@ $('#login').click(function () {
         },
         function (data) {
             console.log(data);
-            if(data.response == 1){
+            if(data.success){
                 window.location.replace("/admin/manage");
             }else{
                 window.alert("用户名或者密码错误");

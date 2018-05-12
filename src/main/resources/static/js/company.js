@@ -41,8 +41,8 @@ $('#companyLogin').click(function () {
         },
         function (data) {
             console.log(data);
-            if(data.response != 0){
-                window.location.replace("/company/manage?cpy_id="+data.response);
+            if(data.success){
+                window.location.replace("/company/manage?cpy_id="+data.cpy_id);
             }else{
                 alert("账号密码错误");
             }
@@ -286,7 +286,7 @@ $('#registerAppStep1').click(function (){
                             var moduleid = $("#showmoduleName option:selected").val();
                             $('#serviceTable').bootstrapTable('refresh',{url: '/showServiceByModuleID?moduleid='+moduleid});
                         });
-
+                        
                         //进入注册服务模态框时
                         $('#addService').on('show.bs.modal',function () {
                             var moduleid = $("#showmoduleName option:selected").val();
@@ -388,6 +388,12 @@ $('#registerAppStep1').click(function (){
                             var moduleid = $("#showmoduleName option:selected").val();
                             $('#serviceTable').bootstrapTable('refresh',{url: '/showServiceByModuleID?moduleid='+moduleid});
                         })
+                        
+                        //注册服务界面点击完成注册
+                        $('#registerAppStep4').click(function () {
+                            location.reload();
+                        })
+                        
                     })
                 });
             }

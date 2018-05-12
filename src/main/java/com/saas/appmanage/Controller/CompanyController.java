@@ -4,16 +4,15 @@ package com.saas.appmanage.Controller;
 import com.saas.appmanage.Entity.SVender;
 import com.saas.appmanage.Mapper.SVenderMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
 
 @RestController
 @RequestMapping("/company")
+@SessionAttributes(value = {"account","password","character"})
 public class CompanyController {
     @Autowired
     private SVenderMapper svenderMapper;
@@ -37,8 +36,9 @@ public class CompanyController {
 
 
     @RequestMapping(value = "/doLogin", method = RequestMethod.POST)
-    public Map<String,Object> doAdminLogin(@RequestParam("account") String account,
-                                           @RequestParam("password") String password){
+    public Map<String,Object> doCpyLogin(@RequestParam("account") String account,
+                                         @RequestParam("password") String password,
+                                         HttpSession session){
         Map<String,Object> map = new HashMap<String,Object>();
         int exist = 0;
 
@@ -47,7 +47,17 @@ public class CompanyController {
         }catch (Exception e){
             exist = 0;
         }
-        map.put("response",exist);
+        if(exist != 0){
+            session.setAttribute("account",account);
+            session.setAttribute("password",password);
+            session.setAttribute("character","company");
+            map.put("success",true);
+            map.put("message","登录成功");
+            map.put("cpy_id",exist);
+        }else {
+            map.put("success",false);
+            map.put("message","登录失败");
+        }
         return map;
     }
 

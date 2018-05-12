@@ -220,7 +220,7 @@
     var that = this,
         filterValues = that.filterColumnsPartial;
 
-    // Filter for client
+    // Interceptor for client
     if (that.options.sidePagination === 'client') {
       this.data = $.grep(this.data, function (row, idx) {
         for (var field in filterValues) {
