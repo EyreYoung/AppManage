@@ -13,7 +13,7 @@ public interface ModuleMapper {
     List<Module> selectModule(@Param("appname") String appname);
 
     //插入模块
-    @Insert("insert into module(Name,Version) values(#{mName},#{ver})")
+    @Insert("insert into module(Name,Version,Intro) values(#{mName},#{ver},#{mIntro})")
     @Options(useGeneratedKeys = true, keyProperty = "mID", keyColumn = "ID")
     int insertModule(Module module);
 

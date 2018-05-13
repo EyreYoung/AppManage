@@ -5,6 +5,7 @@ public class Service {
     private String sName;
     private String sDepen;
     private String sReq;
+    private String sIntro;
     private String sVer;
     private String sAuth;
 
@@ -38,6 +39,14 @@ public class Service {
 
     public void setsReq(String sReq) {
         this.sReq = sReq;
+    }
+
+    public String getsIntro() {
+        return sIntro;
+    }
+
+    public void setsIntro(String sIntro) {
+        this.sIntro = sIntro;
     }
 
     public String getsVer() {

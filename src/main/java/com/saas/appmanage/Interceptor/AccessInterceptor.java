@@ -8,7 +8,6 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.util.Set;
 
 public class AccessInterceptor implements HandlerInterceptor {
 
@@ -36,7 +35,7 @@ public class AccessInterceptor implements HandlerInterceptor {
             }
             // 如果标记了注解，则判断权限
             if (accessPassport != null && !StringUtils.isEmpty(accessPassport.authorities())) {
-                // redis或数据库 中获取该用户的权限信息 并判断是否有权限
+                //从session中获取该用户的身份信息 并判断是否有权限
                 if(accessPassport.authorities().equals((String)session.getAttribute("character"))){
                     System.out.println("Access passport accepted successfully.\nCharacter:"+ accessPassport.authorities() +"\nRedirect to:"+redirectURL+"\n");
                     return true;

@@ -4,6 +4,7 @@ public class Module {
     private int mID;
     private String mName;
     private String depen;
+    private String mIntro;
     private String ver;
 
     public int getmID() {
@@ -28,6 +29,14 @@ public class Module {
 
     public void setDepen(String depen) {
         this.depen = depen;
+    }
+
+    public String getmIntro() {
+        return mIntro;
+    }
+
+    public void setmIntro(String mIntro) {
+        this.mIntro = mIntro;
     }
 
     public String getVer() {

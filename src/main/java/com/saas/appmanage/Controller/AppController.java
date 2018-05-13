@@ -113,9 +113,10 @@ public class AppController {
     //插入服务
     @RequestMapping(value = "/insertService",method = RequestMethod.POST)
     public Map<String,Object> insertService(@RequestParam("mid") int mid,
-                                           @RequestParam("name") String name,
-                                           @RequestParam("ver") String ver,
-                                           @RequestParam("req") String req){
+                                            @RequestParam("name") String name,
+                                            @RequestParam("ver") String ver,
+                                            @RequestParam("req") String req,
+                                            @RequestParam("intro") String intro){
         Map<String,Object> map = new HashMap<String,Object>();
         String response = "服务插入失败";
         int exist1 = 0;
@@ -123,6 +124,7 @@ public class AppController {
         Service service = new Service();
         service.setsName(name);
         service.setsVer(ver);
+        service.setsIntro(intro);
         if(name == ""||ver == ""||req ==""){
 
         }else{
@@ -194,6 +196,7 @@ public class AppController {
     public Map<String,Object> insertModule(@RequestParam("appname") String appname,
                                            @RequestParam("name") String name,
                                            @RequestParam("ver") String ver,
+                                           @RequestParam("intro") String intro,
                                            @RequestParam("req") String req){
         Map<String,Object> map = new HashMap<String,Object>();
         String response = "模块插入失败";
@@ -201,6 +204,7 @@ public class AppController {
         int exist2 = 0;
         Module module = new Module();
         module.setmName(name);
+        module.setmIntro(intro);
         module.setVer(ver);
         if(name == ""||ver == ""||req ==""){
 

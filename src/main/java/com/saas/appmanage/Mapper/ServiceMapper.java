@@ -17,7 +17,7 @@ public interface ServiceMapper {
     List<Service> selectService(@Param("mID") int mID);
 
     //插入服务
-    @Insert("insert into service(Name,Version) values(#{sName},#{sVer})")
+    @Insert("insert into service(Name,Version,Intro) values(#{sName},#{sVer},#{sIntro})")
     @Options(useGeneratedKeys = true, keyProperty = "sID", keyColumn = "ID")
     int insertService(Service service);
 

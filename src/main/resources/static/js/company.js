@@ -203,6 +203,7 @@ $('#registerAppStep1').click(function (){
                         var modname = $('#moduleName').val();
                         var modver = $('#moduleVer').val();
                         var modreq = $("input[name='modReq']:checked").val();
+                        var modintro = $("#moduleIntro").val();
                         //获取所有选择的依赖模块
                         var depmods = document.getElementsByName('dependModule');
                         var modid = 0;
@@ -212,6 +213,7 @@ $('#registerAppStep1').click(function (){
                                 appname:name,
                                 name:modname,
                                 ver:modver,
+                                intro:modintro,
                                 req:modreq
                             },
                             function (data) {
@@ -331,6 +333,7 @@ $('#registerAppStep1').click(function (){
                             var sername = $('#serviceName').val();
                             var server = $('#serviceVer').val();
                             var serreq = $("input[name='serReq']:checked").val();
+                            var serintro = $('#serviceIntro').val();
                             //获取所有选择的依赖服务
                             var depsers = document.getElementsByName('dependService');
                             var depauths = document.getElementsByName('dependAuth');
@@ -342,7 +345,8 @@ $('#registerAppStep1').click(function (){
                                     mid:moduleid,
                                     name:sername,
                                     ver:server,
-                                    req:serreq
+                                    req:serreq,
+                                    intro:serintro
                                 },
                                 function (data) {
                                     console.log(data);
