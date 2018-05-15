@@ -86,6 +86,13 @@
                                 <input type="text" class="form-control" placeholder="请输入权限名称" required="required" id="authName" />
                             </div>
                         </div>
+
+                        <div class="form-group">
+                            <label for="authIntro" class="col-sm-2 control-label">权限说明</label>
+                            <div class="col-sm-10">
+                                <textarea class="form-control" row="3" placeholder="请输入权限说明" id="authIntro"></textarea>
+                            </div>
+                        </div>
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -117,9 +124,9 @@
                     <input type="text" id="showcpyName" class="form-control">
                 </td>
                 <!--<td>   &lt;!&ndash; 按钮触发模态框 &ndash;&gt;-->
-                    <!--<button class="btn btn-primary btn-lg" data-toggle="modal"  data-target="#addModule">-->
-                        <!--添加模块-->
-                    <!--</button>-->
+                <!--<button class="btn btn-primary btn-lg" data-toggle="modal"  data-target="#addModule">-->
+                <!--添加模块-->
+                <!--</button>-->
                 <!--</td>-->
             </tr>
             </tbody>
@@ -198,14 +205,14 @@
                         <div class="form-group">
                             <label for="moduleVer" class="col-sm-2 control-label">模块版本</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" placeholder="请输入应用版本" id="moduleVer" />
+                                <input type="text" class="form-control" placeholder="请输入模块版本" id="moduleVer" />
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label for="moduleIntro" class="col-sm-2 control-label">模块说明</label>
                             <div class="col-sm-10">
-                                <textarea type="text" class="form-control" rows="3" placeholder="请输入应用说明" id="moduleIntro" />
+                                <textarea type="text" class="form-control" rows="3" placeholder="请输入模块说明" id="moduleIntro"></textarea>
                             </div>
                         </div>
 
@@ -350,7 +357,7 @@
                         <div class="form-group">
                             <label for="serviceIntro" class="col-sm-2 control-label">服务说明</label>
                             <div class="col-sm-10">
-                                <textarea type="text" class="form-control" rows="3" placeholder="请输入服务说明" id="serviceIntro" />
+                                <textarea type="text" class="form-control" rows="3" placeholder="请输入服务说明" id="serviceIntro"></textarea>
                             </div>
                         </div>
 
@@ -437,224 +444,261 @@
                     </div>
                 </div>
             </nav>
-         </div>
+        </div>
     </div>
 </div>
 <div class="container">
-        <div class="row clearfix">
-            <div class="col-md-3 column">
-                <ul id="main-nav" class="nav nav-tabs nav-stacked" style="">
-                    <li id="regApp">
-                        <a href="#reg" data-toggle="tab">
-                            <i class="glyphicon glyphicon-globe"></i>
-                            注册应用
-                        </a>
-                    </li>
-                    <li id="manageApp">
-                        <a href="#manage" data-toggle="tab">
-                            <i class="glyphicon glyphicon-credit-card"></i>
-                            应用管理
-                        </a>
-                    </li>
-                    <li id="deleteApp">
-                        <a href="#delete" data-toggle="tab">
-                            <i class="glyphicon glyphicon-globe"></i>
-                            应用升级
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/company/exit">
-                            <i class="glyphicon glyphicon-fire"></i>
-                            退出登录
-                        </a>
-                    </li>
-                </ul>
-            </div>
+    <div class="row clearfix">
+        <div class="col-md-3 column">
+            <ul id="main-nav" class="nav nav-tabs nav-stacked" style="">
+                <li id="regApp">
+                    <a href="#reg" data-toggle="tab">
+                        <i class="glyphicon glyphicon-globe"></i>
+                        注册应用
+                    </a>
+                </li>
+                <li id="manageApp">
+                    <a href="#manage" data-toggle="tab">
+                        <i class="glyphicon glyphicon-credit-card"></i>
+                        应用管理
+                    </a>
+                </li>
+                <li id="deleteApp">
+                    <a href="#delete" data-toggle="tab">
+                        <i class="glyphicon glyphicon-globe"></i>
+                        应用升级
+                    </a>
+                </li>
+                <li>
+                    <a href="/company/exit">
+                        <i class="glyphicon glyphicon-fire"></i>
+                        退出登录
+                    </a>
+                </li>
+            </ul>
+        </div>
 
-            <div class="col-md-9 column" id="company-manage-main">
-                <div id="myTabContent" class="tab-content">
-                    <div class="tab-pane fade" id="reg">
-                        <div id="step1">
-                            <h1>填写基本信息</h1>
-                            <form class="form-horizontal" role="form">
-                                <div class="form-group">
-                                    <label for="appName" class="col-sm-2 control-label">应用名称</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" class="form-control" placeholder="请输入应用名称" required="required" id="appName" />
-                                    </div>
+        <div class="col-md-9 column" id="company-manage-main">
+            <div id="myTabContent" class="tab-content">
+                <div class="tab-pane fade" id="reg">
+                    <div id="step1">
+                        <h1>填写基本信息</h1>
+                        <form class="form-horizontal" role="form">
+                            <div class="form-group">
+                                <label for="appName" class="col-sm-2 control-label">应用名称</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" placeholder="请输入应用名称" required="required" id="appName" />
                                 </div>
-
-                                <div class="form-group">
-                                    <label for="appCpy" class="col-sm-2 control-label">开发者名称</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" class="form-control" placeholder="请输入开发者名称" required="required" id="appCpy" />
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="appCata" class="col-sm-2 control-label">应用类别</label>
-                                    <div class="col-sm-10">
-                                        <select class="selectpicker form-control" title="请选择应用类型" data-live-search="true" required="required" id="appCata">
-                                            <optgroup label="企业管理">
-                                                <option>协同办公</option>
-                                                <option>人力资源</option>
-                                                <option>销售管理</option>
-                                                <option>综合类</option>
-                                                <option>考勤绩效</option>
-                                                <option>财务管理</option>
-                                            </optgroup>
-                                            <optgroup label="工具类">
-                                                <option>便民工具</option>
-                                                <option>文档处理</option>
-                                                <option>协同审批</option>
-                                            </optgroup>
-                                            <optgroup label="工业设计">
-                                                <option>3D展示</option>
-                                                <option>图形图像处理</option>
-                                                <option>设计工具</option>
-                                            </optgroup>
-                                            <optgroup label="大数据">
-                                                <option>数据分析</option>
-                                                <option>数据展示</option>
-                                            </optgroup>
-                                            <optgroup label="工程软件">
-                                                <option>生产制造</option>
-                                            </optgroup>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="appVer" class="col-sm-2 control-label">应用版本</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" class="form-control" placeholder="请输入应用版本" id="appVer" />
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="appImg" class="col-sm-2 control-label">应用图片</label>
-                                    <div class="col-sm-10">
-                                        <input type="file"  data-show-caption="true" class="form-control" placeholder="请上传软件图标" id="appImg" />
-                                        <p class="help-block">支持jpg、jpeg、png格式，大小不超过2.0M</p>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="appIntro" class="col-sm-2 control-label">应用介绍</label>
-                                    <div class="col-sm-10">
-                                        <textarea class="form-control" rows="3" placeholder="请输入应用简介" id="appIntro"></textarea>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <div class="col-sm-offset-2 col-sm-10">
-                                        <button type="button" class="btn btn-primary" id="registerAppStep1">下一步</button>
-                                        <button type="reset" class="btn btn-default">清除</button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade in active" id="manage">
-                        <h1>应用管理</h1>
-                        <table id="appmanage" type="table">
-                            <div id="appmanagetoolbar">
-                                <button type="button" class="btn btn-success" id="manage-editbutton">
-                                    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>修改
-                                </button>
-
-                                <button type="button" class="btn btn-warning" id="manage-dropbutton">
-                                    <span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span>下架
-                                </button>
-
-                                <button type="button" class="btn btn-danger" id="manage-deletebutton">
-                                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>删除
-                                </button>
-
-                                <button type="button" class="btn btn-info" id="manage-managebutton">
-                                    <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>详情
-                                </button>
                             </div>
-                        </table>
-                        <!-- 模态框（Modal） -->
-                        <div class="modal fade" id="editapp-modal" tabindex="-1" role="dialog" aria-labelledby="editAppLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                                            &times;
-                                        </button>
-                                        <h4 class="modal-title" id="editAppLabel">
-                                            修改应用信息
-                                        </h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        <form class="form-horizontal" role="form">
-                                            <div class="form-group">
-                                                <label for="editappName" class="col-sm-2 control-label">应用名称</label>
-                                                <div class="col-sm-10">
-                                                    <input type="text" class="form-control" placeholder="请输入应用名称" required="required" id="editappName" />
-                                                </div>
-                                            </div>
 
-                                            <div class="form-group">
-                                                <label for="editappCata" class="col-sm-2 control-label">应用类别</label>
-                                                <div class="col-sm-10">
-                                                    <select class="selectpicker form-control" title="请选择应用类型" data-live-search="true" required="required" id="editappCata">
-                                                        <optgroup label="企业管理">
-                                                            <option>协同办公</option>
-                                                            <option>人力资源</option>
-                                                            <option>销售管理</option>
-                                                            <option>综合类</option>
-                                                            <option>考勤绩效</option>
-                                                            <option>财务管理</option>
-                                                        </optgroup>
-                                                        <optgroup label="工具类">
-                                                            <option>便民工具</option>
-                                                            <option>文档处理</option>
-                                                            <option>协同审批</option>
-                                                        </optgroup>
-                                                        <optgroup label="工业设计">
-                                                            <option>3D展示</option>
-                                                            <option>图形图像处理</option>
-                                                            <option>设计工具</option>
-                                                        </optgroup>
-                                                        <optgroup label="大数据">
-                                                            <option>数据分析</option>
-                                                            <option>数据展示</option>
-                                                        </optgroup>
-                                                        <optgroup label="工程软件">
-                                                            <option>生产制造</option>
-                                                        </optgroup>
-                                                    </select>
-                                                </div>
-                                            </div>
+                            <div class="form-group">
+                                <label for="appCpy" class="col-sm-2 control-label">开发者名称</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" placeholder="请输入开发者名称" required="required" id="appCpy" />
+                                </div>
+                            </div>
 
-                                            <div class="form-group">
-                                                <label for="editappIntro" class="col-sm-2 control-label">应用介绍</label>
-                                                <div class="col-sm-10">
-                                                    <textarea class="form-control" rows="3" placeholder="请输入应用简介" id="editappIntro"></textarea>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭
-                                        </button>
-                                        <button type="button" class="btn btn-primary" id="modal-editapp-save">
-                                            保存
-                                        </button>
-                                    </div>
-                                </div><!-- /.modal-content -->
-                            </div><!-- /.modal -->
-                        </div>
+                            <div class="form-group">
+                                <label for="appCata" class="col-sm-2 control-label">应用类别</label>
+                                <div class="col-sm-10">
+                                    <select class="selectpicker form-control" title="请选择应用类型" data-live-search="true" required="required" id="appCata">
+                                        <optgroup label="企业管理">
+                                            <option>协同办公</option>
+                                            <option>人力资源</option>
+                                            <option>销售管理</option>
+                                            <option>综合类</option>
+                                            <option>考勤绩效</option>
+                                            <option>财务管理</option>
+                                        </optgroup>
+                                        <optgroup label="工具类">
+                                            <option>便民工具</option>
+                                            <option>文档处理</option>
+                                            <option>协同审批</option>
+                                        </optgroup>
+                                        <optgroup label="工业设计">
+                                            <option>3D展示</option>
+                                            <option>图形图像处理</option>
+                                            <option>设计工具</option>
+                                        </optgroup>
+                                        <optgroup label="大数据">
+                                            <option>数据分析</option>
+                                            <option>数据展示</option>
+                                        </optgroup>
+                                        <optgroup label="工程软件">
+                                            <option>生产制造</option>
+                                        </optgroup>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="appVer" class="col-sm-2 control-label">应用版本</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" placeholder="请输入应用版本" id="appVer" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="appImg" class="col-sm-2 control-label">应用图片</label>
+                                <div class="col-sm-10">
+                                    <input type="file"  data-show-caption="true" class="form-control file-loading" placeholder="请上传软件图标" id="appImg" />
+                                    <p class="help-block">支持jpg、jpeg、png格式，大小不超过2.0M</p>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="appIntro" class="col-sm-2 control-label">应用介绍</label>
+                                <div class="col-sm-10">
+                                    <textarea class="form-control" rows="3" placeholder="请输入应用简介" id="appIntro"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    <button type="button" class="btn btn-primary" id="registerAppStep1">下一步</button>
+                                    <button type="reset" class="btn btn-default">清除</button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
-                    <div class="tab-pane fade" id="delete">
-                        <p>应用升级</p>
+                </div>
+                <div class="tab-pane fade in active" id="manage">
+                    <h1>应用管理</h1>
+                    <table id="appmanage" type="table">
+                        <div id="appmanagetoolbar">
+                            <button type="button" class="btn btn-success" id="manage-editbutton">
+                                <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>修改
+                            </button>
+
+                            <button type="button" class="btn btn-warning" id="manage-dropbutton">
+                                <span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span>下架
+                            </button>
+
+                            <button type="button" class="btn btn-danger" id="manage-deletebutton">
+                                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>删除
+                            </button>
+
+                            <button type="button" class="btn btn-info" id="manage-managebutton">
+                                <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>详情
+                            </button>
+                        </div>
+                    </table>
+                    <!-- 模态框（Modal） -->
+                    <div class="modal fade" id="editapp-modal" tabindex="-1" role="dialog" aria-labelledby="editAppLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                        &times;
+                                    </button>
+                                    <h4 class="modal-title" id="editAppLabel">
+                                        修改应用信息
+                                    </h4>
+                                </div>
+                                <div class="modal-body">
+                                    <form class="form-horizontal" role="form">
+                                        <div class="form-group">
+                                            <label for="editappName" class="col-sm-2 control-label">应用名称</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" placeholder="请输入应用名称" required="required" id="editappName" />
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="editappCata" class="col-sm-2 control-label">应用类别</label>
+                                            <div class="col-sm-10">
+                                                <select class="selectpicker form-control" title="请选择应用类型" data-live-search="true" required="required" id="editappCata">
+                                                    <optgroup label="企业管理">
+                                                        <option>协同办公</option>
+                                                        <option>人力资源</option>
+                                                        <option>销售管理</option>
+                                                        <option>综合类</option>
+                                                        <option>考勤绩效</option>
+                                                        <option>财务管理</option>
+                                                    </optgroup>
+                                                    <optgroup label="工具类">
+                                                        <option>便民工具</option>
+                                                        <option>文档处理</option>
+                                                        <option>协同审批</option>
+                                                    </optgroup>
+                                                    <optgroup label="工业设计">
+                                                        <option>3D展示</option>
+                                                        <option>图形图像处理</option>
+                                                        <option>设计工具</option>
+                                                    </optgroup>
+                                                    <optgroup label="大数据">
+                                                        <option>数据分析</option>
+                                                        <option>数据展示</option>
+                                                    </optgroup>
+                                                    <optgroup label="工程软件">
+                                                        <option>生产制造</option>
+                                                    </optgroup>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="editappIntro" class="col-sm-2 control-label">应用介绍</label>
+                                            <div class="col-sm-10">
+                                                <textarea class="form-control" rows="3" placeholder="请输入应用简介" id="editappIntro"></textarea>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                                    </button>
+                                    <button type="button" class="btn btn-primary" id="modal-editapp-save">
+                                        保存
+                                    </button>
+                                </div>
+                            </div><!-- /.modal-content -->
+                        </div><!-- /.modal -->
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="delete">
+                    <h1>应用升级</h1>
+
+                    <div>
+                        <form class="form">
+                            <table class="table table-bordered">
+                                <tbody>
+                                <tr>
+                                    <td>
+                                        <label for="select-update-type" class="control-label">升级方式</label>
+                                        <select class="selectpicker form-control" required="required" title="请选择升级方式" id="select-update-type">
+                                            <option>应用升级</option>
+                                            <option>模块升级</option>
+                                            <option>服务升级</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <label for="select-update-app" class="control-label">应用名称</label>
+                                        <select class="selectpicker form-control" required="required" title="请选择要升级的应用" disabled="true" id="select-update-app">
+
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <label for="select-update-module" class="control-label">模块名称</label>
+                                        <select class="selectpicker form-control" required="required" title="请选择要升级的模块" disabled="true" id="select-update-module">
+
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <label for="select-update-service" class="control-label">服务名称</label>
+                                        <select class="selectpicker form-control" required="required" title="请选择要升级的服务" disabled="true" id="select-update-service">
+
+                                        </select>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 </div>
 
 <script th:src="@{~/js/libs/bootstrap-3.3.7-dist/css/bootstrap-theme.css}"></script>
@@ -667,6 +711,7 @@
 <script th:src="@{~/js/libs/bootstrap-table-1.11.0/dist/bootstrap-table.js}"></script>
 <script th:src="@{~/js/libs/bootstrap-table-1.11.0/dist/locale/bootstrap-table-zh-CN.js}"></script>
 <script th:src="@{~/js/company.js}"></script>
+<script th:src="@{~/js/updateapp.js}"></script>
 <script th:src="@{~/js/searchapp.js}"></script>
 
 </body>

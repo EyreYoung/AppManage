@@ -1,6 +1,17 @@
 $(document).ready(function () {
     var appid = $('#app_id').val();
     var appname;
+    //进入应用详情界面时将应用热度加1
+    $.post(
+        '/updateAppClicks',
+        {
+            app_id:appid
+        },
+        function (data) {
+            console.log(data.response);
+        }
+    )
+
     //应用信息
     $.post(
         '/queryAppByID',

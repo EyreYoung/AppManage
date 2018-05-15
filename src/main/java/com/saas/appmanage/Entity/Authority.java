@@ -4,6 +4,7 @@ public class Authority {
     private int auth_id;
     private String app_name;
     private String auth_name;
+    private String auth_intro;
     private String rela_service;
 
     public int getAuth_id() {
@@ -28,6 +29,14 @@ public class Authority {
 
     public void setAuth_name(String auth_name) {
         this.auth_name = auth_name;
+    }
+
+    public String getAuth_intro() {
+        return auth_intro;
+    }
+
+    public void setAuth_intro(String auth_intro) {
+        this.auth_intro = auth_intro;
     }
 
     public String getRela_service() {

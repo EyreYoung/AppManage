@@ -51,27 +51,17 @@ $('#companyLogin').click(function () {
     );
 });
 
-function initFileInput(ctrlName,uploadUrl) {
-    var control = $('#' + ctrlName);
-    control.fileinput({
+//上传应用图片
+function initFileInput(uploadUrl) {
+    $('#appImg').fileinput({
         language: 'zh', //设置语言
-        uploadUrl: uploadUrl,  //上传地址
+        uploadUrl: uploadUrl, //上传的地址
+        allowedFileExtensions : ['jpg', 'png','gif'],//接收的文件后缀
         showUpload: false, //是否显示上传按钮
-        showRemove:true,
-        dropZoneEnabled: false,
-        showCaption: true,//是否显示标题
-        allowedPreviewTypes: ['image'],
-        allowedFileTypes: ['image'],
-        allowedFileExtensions:  ['jpg', 'png'],
-        maxFileSize : 2000,
+        showCaption: false,//是否显示标题
+        browseClass: "btn btn-primary", //按钮样式
         maxFileCount: 1,
-        //initialPreview: [
-        //预览图片的设置
-        //      "<img src='http://127.0.0.1:8080/NewsManageSys/plugin/umeditor1_2_2/jsp/upload/20161030/55061                       477813913474.jpg' class='file-preview-image' alt='肖像图片' title='肖像图片'>",
-        //],
-
-    }).on("fileuploaded",function (event,data) {
-        $("#path").attr("value",data.response);
+        previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
     });
 }
 
@@ -140,11 +130,13 @@ $('#registerAppStep1').click(function (){
                 //权限注册模态框中点击保存时
                 $('#regAuthority').click(function () {
                     var auth_name = $('#authName').val();
+                    var auth_intro = $('#authIntro').val();
                     var auth_id = 0;
                     $.post(
                         '/insertAuthority',
                         {
                             auth_name:auth_name,
+                            auth_intro:auth_intro,
                             app_name:name,
                         },
                         function (data) {

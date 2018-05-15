@@ -5,6 +5,7 @@ import com.saas.appmanage.Entity.SVender;
 import com.saas.appmanage.Mapper.SVenderMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.support.SessionStatus;
 
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
@@ -50,6 +51,7 @@ public class CompanyController {
         if(exist != 0){
             session.setAttribute("account",account);
             session.setAttribute("password",password);
+            session.setAttribute("cpy_id",exist);
             session.setAttribute("character","company");
             map.put("success",true);
             map.put("message","登录成功");

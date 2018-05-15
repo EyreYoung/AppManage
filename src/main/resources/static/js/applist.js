@@ -22,7 +22,7 @@ function showAllApps () {
                         '                            <div class="col-md-2">\n' +
                         '                                <div style="vertical-align: middle;horiz-align: center">\n' +
                         '                                    <div>\n' +
-                        '                                        <p>用户评分：<b>' + data[app].star + '</b></p>\n' +
+                        '                                        <p>应用热度：<b>' + data[app].clicks + '</b></p>\n' +
                         '                                    </div>\n' +
                         '                                    <a class="btn btn-primary viewmore" href="/app?app_id=' + data[app].id + '">查看详情</a>\n' +
                         '                                    <a class="btn btn-secondary" href="#">立即试用</a>\n' +
@@ -68,7 +68,7 @@ $(document).ready(function(){
                             '                            <div class="col-md-2">\n' +
                             '                                <div style="vertical-align: middle;horiz-align: center">\n' +
                             '                                    <div>\n' +
-                            '                                        <p>用户评分：<b>' + data[app].star + '</b></p>\n' +
+                            '                                        <p>应用热度：<b>' + data[app].clicks + '</b></p>\n' +
                             '                                    </div>\n' +
                             '                                    <a class="btn btn-primary viewmore" href="/app?app_id=' + data[app].id + '">查看详情</a>\n' +
                             '                                    <a class="btn btn-secondary" href="#">立即试用</a>\n' +
@@ -109,7 +109,7 @@ $(document).ready(function(){
                             '                            <div class="col-md-2">\n' +
                             '                                <div style="vertical-align: middle;horiz-align: center">\n' +
                             '                                    <div>\n' +
-                            '                                        <p>用户评分：<b>' + data[app].star + '</b></p>\n' +
+                            '                                        <p>应用热度：<b>' + data[app].clicks + '</b></p>\n' +
                             '                                    </div>\n' +
                             '                                    <a class="btn btn-primary viewmore" href="/app?app_id=' + data[app].id + '">查看详情</a>\n' +
                             '                                    <a class="btn btn-secondary" href="#">立即试用</a>\n' +

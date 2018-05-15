@@ -15,6 +15,7 @@ public class App {
     private String Rec;
     private String Version;
     private String Status;
+    private int Clicks;
 
     public int getNo() {
         return No;
@@ -110,5 +111,13 @@ public class App {
 
     public void setStatus(String status) {
         Status = status;
+    }
+
+    public int getClicks() {
+        return Clicks;
+    }
+
+    public void setClicks(int clicks) {
+        Clicks = clicks;
     }
 }

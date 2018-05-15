@@ -66,11 +66,6 @@ public class HelloController {
         return "company/companyLogin";
     }
 
-    @RequestMapping(value = "/company/registerapp")
-    public String companyRegisterApp(){
-        return "company/RegisterApp";
-    }
-
     //应用列表
     @RequestMapping(value = "/apps")
     public String showApps(){
@@ -82,7 +77,7 @@ public class HelloController {
     @AccessPassport(authorities = "company")
     public String companyManage(Model model, @RequestParam("cpy_id") int cpyid){
         model.addAttribute("cpy_id",cpyid);
-        return "company/RegisterApp";
+        return "company/companyManage";
     }
 
     //搜索应用

@@ -13,7 +13,7 @@ public interface AuthorityMapper {
     List<Authority> selectAuthority(@Param("appname") String appname);
 
     //插入权限
-    @Insert("insert into authority(app_id,auth_name) values((select ID from app where Name = #{app_name}),#{auth_name})")
+    @Insert("insert into authority(app_id,auth_name,auth_intro) values((select ID from app where Name = #{app_name}),#{auth_name},#{auth_intro})")
     @Options(useGeneratedKeys = true, keyProperty = "auth_id", keyColumn = "auth_id")
     int insertAuthority(Authority authority);
 

@@ -36,6 +36,24 @@ public class AppController {
     @Autowired
     AuthorityMapper authorityMapper;
 
+    //进入应用详情界面将应用热度加1
+    @RequestMapping(value = "/updateAppClicks")
+    public Map<String,Object> updateAppClicks(@RequestParam("app_id") int app_id){
+        Map<String,Object> map = new HashMap<String,Object>();
+        String response = "应用自增失败";
+        int exist = 0;
+        try{
+            exist = appMapper.updateAppClicks(app_id);
+        }catch (Exception e){
+            exist = 0;
+        }
+        if(exist == 1){
+            response = "应用热度热度+1";
+        }
+        map.put("response",response);
+        return map;
+    }
+
     //插入服务-权限关系
     @RequestMapping(value = "/insertAuthorityService",method = RequestMethod.POST)
     public Map<String,Object> insertAuthorityService(@RequestParam("auth_id") int auth_id,
@@ -58,6 +76,7 @@ public class AppController {
     //插入权限
     @RequestMapping(value = "/insertAuthority",method = RequestMethod.POST)
     public Map<String,Object> insertAuthority(@RequestParam("auth_name") String auth_name,
+                                              @RequestParam("auth_intro") String auth_intro,
                                               @RequestParam("app_name") String app_name){
         Map<String,Object> map = new HashMap<String,Object>();
         String response = "权限插入失败";
@@ -65,6 +84,7 @@ public class AppController {
         int exist2 = 0;
         Authority authority = new Authority();
         authority.setAuth_name(auth_name);
+        authority.setAuth_intro(auth_intro);
         authority.setApp_name(app_name);
         if(auth_name == ""||app_name == ""){
 
