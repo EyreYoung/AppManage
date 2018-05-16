@@ -7,6 +7,7 @@ public class Service {
     private String sReq;
     private String sIntro;
     private String sVer;
+    private double sPrice;
     private String sAuth;
 
     public int getsID() {
@@ -55,6 +56,14 @@ public class Service {
 
     public void setsVer(String sVer) {
         this.sVer = sVer;
+    }
+
+    public double getsPrice() {
+        return sPrice;
+    }
+
+    public void setsPrice(double sPrice) {
+        this.sPrice = sPrice;
     }
 
     public String getsAuth() {

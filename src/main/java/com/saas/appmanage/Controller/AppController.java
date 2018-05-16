@@ -36,6 +36,12 @@ public class AppController {
     @Autowired
     AuthorityMapper authorityMapper;
 
+    //查出同类型应用并按热度排行
+    @RequestMapping(value = "/queryRelaApps")
+    public List<App> queryRelaApps(@RequestParam("app_id") int app_id){
+        return appMapper.SelectRelaAppByID(app_id);
+    }
+
     //进入应用详情界面将应用热度加1
     @RequestMapping(value = "/updateAppClicks")
     public Map<String,Object> updateAppClicks(@RequestParam("app_id") int app_id){
@@ -108,13 +114,13 @@ public class AppController {
 
     //根据App_Name查询所有权限
     @RequestMapping(value = "/queryAuthorityByAppName",method = RequestMethod.POST)
-    List<Authority> queryAuthorityByAppID(@RequestParam("appname") String appname){
+    public List<Authority> queryAuthorityByAppID(@RequestParam("appname") String appname){
         return authorityMapper.selectAuthority(appname);
     }
 
     //根据开发商ID查询应用信息
     @RequestMapping(value = "/queryAppByCpyID",method = RequestMethod.POST)
-    List<App> queryAppByCpyID(@RequestParam("cpy_id") int cpyid){
+    public List<App> queryAppByCpyID(@RequestParam("cpy_id") int cpyid){
         return appMapper.SelectAppByCpyID(cpyid);
     }
 
@@ -136,7 +142,8 @@ public class AppController {
                                             @RequestParam("name") String name,
                                             @RequestParam("ver") String ver,
                                             @RequestParam("req") String req,
-                                            @RequestParam("intro") String intro){
+                                            @RequestParam("intro") String intro,
+                                            @RequestParam("price") double price){
         Map<String,Object> map = new HashMap<String,Object>();
         String response = "服务插入失败";
         int exist1 = 0;
@@ -145,6 +152,7 @@ public class AppController {
         service.setsName(name);
         service.setsVer(ver);
         service.setsIntro(intro);
+        service.setsPrice(price);
         if(name == ""||ver == ""||req ==""){
 
         }else{

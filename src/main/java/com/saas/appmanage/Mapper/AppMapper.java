@@ -9,8 +9,12 @@ import java.util.List;
 @Mapper
 public interface AppMapper {
 
+    //查出同类型应用并按热度排行
+    @Select("select * from app where Catagory=(select Catagory from app where ID = ${app_id})and ID != ${app_id} ORDER BY Clicks DESC")
+    List<App> SelectRelaAppByID(@Param("app_id") int app_id);
+
     //进入应用详情界面将应用Clicks自加1
-    @Update("update app set Clicks = Clicks + 1 where ID = #{app_id}")
+    @Update("update app set Clicks = Clicks + 1 where ID = ${app_id}")
     int updateAppClicks(@Param("app_id") int app_id);
 
     //根据开发商ID查询应用信息

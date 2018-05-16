@@ -326,6 +326,7 @@ $('#registerAppStep1').click(function (){
                             var server = $('#serviceVer').val();
                             var serreq = $("input[name='serReq']:checked").val();
                             var serintro = $('#serviceIntro').val();
+                            var serpri = $('#servicePri').val();
                             //获取所有选择的依赖服务
                             var depsers = document.getElementsByName('dependService');
                             var depauths = document.getElementsByName('dependAuth');
@@ -338,7 +339,8 @@ $('#registerAppStep1').click(function (){
                                     name:sername,
                                     ver:server,
                                     req:serreq,
-                                    intro:serintro
+                                    intro:serintro,
+                                    price:serpri
                                 },
                                 function (data) {
                                     console.log(data);
@@ -526,12 +528,18 @@ function InitServiceTable() {
             }, {
                 field: 'sAuth',
                 title: '所需权限'
-            },{
+            }, {
                 field: 'sReq',
                 title: '必选'
             }, {
+                field: 'sPrice',
+                title: '价格'
+            }, {
                 field: 'sVer',
                 title: '版本'
+            }, {
+                field: 'sIntro',
+                title: '说明'
             }
         ]
     });

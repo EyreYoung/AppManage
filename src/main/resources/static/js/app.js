@@ -21,6 +21,7 @@ $(document).ready(function () {
         function (data) {
             console.log(data);
             appname = data.name;
+            document.title="SaaS平台——" + appname;
             $('#appname').html(data.name);
             $('#app_name').html(data.name);
             $('#app_intro').html(data.intro);
@@ -75,6 +76,20 @@ $(document).ready(function () {
                     }
                 }
             );
+            //相关应用信息
+            $.post(
+                '/queryRelaApps',
+                {
+                    app_id: appid
+                },
+                function (data) {
+                    console.log("相关应用："+data);
+                    $('#rela_app').empty();
+                    for(var app in data){
+                        $('#rela_app').append('<tr><td><a href="/app?app_id=' + data[app].id + '">' + data[app].name + '</a></td></tr>');
+                    }
+                }
+            );
         }
     );
     //开发商信息
@@ -90,7 +105,6 @@ $(document).ready(function () {
             $('#cpy_mail').html("邮 箱:" + data.mail);
         }
     );
-
 })
 
 
