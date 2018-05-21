@@ -460,25 +460,31 @@
             <ul id="main-nav" class="nav nav-tabs nav-stacked" style="">
                 <li id="regApp">
                     <a href="#reg" data-toggle="tab">
-                        <i class="glyphicon glyphicon-globe"></i>
+                        <i class="glyphicon glyphicon-cloud-upload"></i>
                         注册应用
                     </a>
                 </li>
                 <li id="manageApp">
                     <a href="#manage" data-toggle="tab">
-                        <i class="glyphicon glyphicon-credit-card"></i>
+                        <i class="glyphicon glyphicon-duplicate"></i>
                         应用管理
                     </a>
                 </li>
                 <li id="deleteApp">
                     <a href="#delete" data-toggle="tab">
-                        <i class="glyphicon glyphicon-globe"></i>
+                        <i class="glyphicon glyphicon-upload"></i>
                         应用升级
+                    </a>
+                </li>
+                <li id="updateCpy">
+                    <a href="#update" data-toggle="tab">
+                        <i class="glyphicon glyphicon-wrench"></i>
+                        修改信息
                     </a>
                 </li>
                 <li>
                     <a href="/company/exit">
-                        <i class="glyphicon glyphicon-fire"></i>
+                        <i class="glyphicon glyphicon-log-out"></i>
                         退出登录
                     </a>
                 </li>
@@ -673,7 +679,7 @@
                                 <tr>
                                     <td>
                                         <label for="select-update-type" class="control-label">升级方式</label>
-                                        <select class="selectpicker form-control" required="required" title="请选择升级方式" id="select-update-type">
+                                        <select class="form-control" required="required" th:placeholder="请选择升级方式" id="select-update-type">
                                             <option>应用升级</option>
                                             <option>模块升级</option>
                                             <option>服务升级</option>
@@ -681,19 +687,19 @@
                                     </td>
                                     <td>
                                         <label for="select-update-app" class="control-label">应用名称</label>
-                                        <select class="selectpicker form-control" required="required" title="请选择要升级的应用" disabled="true" id="select-update-app">
+                                        <select class="form-control" required="required" title="请选择要升级的应用" disabled="true" id="select-update-app">
 
                                         </select>
                                     </td>
                                     <td>
                                         <label for="select-update-module" class="control-label">模块名称</label>
-                                        <select class="selectpicker form-control" required="required" title="请选择要升级的模块" disabled="true" id="select-update-module">
+                                        <select class="form-control" required="required" title="请选择要升级的模块" disabled="true" id="select-update-module">
 
                                         </select>
                                     </td>
                                     <td>
                                         <label for="select-update-service" class="control-label">服务名称</label>
-                                        <select class="selectpicker form-control" required="required" title="请选择要升级的服务" disabled="true" id="select-update-service">
+                                        <select class="form-control" required="required" title="请选择要升级的服务" disabled="true" id="select-update-service">
 
                                         </select>
                                     </td>
@@ -701,6 +707,46 @@
                                 </tbody>
                             </table>
                         </form>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="update">
+                    <h1>修改信息</h1>
+
+                    <div id="update-info">
+                        <form class="form-inline">
+                            <div class="form-group">
+                                <label class="control-label">用户名</label>
+                                <input type="text" class="form-control" disabled="true" id="update-account" placeholder="Account">
+                            </div>
+                            <div class="form-group" style="padding-left: 30px">
+                                <label for="update-password-confirm" class="control-label">密码</label>
+                                <input type="password" class="form-control" id="update-password-confirm" placeholder="请输入密码确认身份">
+                            </div>
+                            <button type="button" class="btn btn-primary" id="confirm">确认</button>
+                        </form>
+                        <div id="update-info-full" style="display: none">
+                            <form class="form-horizontal">
+                                <div class="form-group">
+                                    <label class="control-label">公司名</label>
+                                    <input type="text" class="form-control" id="update-company">
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">密码</label>
+                                    <input type="password" class="form-control" id="update-password">
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">邮箱</label>
+                                    <input type="text" class="form-control" id="update-mail">
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">电话</label>
+                                    <input type="text" class="form-control" id="update-tel">
+                                </div>
+                                <button type="button" class="btn btn-primary" id="confirm-save">保存修改</button>
+                                <button type="button" class="btn btn-default" id="confirm-reset">重置</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>

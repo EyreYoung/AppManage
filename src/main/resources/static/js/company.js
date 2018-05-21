@@ -81,14 +81,66 @@ $(document).ready(function () {
             id:cpyid
         },
         function (data) {
-            $('#appCpy').val(data.cpy);
+            $('#appCpy').val(data[0].company);
             $('#appCpy').attr("disabled",true);
+            $('#update-account').val(data[0].account);
+            //修改个人信息
+            $('#confirm').click(function () {
+                var pwd = $('#update-password-confirm').val();
+                $.post(
+                    '/company/doLogin',
+                    {
+                        account:data[0].account,
+                        password:pwd
+                    },
+                    function (result) {
+                        if(result.success){
+                            var updateinfo = $('#update-info-full').html();
+                            $('#update-info').empty();
+                            $('#update-info-full').remove();
+                            $('#update-info').append(updateinfo);
+                            $('#update-company').val(data[0].company);
+                            $('#update-password').val(data[0].password);
+                            $('#update-mail').val(data[0].mail);
+                            $('#update-tel').val(data[0].tel);
+                            //点击保存修改
+                            $('#confirm-save').on("click",function () {
+                                var password = $('#update-password').val();
+                                var company = $('#update-company').val();
+                                var tel = $('#update-tel').val();
+                                var mail = $('#update-mail').val();
+                                $.post(
+                                    '/company/updateCpyByID',
+                                    {
+                                        cpy_id:cpyid,
+                                        password:password,
+                                        company:company,
+                                        tel:tel,
+                                        mail:mail
+                                    },
+                                    function (updateresult) {
+                                        if(updateresult.success){
+                                            alert("修改成功");
+                                            location.reload();
+                                        }else {
+                                            alert("修改失败，公司名可能重复或有未填项");
+                                        }
+                                    }
+                                );
+                            });
+                        }else {
+                            alert("密码错误");
+                            $('#update-password-confirm').val("");
+                        }
+                    }
+                );
+            });
         }
     );
-
     initApptable(cpyid);
-
 });
+
+
 
 //注册应用第一步 填写基本信息（应用名、类别、应用简介、应用版本）
 $('#registerAppStep1').click(function (){
