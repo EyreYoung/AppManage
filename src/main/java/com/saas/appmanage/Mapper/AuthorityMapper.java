@@ -9,7 +9,7 @@ import java.util.List;
 public interface AuthorityMapper {
 
     //根据App_Name查询所有权限
-    @Select("select auth_id,app.Name as app_name,auth_name from authority as au,app where app_id = app.ID and app.Name = #{appname}")
+    @Select("select auth_id,app.Name as app_name,auth_name,auth_intro from authority as au,app where app_id = app.ID and app.Name = #{appname}")
     List<Authority> selectAuthority(@Param("appname") String appname);
 
     //插入权限

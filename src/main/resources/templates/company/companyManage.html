@@ -703,10 +703,120 @@
 
                                         </select>
                                     </td>
+                                    <td>
+                                        <button type="button" class="btn btn-warning" id="start-update">开始升级</button>
+                                    </td>
                                 </tr>
                                 </tbody>
                             </table>
                         </form>
+
+                        <div id="update-app-toolbar">
+                            <button type="button" class="btn btn-success" id="app-update-finish">
+                                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>完成升级
+                            </button>
+
+                            <button type="button" class="btn btn-info" id="app-update-refresh">
+                                <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>刷新
+                            </button>
+                        </div>
+                        <h3>升级中应用</h3>
+                        <table class="table" id="update-app-table"></table>
+
+                        <div id="update-module-toolbar">
+                            <button type="button" class="btn btn-success" id="module-update-finish">
+                                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>完成升级
+                            </button>
+
+                            <button type="button" class="btn btn-info" id="module-update-refresh">
+                                <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>刷新
+                            </button>
+                        </div>
+                        <h3>升级中模块</h3>
+                        <table class="table" id="update-module-table"></table>
+
+                        <!-- 应用完成升级模态框（Modal） -->
+                        <div class="modal fade" id="update-app-finish-modal" tabindex="-1" role="dialog" aria-labelledby="update-app-finish-Label" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                            &times;
+                                        </button>
+                                        <h4 class="modal-title" id="update-app-finish-Label">
+                                            应用升级完成
+                                        </h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form class="form-horizontal" role="form">
+                                            <div class="form-group">
+                                                <label for="app-update-old-version" class="col-sm-2 control-label">应用原版本</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" disabled="true" required="required" id="app-update-old-version" />
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="app-update-new-version" class="col-sm-2 control-label">应用新版本</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" placeholder="请输入应用新版本号" required="required" id="app-update-new-version" />
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">
+                                            关闭
+                                        </button>
+                                        <button type="button" class="btn btn-primary" id="modal-updateapp-save">
+                                            完成升级
+                                        </button>
+                                    </div>
+                                </div><!-- /.modal-content -->
+                            </div><!-- /.modal -->
+                        </div>
+
+                        <!-- 模块完成升级模态框（Modal） -->
+                        <div class="modal fade" id="update-module-finish-modal" tabindex="-1" role="dialog" aria-labelledby="update-module-finish-Label" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                            &times;
+                                        </button>
+                                        <h4 class="modal-title" id="update-module-finish-Label">
+                                            应用升级完成
+                                        </h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form class="form-horizontal" role="form">
+                                            <div class="form-group">
+                                                <label for="module-update-old-version" class="col-sm-2 control-label">模块原版本</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" disabled="true" required="required" id="module-update-old-version" />
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="module-update-new-version" class="col-sm-2 control-label">模块新版本</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" placeholder="请输入模块新版本号" required="required" id="module-update-new-version" />
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">
+                                            关闭
+                                        </button>
+                                        <button type="button" class="btn btn-primary" id="modal-updatemodule-save">
+                                            完成升级
+                                        </button>
+                                    </div>
+                                </div><!-- /.modal-content -->
+                            </div><!-- /.modal -->
+                        </div>
+
                     </div>
                 </div>
 

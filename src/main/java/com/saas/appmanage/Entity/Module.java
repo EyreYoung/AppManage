@@ -6,6 +6,9 @@ public class Module {
     private String depen;
     private String mIntro;
     private String ver;
+    private String mStatus;
+    private String appName;
+    private String mReq;
 
     public int getmID() {
         return mID;
@@ -45,5 +48,29 @@ public class Module {
 
     public void setVer(String ver) {
         this.ver = ver;
+    }
+
+    public String getmStatus() {
+        return mStatus;
+    }
+
+    public void setmStatus(String mStatus) {
+        this.mStatus = mStatus;
+    }
+
+    public String getAppName() {
+        return appName;
+    }
+
+    public void setAppName(String appName) {
+        this.appName = appName;
+    }
+
+    public String getmReq() {
+        return mReq;
+    }
+
+    public void setmReq(String mReq) {
+        this.mReq = mReq;
     }
 }

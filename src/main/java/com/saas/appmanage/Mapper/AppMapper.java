@@ -9,6 +9,19 @@ import java.util.List;
 @Mapper
 public interface AppMapper {
 
+    //根据开发商ID查询升级中应用信息
+    @Select("select * from app where SVID = ${cpy_id} and Status = '升级中'")
+    List<App> SelectUpdatedAppByCpyID(@Param("cpy_id") int cpy_id);
+
+    //应用升级方式完成升级
+    @Update("update app set Status = '在售', Version = #{newver} where Name = #{appname}")
+    int updateAppFinish(@Param("appname") String appname,
+                        @Param("newver") String newver);
+
+    //应用升级方式升级应用
+    @Update("update app set Status = '升级中' where Name = #{appname}")
+    int updateApp(@Param("appname") String appname);
+
     //查出同类型应用并按热度排行
     @Select("select * from app where Catagory=(select Catagory from app where ID = ${app_id})and ID != ${app_id} ORDER BY Clicks DESC")
     List<App> SelectRelaAppByID(@Param("app_id") int app_id);

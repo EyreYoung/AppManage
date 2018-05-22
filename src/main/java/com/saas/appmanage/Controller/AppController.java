@@ -36,6 +36,114 @@ public class AppController {
     @Autowired
     AuthorityMapper authorityMapper;
 
+    //模块升级方式完成升级
+    @RequestMapping(value = "/updateModuleFinishByID")
+    public Map<String,Object> updateModuleFinishByID(@RequestParam("module_id") int module_id,
+                                                       @RequestParam("newver") String newver){
+        Map<String,Object> map = new HashMap<String,Object>();
+        String response = "升级模块未完成";
+        int exist = 0;
+        if(newver!=null&&newver!=""){
+            try{
+                exist = moduleMapper.updateModuleFinish(module_id,newver);
+            }catch (Exception e){
+                exist = 0;
+            }
+        }else{
+            map.put("response","输入值不能为空！");
+        }
+        if(exist == 1){
+            map.put("success",true);
+            response = "升级模块完成";
+        }else {
+            map.put("success",false);
+        }
+        map.put("response",response);
+        return map;
+    }
+
+    //根据开发商ID查询升级中模块信息
+    @RequestMapping(value = "/queryUpdatedMoudleByCpyID",method = RequestMethod.POST)
+    public List<Module> queryUpdatedMoudleByCpyID(@RequestParam("cpy_id") int cpy_id){
+        return moduleMapper.SelectUpdatedModuleByCpyID(cpy_id);
+    }
+
+    //模块升级方式升级应用
+    @RequestMapping(value = "/updateModuleByID")
+    public Map<String,Object> updateModuleByID(@RequestParam("module_id") int module_id){
+        Map<String,Object> map = new HashMap<String,Object>();
+        String response = "升级模块失败";
+        int exist = 0;
+        try{
+            exist = moduleMapper.updateModule(module_id);
+        }catch (Exception e){
+            exist = 0;
+        }
+        if(exist == 1){
+            map.put("success",true);
+            response = "升级模块成功";
+        }else {
+            map.put("success",false);
+        }
+        map.put("response",response);
+        return map;
+    }
+
+    //应用升级方式完成升级
+    @RequestMapping(value = "/updateAppFinishByAppName")
+    public Map<String,Object> updateAppFinishByAppName(@RequestParam("appname") String appname,
+                                                       @RequestParam("newver") String newver){
+        Map<String,Object> map = new HashMap<String,Object>();
+        String response = "升级应用未完成";
+        int exist = 0;
+        if(appname!=null&&appname!=""&&newver!=null&&newver!=""){
+            try{
+                exist = appMapper.updateAppFinish(appname,newver);
+            }catch (Exception e){
+                exist = 0;
+            }
+        }else{
+            map.put("response","输入值不能为空！");
+        }
+        if(exist == 1){
+            map.put("success",true);
+            response = "升级应用完成";
+        }else {
+            map.put("success",false);
+        }
+        map.put("response",response);
+        return map;
+    }
+
+    //根据开发商ID查询升级中应用信息
+    @RequestMapping(value = "/queryUpdatedAppByCpyID",method = RequestMethod.POST)
+    public List<App> queryUpdatedAppByCpyID(@RequestParam("cpy_id") int cpyid){
+        return appMapper.SelectUpdatedAppByCpyID(cpyid);
+    }
+
+    //应用升级方式升级应用
+    @RequestMapping(value = "/updateAppByAppName")
+    public Map<String,Object> updateAppByAppName(@RequestParam("appname") String appname){
+        Map<String,Object> map = new HashMap<String,Object>();
+        String response = "升级应用失败";
+        int exist = 0;
+        if(appname!=null){
+            try{
+                exist = appMapper.updateApp(appname);
+            }catch (Exception e){
+                exist = 0;
+            }
+        }
+        if(exist == 1){
+            map.put("success",true);
+            response = "升级应用成功";
+        }else {
+            map.put("success",false);
+        }
+        map.put("response",response);
+        return map;
+    }
+
     //查出同类型应用并按热度排行
     @RequestMapping(value = "/queryRelaApps")
     public List<App> queryRelaApps(@RequestParam("app_id") int app_id){

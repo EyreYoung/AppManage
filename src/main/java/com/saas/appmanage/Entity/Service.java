@@ -9,6 +9,7 @@ public class Service {
     private String sVer;
     private double sPrice;
     private String sAuth;
+    private String sStatus;
 
     public int getsID() {
         return sID;
@@ -72,5 +73,13 @@ public class Service {
 
     public void setsAuth(String sAuth) {
         this.sAuth = sAuth;
+    }
+
+    public String getsStatus() {
+        return sStatus;
+    }
+
+    public void setsStatus(String sStatus) {
+        this.sStatus = sStatus;
     }
 }

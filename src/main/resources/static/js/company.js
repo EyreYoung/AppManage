@@ -486,6 +486,9 @@ function InitAuthorityTable(appname) {
             }, {
                 field: 'auth_name',
                 title: '权限名'
+            }, {
+                field: 'auth_intro',
+                title: '权限说明'
             }
         ]
     });
@@ -533,6 +536,12 @@ function InitModuleTable(appname) {
             }, {
                 field: 'ver',
                 title: '版本'
+            }, {
+                field: 'mIntro',
+                title: '说明'
+            }, {
+                field: 'mStatus',
+                title: '状态'
             }
         ]
     });
@@ -592,6 +601,9 @@ function InitServiceTable() {
             }, {
                 field: 'sIntro',
                 title: '说明'
+            }, {
+                field: 'sStatus',
+                title: '状态'
             }
         ]
     });

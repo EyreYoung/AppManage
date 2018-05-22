@@ -13,7 +13,7 @@ public interface ServiceMapper {
 //    List<Service> selectService(@Param("mID") int mID);
 
     //根据模块ID找到所有服务信息 serviceplus(包含服务依赖信息、服务权限信息)
-    @Select("select mID,sID,sName,sDepen,sReq,sVer,sAuth,sIntro,sPrice from (select auser.service_id,GROUP_CONCAT(DISTINCT a.auth_name) as sAuth from authority as a,authorityservice as auser where a.auth_id=auser.authority_id GROUP BY service_id) as au RIGHT JOIN serviceplus as sp on sp.sID = au.service_id where mID = ${mID}")
+    @Select("select mID,sID,sName,sDepen,sReq,sVer,sAuth,sIntro,sPrice,sStatus from (select auser.service_id,GROUP_CONCAT(DISTINCT a.auth_name) as sAuth from authority as a,authorityservice as auser where a.auth_id=auser.authority_id GROUP BY service_id) as au RIGHT JOIN serviceplus as sp on sp.sID = au.service_id where mID = ${mID}")
     List<Service> selectService(@Param("mID") int mID);
 
     //插入服务
