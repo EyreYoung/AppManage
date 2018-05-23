@@ -164,7 +164,9 @@ $('#registerAppStep1').click(function (){
             console.log(data);
             if(data.response == "插入失败"){
                 window.alert("注册失败。原因可能为：必填项为空/应用名重复。");
-            }else {
+            }
+            //第一步成功后
+            else {
                 $('#reg').empty();
                 var step2 = $('#step2').html();
                 $('#step2').remove();
@@ -178,6 +180,26 @@ $('#registerAppStep1').click(function (){
                     $('#showcpyName0').attr("disabled",true);
                 }, 0);
                 InitAuthorityTable(name);
+
+                //点击删除权限按钮
+                $('#deleteauthority').on("click",function () {
+                    var selectContent = $('#authorityTable').bootstrapTable('getSelections');
+                    if(selectContent.length!=1){
+                        alert("请选择一个权限");
+                    }else {
+                        $.post(
+                            '/deleteAuthByID',
+                            {
+                                auth_id: selectContent[0].auth_id
+                            },
+                            function (data) {
+                                console.log(data);
+                                $('#authorityTable').bootstrapTable('refresh');
+                                alert(data.response);
+                            }
+                        );
+                    }
+                });
 
                 //权限注册模态框中点击保存时
                 $('#regAuthority').click(function () {
@@ -193,7 +215,7 @@ $('#registerAppStep1').click(function (){
                         },
                         function (data) {
                             console.log(data);
-                            InitAuthorityTable(name);
+                            $('#authorityTable').bootstrapTable('refresh');
                             alert(data.response);
                         }
                     );
@@ -285,6 +307,7 @@ $('#registerAppStep1').click(function (){
                                 }
                             }
                         );
+                        $('#moduleTable').bootstrapTable('refresh');
                         $('#addModule').modal('hide');
                     });
                     //模态框关闭时触发
@@ -478,9 +501,12 @@ function InitAuthorityTable(appname) {
         showToggle: true,                   //是否显示详细视图和列表视图的切换按钮
         cardView: false,                    //是否显示详细视图
         detailView: false,                  //是否显示父子表
+        singleSelect: true,                 //单选checkbox
 
         columns: [
             {
+                checkbox: true
+            }, {
                 field: 'auth_id',
                 title: '权限ID'
             }, {
@@ -522,9 +548,12 @@ function InitModuleTable(appname) {
         showToggle: true,                   //是否显示详细视图和列表视图的切换按钮
         cardView: false,                    //是否显示详细视图
         detailView: false,                  //是否显示父子表
+        singleSelect: true,                 //单选checkbox
 
         columns: [
             {
+                checkbox: true
+            }, {
                 field: 'mID',
                 title: '模块ID'
             }, {
@@ -575,9 +604,12 @@ function InitServiceTable() {
         showToggle: true,                   //是否显示详细视图和列表视图的切换按钮
         cardView: false,                    //是否显示详细视图
         detailView: false,                  //是否显示父子表
+        singleSelect: true,                 //单选checkbox
 
         columns: [
             {
+                checkbox: true
+            }, {
                 field: 'sID',
                 title: '服务ID'
             }, {
@@ -638,7 +670,7 @@ function initApptable(cpyid) {
 
         columns: [
             {
-               checkbox: true
+                checkbox: true
             }, {
                 field: 'name',
                 title: '应用名'

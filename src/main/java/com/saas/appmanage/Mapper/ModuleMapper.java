@@ -13,7 +13,7 @@ public interface ModuleMapper {
     int updateModuleFinish(@Param("module_id") int module_id,
                         @Param("newver") String newver);
 
-    //根据开发商ID查询升级中应用信息
+    //根据开发商ID查询升级中模块信息
     @Select("select m.ID as mID,m.Name as mName,m.Intro as mIntro,m.Version as ver,m.Status as mStatus,a.Name as appName,am.Required as mReq from app as a,appmodule as am,module as m where am.AppID = a.ID and am.ModuleID = m.ID and m.Status = '升级中' and a.SVID = ${cpy_id}")
     List<Module> SelectUpdatedModuleByCpyID(@Param("cpy_id") int cpy_id);
 

@@ -12,6 +12,7 @@ function chooseUpdatetype() {
     var updatetype = $("#select-update-type option:selected").text();
     initUpdatedApptable(cpy_id);
     initUpdatedModuletable(cpy_id);
+    initUpdatedServicetable(cpy_id);
     //选择应用升级后
     if(updatetype == "应用升级"){
         $('#select-update-app').attr("disabled",false);
@@ -133,7 +134,7 @@ function chooseUpdatetype() {
     }
 }
 
-//应用升级方式中点击开始升级按钮
+//升级方式中点击开始升级按钮
 $('#start-update').on("click",function () {
     var cpy_id = $('#cpyID').val();
     var updatetype = $("#select-update-type option:selected").text();
@@ -165,7 +166,18 @@ $('#start-update').on("click",function () {
             }
         );
     }else if(updatetype == "服务升级"){
-
+        var servicetoupdate = $("#select-update-service option:selected").val();
+        $.post(
+            '/updateServiceByID',
+            {
+                service_id: servicetoupdate
+            },
+            function (data) {
+                console.log(data);
+                alert(data.response);
+                $('#update-service-table').bootstrapTable('refresh');
+            }
+        );
     }
 
 });
@@ -191,6 +203,18 @@ $('#module-update-finish').on("click",function () {
         console.log(selectContent[0]);
         $('#update-module-finish-modal').modal("show");
         $('#module-update-old-version').val(selectContent[0].ver);
+    }
+});
+
+//服务完成升级按钮
+$('#service-update-finish').on("click",function () {
+    var selectContent = $('#update-service-table').bootstrapTable('getSelections');
+    if(selectContent.length!=1){
+        alert("请选择一个服务");
+    }else {
+        console.log(selectContent[0]);
+        $('#update-service-finish-modal').modal("show");
+        $('#service-update-old-version').val(selectContent[0].sVer);
     }
 });
 
@@ -232,6 +256,25 @@ $('#modal-updatemodule-save').on("click",function () {
     );
 });
 
+//服务完成升级模态框中点击完成升级
+$('#modal-updateservice-save').on("click",function () {
+    var selectContent = $('#update-service-table').bootstrapTable('getSelections');
+    var service_id = selectContent[0].sID;
+    var newver = $('#service-update-new-version').val();
+    $.post(
+        '/updateServiceFinishByID',
+        {
+            service_id: service_id,
+            newver: newver
+        },function (data) {
+            console.log(data);
+            alert(data.response);
+            $('#update-service-table').bootstrapTable('refresh');
+            $('#update-service-finish-modal').modal("hide");
+        }
+    );
+});
+
 //应用表刷新
 $('#app-update-refresh').on("click",function () {
     var cpy_id = $('#cpyID').val();
@@ -242,6 +285,12 @@ $('#app-update-refresh').on("click",function () {
 $('#module-update-refresh').on("click",function () {
     var cpy_id = $('#cpyID').val();
     $('#update-module-table').bootstrapTable('refresh',{url: '/queryUpdatedMoudleByCpyID?cpy_id='+cpy_id});
+});
+
+//服务表刷新
+$('#service-update-refresh').on("click",function () {
+    var cpy_id = $('#cpyID').val();
+    $('#update-service-table').bootstrapTable('refresh',{url: '/queryUpdatedServiceByCpyID?cpy_id='+cpy_id});
 });
 
 //开发商升级应用-应用表
@@ -352,6 +401,69 @@ function initUpdatedModuletable(cpyid) {
                 title: '版本'
             },{
                 field: 'mStatus',
+                title: '状态'
+            }
+        ]
+    });
+}
+
+//开发商升级应用-服务表
+function initUpdatedServicetable(cpyid) {
+    $('#update-service-table').bootstrapTable({
+        url: '/queryUpdatedServiceByCpyID?cpy_id='+cpyid,
+        method: 'POST',
+        toolbar: '#update-service-toolbar',
+        striped: true,                      //是否显示行间隔色
+        cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+        pagination: true,                   //是否显示分页（*）
+        sortable: true,                     //是否启用排序
+        sortOrder: "asc",                   //排序方式
+        sidePagination: "client",           //分页方式：client客户端分页，server服务端分页（*）
+        pageNumber: 1,                      //初始化加载第一页，默认第一页,并记录
+        pageSize: 10,                       //每页的记录行数（*）
+        pageList: [10, 25, 50, 100],        //可供选择的每页的行数（*）
+        search: true,                       //是否显示表格搜索
+        strictSearch: false,
+        showColumns: true,                  //是否显示所有的列（选择显示的列）
+        showRefresh: true,                  //是否显示刷新按钮
+        minimumCountColumns: 2,             //最少允许的列数
+        clickToSelect: true,                //是否启用点击选中行
+        singleSelect: true,                 //每一行的唯一标识，一般为主键列
+        showToggle: true,                   //是否显示详细视图和列表视图的切换按钮
+        cardView: false,                    //是否显示详细视图
+        detailView: false,                  //是否显示父子表
+        singleSelect: true,                 //单选checkbox
+
+        columns: [
+            {
+                checkbox: true
+            }, {
+                field: 'sID',
+                title: '服务ID',
+                hidden: true
+            }, {
+                field: 'sApp',
+                title: '关联应用'
+            }, {
+                field: 'sModule',
+                title: '关联模块'
+            }, {
+                field: 'sName',
+                title: '服务名'
+            }, {
+                field: 'sReq',
+                title: '是否必选'
+            }, {
+                field: 'sIntro',
+                title: '服务说明'
+            }, {
+                field: 'sVer',
+                title: '版本'
+            },{
+                field: 'sPrice',
+                title: '价格'
+            },{
+                field: 'sStatus',
                 title: '状态'
             }
         ]

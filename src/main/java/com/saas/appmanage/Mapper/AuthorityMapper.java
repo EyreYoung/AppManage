@@ -8,6 +8,10 @@ import java.util.List;
 @Mapper
 public interface AuthorityMapper {
 
+    //根据权限ID删除权限
+    @Delete("delete from authority where auth_id = ${auth_id}")
+    int deleteAuthorityByID(@Param("auth_id") int auth_id);
+
     //根据App_Name查询所有权限
     @Select("select auth_id,app.Name as app_name,auth_name,auth_intro from authority as au,app where app_id = app.ID and app.Name = #{appname}")
     List<Authority> selectAuthority(@Param("appname") String appname);

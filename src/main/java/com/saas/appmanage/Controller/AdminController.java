@@ -29,6 +29,7 @@ public class AdminController {
     @Autowired
     private SVenderMapper svenderMapper;
 
+    //管理员登录
     @RequestMapping(value = {"/doLogin"}, method = RequestMethod.POST)
     public Map<String,Object> doAdminLogin(@RequestParam("account") String account,
                                            @RequestParam("password") String password,
@@ -53,7 +54,7 @@ public class AdminController {
         }
         return map;
     }
-
+    //查询所有应用
     @RequestMapping(value = "/queryApps")
     public List<App> selectAllApp(){
         return appMapper.SelectApp();

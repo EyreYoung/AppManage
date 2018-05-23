@@ -36,6 +36,79 @@ public class AppController {
     @Autowired
     AuthorityMapper authorityMapper;
 
+    //根据权限ID删除权限
+    @RequestMapping(value = "/deleteAuthByID",method = RequestMethod.POST)
+    public Map<String,Object> deleteAuthByID(@RequestParam("auth_id") int auth_id){
+        Map<String,Object> map = new HashMap<String,Object>();
+        String response = "删除权限失败";
+        map.put("success",false);
+        int exist = 0;
+        try{
+            exist = authorityMapper.deleteAuthorityByID(auth_id);
+        }catch (Exception e){
+            exist = 0;
+        }
+        if(exist == 1){
+            response = "删除权限成功";
+            map.put("success",true);
+        }
+        map.put("response",response);
+        return map;
+    }
+
+    //模块升级方式完成升级
+    @RequestMapping(value = "/updateServiceFinishByID")
+    public Map<String,Object> updateServiceFinishByID(@RequestParam("service_id") int service_id,
+                                                     @RequestParam("newver") String newver){
+        Map<String,Object> map = new HashMap<String,Object>();
+        String response = "升级服务未完成";
+        int exist = 0;
+        if(newver!=null&&newver!=""){
+            try{
+                exist = serviceMapper.updateServiceFinish(service_id,newver);
+            }catch (Exception e){
+                exist = 0;
+            }
+        }else{
+            map.put("response","输入值不能为空！");
+        }
+        if(exist == 1){
+            map.put("success",true);
+            response = "升级服务完成";
+        }else {
+            map.put("success",false);
+        }
+        map.put("response",response);
+        return map;
+    }
+
+    //根据开发商ID查询升级中服务信息
+    @RequestMapping(value = "/queryUpdatedServiceByCpyID",method = RequestMethod.POST)
+    public List<Service> queryUpdatedServiceByCpyID(@RequestParam("cpy_id") int cpy_id){
+        return serviceMapper.SelectUpdatedServiceByCpyID(cpy_id);
+    }
+
+    //服务升级方式升级应用
+    @RequestMapping(value = "/updateServiceByID")
+    public Map<String,Object> updateServiceByID(@RequestParam("service_id") int service_id){
+        Map<String,Object> map = new HashMap<String,Object>();
+        String response = "升级服务失败";
+        int exist = 0;
+        try{
+            exist = serviceMapper.updateService(service_id);
+        }catch (Exception e){
+            exist = 0;
+        }
+        if(exist == 1){
+            map.put("success",true);
+            response = "升级服务成功";
+        }else {
+            map.put("success",false);
+        }
+        map.put("response",response);
+        return map;
+    }
+
     //模块升级方式完成升级
     @RequestMapping(value = "/updateModuleFinishByID")
     public Map<String,Object> updateModuleFinishByID(@RequestParam("module_id") int module_id,

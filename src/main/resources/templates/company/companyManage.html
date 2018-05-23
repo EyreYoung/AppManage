@@ -18,19 +18,19 @@
 <input type="hidden" th:value="${cpy_id}" id="cpyID"/>
 
 <div id="step2" style="display:none">
-    <h1>注册应用权限</h1>
+    <h1 id="authority-head">注册应用权限</h1>
 
     <form class="form">
         <table class="table table-bordered">
             <tbody>
             <tr>
                 <td>
-                    <label for="showappName" class="control-label">应用名称</label>
+                    <label for="showappName0" class="control-label">应用名称</label>
                     <input type="text" id="showappName0" class="col-sm-10 form-control"/>
 
                 </td>
                 <td>
-                    <label for="showcpyName" class="control-label">开发者名称</label>
+                    <label for="showcpyName0" class="control-label">开发者名称</label>
                     <input type="text" id="showcpyName0" class="form-control">
                 </td>
                 <!--<td>   &lt;!&ndash; 按钮触发模态框 &ndash;&gt;-->
@@ -50,8 +50,8 @@
             <span class="glyphicon glyphicon  glyphicon-plus" aria-hidden="true"></span>增加
         </button>
 
-        <button type="button" class="btn btn-warning" id="editauthority">
-            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>修改
+        <button type="button" class="btn btn-danger" id="deleteauthority">
+            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>删除
         </button>
     </div>
 
@@ -245,7 +245,7 @@
                     </select>
                 </td>
                 <td>
-                    <label for="showappName" class="control-label">应用名称</label>
+                    <label for="showappName2" class="control-label">应用名称</label>
                     <input type="text" id="showappName2" class="form-control"/>
 
                 </td>
@@ -397,7 +397,9 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="/index">SaaS平台</a>
+                        <a class="navbar-brand" href="/index">
+                            <img alt="Brand" th:src="@{~/img/SaaS.ico}" style="height: 60px;margin-top: -20px">
+                        </a>
                     </div>
 
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -576,6 +578,7 @@
                     </div>
                 </div>
                 <div class="tab-pane fade in active" id="manage">
+
                     <h1>应用管理</h1>
                     <table id="appmanage" type="table">
                         <div id="appmanagetoolbar">
@@ -591,8 +594,16 @@
                                 <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>删除
                             </button>
 
-                            <button type="button" class="btn btn-info" id="manage-managebutton">
-                                <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>详情
+                            <button type="button" class="btn btn-info" id="manage-module-button">
+                                <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>模块详情
+                            </button>
+
+                            <button type="button" class="btn btn-info" id="manage-service-button">
+                                <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>服务详情
+                            </button>
+
+                            <button type="button" class="btn btn-info" id="manage-auth-button">
+                                <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>权限详情
                             </button>
                         </div>
                     </table>
@@ -720,6 +731,9 @@
                                 <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>刷新
                             </button>
                         </div>
+
+                        <hr style="width: 800px;height: 3px;color: #555555">
+
                         <h3>升级中应用</h3>
                         <table class="table" id="update-app-table"></table>
 
@@ -732,8 +746,26 @@
                                 <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>刷新
                             </button>
                         </div>
+
+                        <hr style="width: 800px;height: 3px;color: #555555">
+
                         <h3>升级中模块</h3>
                         <table class="table" id="update-module-table"></table>
+
+                        <div id="update-service-toolbar">
+                            <button type="button" class="btn btn-success" id="service-update-finish">
+                                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>完成升级
+                            </button>
+
+                            <button type="button" class="btn btn-info" id="service-update-refresh">
+                                <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>刷新
+                            </button>
+                        </div>
+
+                        <hr style="width: 800px;height: 3px;color: #555555">
+
+                        <h3>升级中服务</h3>
+                        <table class="table" id="update-service-table"></table>
 
                         <!-- 应用完成升级模态框（Modal） -->
                         <div class="modal fade" id="update-app-finish-modal" tabindex="-1" role="dialog" aria-labelledby="update-app-finish-Label" aria-hidden="true">
@@ -817,6 +849,47 @@
                             </div><!-- /.modal -->
                         </div>
 
+                        <!-- 服务完成升级模态框（Modal） -->
+                        <div class="modal fade" id="update-service-finish-modal" tabindex="-1" role="dialog" aria-labelledby="update-service-finish-Label" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                            &times;
+                                        </button>
+                                        <h4 class="modal-title" id="update-service-finish-Label">
+                                            应用升级完成
+                                        </h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form class="form-horizontal" role="form">
+                                            <div class="form-group">
+                                                <label for="service-update-old-version" class="col-sm-2 control-label">服务原版本</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" disabled="true" required="required" id="service-update-old-version" />
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="service-update-new-version" class="col-sm-2 control-label">服务新版本</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" placeholder="请输入服务新版本号" required="required" id="service-update-new-version" />
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">
+                                            关闭
+                                        </button>
+                                        <button type="button" class="btn btn-primary" id="modal-updateservice-save">
+                                            完成升级
+                                        </button>
+                                    </div>
+                                </div><!-- /.modal-content -->
+                            </div><!-- /.modal -->
+                        </div>
+
                     </div>
                 </div>
 
@@ -875,6 +948,7 @@
 <script th:src="@{~/js/libs/bootstrap-table-1.11.0/dist/locale/bootstrap-table-zh-CN.js}"></script>
 <script th:src="@{~/js/company.js}"></script>
 <script th:src="@{~/js/updateapp.js}"></script>
+<script th:src="@{~/js/manageapp.js}"></script>
 <script th:src="@{~/js/searchapp.js}"></script>
 
 </body>

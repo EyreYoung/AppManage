@@ -10,6 +10,8 @@ public class Service {
     private double sPrice;
     private String sAuth;
     private String sStatus;
+    private String sModule;
+    private String sApp;
 
     public int getsID() {
         return sID;
@@ -81,5 +83,21 @@ public class Service {
 
     public void setsStatus(String sStatus) {
         this.sStatus = sStatus;
+    }
+
+    public String getsModule() {
+        return sModule;
+    }
+
+    public void setsModule(String sModule) {
+        this.sModule = sModule;
+    }
+
+    public String getsApp() {
+        return sApp;
+    }
+
+    public void setsApp(String sApp) {
+        this.sApp = sApp;
     }
 }
