@@ -465,7 +465,7 @@ $('#registerAppStep1').click(function (){
                         //注册服务界面点击完成注册
                         $('#registerAppStep4').click(function () {
                             location.reload();
-                        })
+                        });
                         
                     })
                 });

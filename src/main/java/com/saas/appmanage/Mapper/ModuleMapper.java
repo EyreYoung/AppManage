@@ -8,6 +8,10 @@ import java.util.List;
 @Mapper
 public interface ModuleMapper {
 
+    //根据模块ID删除模块
+    @Delete("delete from module where ID = ${module_id}")
+    int deleteModuleByID(@Param("module_id") int module_id);
+
     //模块升级方式完成升级
     @Update("update module set Status = '正常', Version = #{newver} where ID = ${module_id}")
     int updateModuleFinish(@Param("module_id") int module_id,

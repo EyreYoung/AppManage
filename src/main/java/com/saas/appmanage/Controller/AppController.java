@@ -36,6 +36,46 @@ public class AppController {
     @Autowired
     AuthorityMapper authorityMapper;
 
+    //根据服务ID删除权限
+    @RequestMapping(value = "/deleteServiceByID",method = RequestMethod.POST)
+    public Map<String,Object> deleteServiceByID(@RequestParam("service_id") int service_id){
+        Map<String,Object> map = new HashMap<String,Object>();
+        String response = "删除服务失败";
+        map.put("success",false);
+        int exist = 0;
+        try{
+            exist = serviceMapper.deleteServiceByID(service_id);
+        }catch (Exception e){
+            exist = 0;
+        }
+        if(exist == 1){
+            response = "删除服务成功";
+            map.put("success",true);
+        }
+        map.put("response",response);
+        return map;
+    }
+
+    //根据模块ID删除权限
+    @RequestMapping(value = "/deleteModuleByID",method = RequestMethod.POST)
+    public Map<String,Object> deleteModuleByID(@RequestParam("module_id") int module_id){
+        Map<String,Object> map = new HashMap<String,Object>();
+        String response = "删除模块失败";
+        map.put("success",false);
+        int exist = 0;
+        try{
+            exist = moduleMapper.deleteModuleByID(module_id);
+        }catch (Exception e){
+            exist = 0;
+        }
+        if(exist == 1){
+            response = "删除模块成功";
+            map.put("success",true);
+        }
+        map.put("response",response);
+        return map;
+    }
+
     //根据权限ID删除权限
     @RequestMapping(value = "/deleteAuthByID",method = RequestMethod.POST)
     public Map<String,Object> deleteAuthByID(@RequestParam("auth_id") int auth_id){

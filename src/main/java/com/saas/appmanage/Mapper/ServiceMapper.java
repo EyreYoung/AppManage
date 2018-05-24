@@ -8,6 +8,10 @@ import java.util.List;
 @Mapper
 public interface ServiceMapper {
 
+    //根据模块ID删除服务
+    @Delete("delete from service where ID = ${service_id}")
+    int deleteServiceByID(@Param("service_id") int service_id);
+
     //服务升级方式完成升级
     @Update("update service set Status = '正常', Version = #{newver} where ID = ${service_id}")
     int updateServiceFinish(@Param("service_id") int service_id,
