@@ -9,6 +9,26 @@ import java.util.List;
 @Mapper
 public interface AppMapper {
 
+    //应用设为推荐
+    @Update("update app set Rec = '是' where ID = ${app_id} and Rec = '否'")
+    int recommendApp(@Param("app_id") int app_id);
+
+    //应用取消推荐
+    @Update("update app set Rec = '否' where ID = ${app_id} and Rec = '是'")
+    int unrecommendApp(@Param("app_id") int app_id);
+
+    //应用注册审核通过
+    @Update("update app set Status = '在售' where Status = '审核中' and ID = ${app_id}")
+    int passRegApp(@Param("app_id") int app_id);
+
+    //应用注册审核通过
+    @Update("update app set Status = '审核未通过' where Status = '审核中' and ID = ${app_id}")
+    int unpassRegApp(@Param("app_id") int app_id);
+
+    //查询注册审核中的应用
+    @Select("SELECT ap.*,s.Company as SVenderName FROM appprice as ap,svender as s where ap.SVID = s.ID AND ap.Status = '审核中'")
+    List<App> queryRegApps();
+
     //根据开发商ID查询升级中应用信息
     @Select("select * from app where SVID = ${cpy_id} and Status = '升级中'")
     List<App> SelectUpdatedAppByCpyID(@Param("cpy_id") int cpy_id);
@@ -35,11 +55,11 @@ public interface AppMapper {
     List<App> SelectAppByCpyID(@Param("cpy_id") int cpyid);
 
     //查询出所有应用
-    @Select("select (@i:=@i+1) as No,a.ID,a.Name,s.Company as SVenderName,regDate,Type,Catagory,Intro,Star,Rec,Version,Status,Clicks from app as a,(select @i:=0) as it,svender as s where a.SVID = s.ID order by regDate")
+    @Select("SELECT ap.*,s.Company as SVenderName FROM appprice as ap,svender as s where ap.SVID = s.ID")
     List<App> SelectApp();
 
     //注册应用基本信息
-    @Insert("insert into app(Name,SVID,regDate,Catagory,Intro,Version) values(#{name},(select ID from svender where Company = #{svname}),#{regdate},#{catagory},#{intro},#{version})")
+    @Insert("insert into app(Name,SVID,regDate,Catagory,Intro,Version,Status) values(#{name},(select ID from svender where Company = #{svname}),#{regdate},#{catagory},#{intro},#{version},'审核中')")
     int insertApp(@Param("name") String name,
                   @Param("svname") String svname,
                   @Param("regdate") String regdate,

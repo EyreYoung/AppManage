@@ -62,7 +62,7 @@ public class CompanyController {
         return map;
     }
 
-
+    //开发商登录
     @RequestMapping(value = "/doLogin", method = RequestMethod.POST)
     public Map<String,Object> doCpyLogin(@RequestParam("account") String account,
                                          @RequestParam("password") String password,

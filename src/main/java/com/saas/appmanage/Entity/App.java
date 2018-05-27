@@ -1,7 +1,5 @@
 package com.saas.appmanage.Entity;
 
-import java.util.Date;
-
 public class App {
     private int No;
     private int ID;
@@ -16,6 +14,7 @@ public class App {
     private String Version;
     private String Status;
     private int Clicks;
+    private int Price;
 
     public int getNo() {
         return No;
@@ -119,5 +118,13 @@ public class App {
 
     public void setClicks(int clicks) {
         Clicks = clicks;
+    }
+
+    public int getPrice() {
+        return Price;
+    }
+
+    public void setPrice(int price) {
+        Price = price;
     }
 }

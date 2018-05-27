@@ -95,21 +95,50 @@
                         <span class="pull-right glyphicon glyphicon-chevron-down"></span>
                     </a>
                     <ul id="userManage" class="nav nav-list collapse secondmenu" style="height: 10px;">
-                        <li id="viewadmins"><a href="#"><i class="glyphicon glyphicon-user"></i>查看管理员</a></li>
-                        <li id="viewcpys"><a href="#"><i class="glyphicon glyphicon-asterisk"></i>查看开发者</a></li>
-                        <li><a href="#"><i class="glyphicon glyphicon-edit"></i>修改密码</a></li>
-                        <li><a href="#"><i class="glyphicon glyphicon-eye-open"></i>日志查看</a></li>
+                        <li id="viewadmins">
+                            <a href="#manage_admins" data-toggle="tab">
+                                <i class="glyphicon glyphicon-user"></i>
+                                查看管理员
+                            </a>
+                        </li>
+                        <li id="viewcpys">
+                            <a href="#manage_cpys" data-toggle="tab">
+                                <i class="glyphicon glyphicon-asterisk"></i>
+                                查看开发商</a>
+                        </li>
+                        <li>
+                            <a href="#censor_cpys" data-toggle="tab">
+                                <i class="glyphicon glyphicon-edit"></i>
+                                审核开发商注册
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" data-toggle="tab">
+                                <i class="glyphicon glyphicon-eye-open"></i>
+                                日志查看
+                            </a>
+                        </li>
                     </ul>
                 </li>
                 <li>
-                    <a href="#systemSetting" class="nav-header collapsed" data-toggle="collapse" bgcolor="#080808">
+                    <a href="#appManage" class="nav-header collapsed" data-toggle="collapse" bgcolor="#080808">
                         <i class="glyphicon glyphicon-credit-card"></i>
                         应用管理
                         <span class="pull-right glyphicon glyphicon-chevron-down"></span>
                     </a>
-                    <ul id="systemSetting" class="nav nav-list collapse secondmenu" style="height: 10px;">
-                        <li id="viewapps"><a href="#"><i class="glyphicon glyphicon-user"></i>查看应用</a></li>
-                        <li><a href="#"><i class="glyphicon glyphicon-asterisk"></i>角色管理</a></li>
+                    <ul id="appManage" class="nav nav-list collapse secondmenu" style="height: 10px;">
+                        <li id="viewapps">
+                            <a href="#manage_apps" data-toggle="tab">
+                                <i class="glyphicon glyphicon-user"></i>
+                                查看应用
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#censor_apps" data-toggle="tab">
+                                <i class="glyphicon glyphicon-asterisk"></i>
+                                审核应用
+                            </a>
+                        </li>
                     </ul>
                 </li>
                 <li>
@@ -127,7 +156,69 @@
             </ul>
         </div>
         <div class="col-md-9" id="admin-manage-main">
-            <table id="appTable" class="table"></table>
+            <div id="myTabContent" class="tab-content">
+
+                <div class="tab-pane fade in active" id="manage_admins">
+                    <h2>查看管理员</h2>
+                    <table id="adminTable" class="table"></table>
+                </div>
+
+                <div class="tab-pane fade" id="manage_cpys">
+                    <h2>查看开发商</h2>
+                    <table id="cpyTable" class="table"></table>
+                </div>
+
+                <div class="tab-pane fade" id="censor_cpys">
+                    <h2>审核开发商注册</h2>
+
+                    <table id="regCpyTable" class="table">
+                        <div id="censorCpy_toolbar">
+                            <button type="button" class="btn btn-success" id="censorCpy_pass_button">
+                                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>审核通过
+                            </button>
+                            <button type="button" class="btn btn-danger" id="censorCpy_not_pass_button">
+                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>审核不通过
+                            </button>
+                        </div>
+                    </table>
+                </div>
+
+                <div class="tab-pane fade" id="manage_apps">
+                    <h2>管理应用</h2>
+                    <table id="appTable" class="table">
+                        <div id="manageApp_toolbar">
+                            <button type="button" class="btn btn-success" id="manageApp_recommend_button">
+                                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>推荐
+                            </button>
+                            <button type="button" class="btn btn-warning" id="manageApp_not_recommend_button">
+                                <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>取消推荐
+                            </button>
+                            <button type="button" class="btn btn-danger" id="manageApp_drop_button">
+                                <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>下架
+                            </button>
+                            <button type="button" class="btn btn-info" id="manageApp_more_button">
+                                <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>详情
+                            </button>
+                        </div>
+                    </table>
+                </div>
+
+                <div class="tab-pane fade" id="censor_apps">
+                    <h2>审核应用注册</h2>
+
+                    <table id="regAppTable" class="table">
+                        <div id="censorApp_toolbar">
+                            <button type="button" class="btn btn-success" id="censorApp_pass_button">
+                                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>审核通过
+                            </button>
+                            <button type="button" class="btn btn-danger" id="censorApp_not_pass_button">
+                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>审核不通过
+                            </button>
+                        </div>
+                    </table>
+                </div>
+
+            </div><!--tab-->
         </div>
     </div>
 </div>

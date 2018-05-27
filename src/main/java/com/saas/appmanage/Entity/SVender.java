@@ -9,6 +9,7 @@ public class SVender {
     private String Company;
     private String Mail;
     private String Tel;
+    private String Status;
 
     public int getID() {
         return ID;
@@ -56,5 +57,13 @@ public class SVender {
 
     public void setTel(String tel) {
         Tel = tel;
+    }
+
+    public String getStatus() {
+        return Status;
+    }
+
+    public void setStatus(String status) {
+        Status = status;
     }
 }
