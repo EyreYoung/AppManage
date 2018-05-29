@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 //import java.sql.Date;
@@ -35,6 +36,18 @@ public class AppController {
 
     @Autowired
     AuthorityMapper authorityMapper;
+
+    //按热度排序应用
+    @RequestMapping(value = "/queryHotApps")
+    public List<App> queryHotApps(){
+        return appMapper.queryHotApps();
+    }
+
+    //查询所有推荐应用
+    @RequestMapping(value = "/queryRecApps")
+    public List<App> queryRecApps(){
+        return appMapper.queryRecApps();
+    }
 
     //根据服务ID删除权限
     @RequestMapping(value = "/deleteServiceByID",method = RequestMethod.POST)
@@ -456,7 +469,7 @@ public class AppController {
         module.setmIntro(intro);
         module.setVer(ver);
         if(name == ""||ver == ""||req ==""){
-
+            response = "模块信息填写不完全，请重试";
         }else{
             try{
                 //插入模块
@@ -485,35 +498,48 @@ public class AppController {
 
     //注册应用基本信息
     @RequestMapping(value = "/company/doRegisterAppStep1",method = RequestMethod.POST)
-    public Map<String,String> doRegisterApp(@RequestParam("name") String name,
+    public Map<String,Object> doRegisterApp(@RequestParam("name") String name,
                                             @RequestParam("svname") String svname,
                                             @RequestParam("catagory") String catagory,
                                             @RequestParam("intro") String intro,
                                             @RequestParam("version") String version){
-        Map<String,String> map = new HashMap<String,String>();
+        Map<String,Object> map = new HashMap<String,Object>();
         String response = "插入失败";
         int exist = 0;
+        map.put("success",false);
         Date nowDate = new Date();
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         String today = df.format(nowDate);
+        App app = new App();
         if(name == ""||svname == ""||catagory == ""||version == ""){
-
+            response = "必填项未空值，填写后重试";
         }else{
             try{
-                exist = appMapper.insertApp(name,svname,today,catagory,intro,version);
+                app.setName(name);
+                app.setSVenderName(svname);
+                app.setCatagory(catagory);
+                app.setRegDate(today);
+                app.setIntro(intro);
+                app.setVersion(version);
+                app.setStatus("审核中");
+                appMapper.insertApp(app);
+                exist = app.getID();
             }catch (Exception e){
                 exist = 0;
             }
         }
-        if(exist == 1){
+        if(exist != 0){
             response = name;
+            map.put("success",true);
+            map.put("id",exist);
         }
         map.put("response",response);
         return map;
     }
 
-    @RequestMapping(value = "/company/uploadimg",method = RequestMethod.POST)
-    public String uploadImg(@RequestParam("file")CommonsMultipartFile file) throws Exception{
+    //注册应用上传图片
+    @RequestMapping(value = "/company/uploadimg")
+    public String uploadImg(@RequestParam("file") MultipartFile file){
         String path="D:/GitHub/AppManage/src/main/resources/static/img/"+file.getOriginalFilename();
         File newFile = new File(path);
         Map<String, String> map = new HashMap<String, String>();

@@ -57,22 +57,35 @@ function initFileInput(uploadUrl) {
         language: 'zh', //设置语言
         uploadUrl: uploadUrl, //上传的地址
         allowedFileExtensions : ['jpg', 'png','gif'],//接收的文件后缀
+        uploadAsync: true, //默认异步上传
         showUpload: false, //是否显示上传按钮
-        showCaption: false,//是否显示标题
+        showCaption: true,//是否显示标题
+        dropZoneEnabled: false,//是否显示拖拽区域
         browseClass: "btn btn-primary", //按钮样式
         maxFileCount: 1,
-        previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
+        previewFileIcon: "<i class='glyphicon glyphicon-king'></i>"
+    });
+    //异步上传返回结果处理
+    $('.appImg').on('fileerror', function(event, data, msg) {
+        console.log("fileerror");
+        console.log(data);
+    });
+    //异步上传返回结果处理
+    $(".appImg").on("fileuploaded", function(event, data, previewId, index) {
+        console.log("fileuploaded");
+        console.log(data);
+
+    });
+    //上传前
+    $('.appImg').on('filepreupload', function(event, data, previewId, index) {
+        console.log("filepreupload");
     });
 }
 
-$(function () {
-    var path="/company/uploadimg";
-    initFileInput("appImg",path);
-})
-
-
 //进入页面根据开发商id初始化页面
 $(document).ready(function () {
+    var path="/company/uploadimg";
+    initFileInput(path);
     var cpyid = $('#cpyID').val();
     console.log(cpyid);
     $.post(
@@ -139,8 +152,6 @@ $(document).ready(function () {
     );
     initApptable(cpyid);
 });
-
-
 
 //注册应用第一步 填写基本信息（应用名、类别、应用简介、应用版本）
 $('#registerAppStep1').click(function (){
