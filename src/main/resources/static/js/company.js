@@ -52,10 +52,10 @@ $('#companyLogin').click(function () {
 });
 
 //上传应用图片
-function initFileInput(uploadUrl) {
+function initFileInput(uploadURL) {
     $('#appImg').fileinput({
         language: 'zh', //设置语言
-        uploadUrl: uploadUrl, //上传的地址
+        uploadUrl: uploadURL, //上传的地址
         allowedFileExtensions : ['jpg', 'png','gif'],//接收的文件后缀
         uploadAsync: true, //默认异步上传
         showUpload: false, //是否显示上传按钮
@@ -66,25 +66,25 @@ function initFileInput(uploadUrl) {
         previewFileIcon: "<i class='glyphicon glyphicon-king'></i>"
     });
     //异步上传返回结果处理
-    $('.appImg').on('fileerror', function(event, data, msg) {
+    $('#appImg').on('fileerror', function(event, data, msg) {
         console.log("fileerror");
         console.log(data);
     });
     //异步上传返回结果处理
-    $(".appImg").on("fileuploaded", function(event, data, previewId, index) {
+    $("#appImg").on("fileuploaded", function(event, data, previewId, index) {
         console.log("fileuploaded");
         console.log(data);
 
     });
     //上传前
-    $('.appImg').on('filepreupload', function(event, data, previewId, index) {
+    $('#appImg').on('filepreupload', function(event, data, previewId, index) {
         console.log("filepreupload");
     });
 }
 
 //进入页面根据开发商id初始化页面
 $(document).ready(function () {
-    var path="/company/uploadimg";
+    var path = "/uploadimg";
     initFileInput(path);
     var cpyid = $('#cpyID').val();
     console.log(cpyid);
@@ -173,8 +173,8 @@ $('#registerAppStep1').click(function (){
         },
         function (data) {
             console.log(data);
-            if(data.response == "插入失败"){
-                window.alert("注册失败。原因可能为：必填项为空/应用名重复。");
+            if(data.success == false){
+                alert(data.response);
             }
             //第一步成功后
             else {

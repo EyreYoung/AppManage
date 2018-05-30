@@ -1,5 +1,6 @@
 package com.saas.appmanage.Mapper;
 
+import com.saas.appmanage.Entity.Authority;
 import com.saas.appmanage.Entity.Service;
 import org.apache.ibatis.annotations.*;
 
@@ -48,4 +49,8 @@ public interface ServiceMapper {
     @Insert("insert into servicedependence values(#{ServiceID},#{Depend})")
     int insertServiceDependence(@Param("ServiceID") String ServiceID,
                                @Param("Depend") String Depend);
+
+    //根据权限ID查询关联服务
+    @Select("select s.ID as sID,s.Name as sName,s.Intro as sIntro,s.Version as sVer,s.Status as sStatus from service as s,authorityservice as a where a.service_id = s.ID and a.authority_id = ${auth_id}")
+    List<Service> selectServicesByAuthID(@Param("auth_id") int auth_id);
 }

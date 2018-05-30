@@ -44,4 +44,8 @@ public interface ModuleMapper {
     @Insert("insert into moduledependence values(#{moduleID1},#{dependID})")
     int insertModuleDependence(@Param("moduleID1") String moduleID1,
                                @Param("dependID") String dependID);
+
+    //根据应ID查询该应用所有模块
+    @Select("SELECT mo.ID AS mID,mo.Name AS mName,mo.depen,mo.Version AS ver,mo.Intro AS mIntro,mo.Status AS mStatus,am.Required AS mReq FROM (SELECT * FROM module AS m LEFT JOIN (SELECT ModuleID1 AS moid,GROUP_CONCAT( DISTINCT m.Name ) AS depen FROM moduledependence AS md,module AS m WHERE m.ID = md.Depend GROUP BY ModuleID1) AS d ON m.ID = d.moid) AS mo,appmodule AS am,app AS a WHERE mo.ID = am.ModuleID AND a.ID = am.AppID AND a.ID = ${app_id} ORDER BY mID")
+    List<Module> selectModuleByAppID(@Param("app_id") int app_id);
 }

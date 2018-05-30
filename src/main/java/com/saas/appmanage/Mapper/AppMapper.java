@@ -66,15 +66,6 @@ public interface AppMapper {
     @Select("SELECT ap.*,s.Company as SVenderName FROM appprice as ap,svender as s where ap.SVID = s.ID")
     List<App> SelectApp();
 
-//    //注册应用基本信息
-//    @Insert("insert into app(Name,SVID,regDate,Catagory,Intro,Version,Status) values(#{name},(select ID from svender where Company = #{svname}),#{regdate},#{catagory},#{intro},#{version},'审核中')")
-//    int insertApp(@Param("name") String name,
-//                  @Param("svname") String svname,
-//                  @Param("regdate") String regdate,
-//                  @Param("catagory") String catagory,
-//                  @Param("intro") String intro,
-//                  @Param("version") String version);
-
     //注册应用基本信息
     @Insert("insert into app(Name,SVID,regDate,Catagory,Intro,Version,Status) values(#{Name},(select ID from svender where Company = #{SVenderName}),#{regDate},#{Catagory},#{Intro},#{Version},#{Status})")
     @Options(useGeneratedKeys = true, keyProperty = "ID", keyColumn = "ID")
@@ -89,7 +80,7 @@ public interface AppMapper {
     List<App> SearchApp(@Param("queryword") String queryword);
 
     //根据应用ID查询应用信息
-    @Select("select * from app where ID = #{app_id}")
+    @Select("select * from appprice where ID = #{app_id}")
     App SearchAppByID(@Param("app_id") int appid);
 
     //应用下架
@@ -106,4 +97,8 @@ public interface AppMapper {
                       @Param("newcata") String newcata,
                       @Param("newintro") String newintro,
                       @Param("app_id") int appid);
+
+    //租户管理系统查询所有在售应用信息
+    @Select("SELECT ap.*,s.Company as SVenderName FROM appprice as ap,svender as s where ap.SVID = s.ID AND ap.Status = '在售'")
+    List<App> queryAppsForSale();
 }

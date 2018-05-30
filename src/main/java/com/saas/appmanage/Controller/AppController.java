@@ -14,6 +14,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 //import java.sql.Date;
 import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -538,13 +539,19 @@ public class AppController {
     }
 
     //注册应用上传图片
-    @RequestMapping(value = "/company/uploadimg")
-    public String uploadImg(@RequestParam("file") MultipartFile file){
-        String path="D:/GitHub/AppManage/src/main/resources/static/img/"+file.getOriginalFilename();
+    @RequestMapping(value = "/uploadimg")
+    public Map<String, Object> uploadImg(@RequestParam("file") CommonsMultipartFile file) throws IOException {
+        String path="D://GitHub//"+file.getOriginalFilename();
         File newFile = new File(path);
-        Map<String, String> map = new HashMap<String, String>();
+        try {
+            file.transferTo(newFile);
+            System.out.println("上传成功");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Map<String, Object> map = new HashMap<String, Object>();
         map.put("pathUrl", path);
-        return path;
+        return map;
     }
 
     //分类查询应用

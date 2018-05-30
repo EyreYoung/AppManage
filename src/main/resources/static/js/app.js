@@ -27,6 +27,7 @@ $(document).ready(function () {
             $('#app_intro').html(data.intro);
             $('#appcata').html(data.catagory);
             $('#app_intro2').html(data.intro);
+            $('#appPrice').html(data.price);
             //模块服务信息
             $.post(
                 '/showModuleByAppName',
@@ -76,6 +77,7 @@ $(document).ready(function () {
                     }
                 }
             );
+
             //相关应用信息
             $.post(
                 '/queryRelaApps',
@@ -92,6 +94,38 @@ $(document).ready(function () {
             );
         }
     );
+
+    //权限信息
+    $.post(
+        '/queryAuthorityByAppID',
+        {
+            app_id:appid
+        },
+        function (data) {
+            $('#authTable').empty();
+            console.log(data);
+            for(var auth in data){
+                $('#authTable').append('<h4>' + data[auth].auth_name + '</h4><h5>相关服务：</h5>\n' +
+                    '                        <ul id="auth' + data[auth].auth_id + '"></ul>');
+                $.ajax({
+                    type: "POST",
+                    url: '/queryServiceByAuthID',
+                    async: false,//是否异步
+                    data: {
+                        auth_id: data[auth].auth_id
+                    },
+                    success: function (result) {
+                        for(var service in result)
+                        $('#auth' + data[auth].auth_id).append('<li>' + result[service].sName + '</li>');
+                    }
+                });
+
+            }
+
+        }
+
+    );
+
     //开发商信息
     $.post(
         '/queryCpyByAppID',

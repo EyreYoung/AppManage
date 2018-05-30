@@ -12,6 +12,10 @@ public interface AuthorityMapper {
     @Delete("delete from authority where auth_id = ${auth_id}")
     int deleteAuthorityByID(@Param("auth_id") int auth_id);
 
+    //根据应用ID查询所有权限
+    @Select("select auth_id,auth_name,auth_intro from authority as au where au.app_id = ${app_id}")
+    List<Authority> selectAuthorityByAppID(@Param("app_id") int app_id);
+
     //根据App_Name查询所有权限
     @Select("select auth_id,app.Name as app_name,auth_name,auth_intro from authority as au,app where app_id = app.ID and app.Name = #{appname}")
     List<Authority> selectAuthority(@Param("appname") String appname);
@@ -25,4 +29,8 @@ public interface AuthorityMapper {
     @Insert("insert into authorityservice(authority_id,service_id) values (${auth_id},${ser_id})")
     int insertAuthorityService(@Param("auth_id") int auth_id,
                                @Param("ser_id") int ser_id);
+
+    //根据服务ID查询需要权限
+    @Select("select auth_id,auth_name,auth_intro from authority as a,authorityservice as s where a.auth_id = s.authority_id and s.service_id = ${service_id}")
+    List<Authority> selectAuthByServiceID(@Param("service_id") int service_id);
 }
