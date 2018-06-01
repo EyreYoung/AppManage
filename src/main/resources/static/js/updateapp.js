@@ -293,7 +293,7 @@ $('#service-update-refresh').on("click",function () {
     $('#update-service-table').bootstrapTable('refresh',{url: '/queryUpdatedServiceByCpyID?cpy_id='+cpy_id});
 });
 
-//开发商升级应用-应用表
+//提供商升级应用-应用表
 function initUpdatedApptable(cpyid) {
     $('#update-app-table').bootstrapTable({
         url: '/queryUpdatedAppByCpyID?cpy_id='+cpyid,
@@ -350,7 +350,7 @@ function initUpdatedApptable(cpyid) {
     });
 }
 
-//开发商升级应用-模块表
+//提供商升级应用-模块表
 function initUpdatedModuletable(cpyid) {
     $('#update-module-table').bootstrapTable({
         url: '/queryUpdatedMoudleByCpyID?cpy_id='+cpyid,
@@ -407,7 +407,7 @@ function initUpdatedModuletable(cpyid) {
     });
 }
 
-//开发商升级应用-服务表
+//提供商升级应用-服务表
 function initUpdatedServicetable(cpyid) {
     $('#update-service-table').bootstrapTable({
         url: '/queryUpdatedServiceByCpyID?cpy_id='+cpyid,

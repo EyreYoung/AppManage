@@ -1,8 +1,6 @@
 package com.saas.appmanage.Controller;
 
-import com.saas.appmanage.Entity.App;
-import com.saas.appmanage.Entity.Module;
-import com.saas.appmanage.Entity.Service;
+import com.saas.appmanage.Entity.*;
 import com.saas.appmanage.Mapper.AppMapper;
 import com.saas.appmanage.Mapper.ModuleMapper;
 import com.saas.appmanage.Mapper.ServiceMapper;
@@ -27,19 +25,19 @@ public class TenantManageController {
 
     //租户管理系统查询所有应用
     @RequestMapping(value = "/queryAppsForSale",method = RequestMethod.GET)
-    public List<App> selectAllApp(){
+    public List<minApp> selectAllApp(){
         return appMapper.queryAppsForSale();
     }
 
     //租户管理系统根据应用ID查询所有模块信息
     @RequestMapping(value = "/queryModulesByAppID",method = RequestMethod.POST)
-    public List<Module> queryModulesByAppID(@RequestParam("app_id") int app_id){
+    public List<minModule> queryModulesByAppID(@RequestParam("app_id") int app_id){
         return moduleMapper.selectModuleByAppID(app_id);
     }
 
     //租户管理系统根据模块ID查询所有服务信息
     @RequestMapping(value = "/queryServicesByModuleID",method = RequestMethod.POST)
-    public List<Service> queryServicesByModuleID(@RequestParam("module_id") int module_id){
-        return serviceMapper.selectService(module_id);
+    public List<minService> queryServicesByModuleID(@RequestParam("module_id") int module_id){
+        return serviceMapper.selectServiceByModuleID(module_id);
     }
 }

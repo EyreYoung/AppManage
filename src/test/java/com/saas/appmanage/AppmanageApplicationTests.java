@@ -19,8 +19,6 @@ import javax.annotation.Resource;
 public class AppmanageApplicationTests {
 
 	@Autowired
-	private UserMapper userMapper;
-	@Autowired
 	private AdminMapper adminMapper;
 
 	@Resource
@@ -28,10 +26,6 @@ public class AppmanageApplicationTests {
 
 	@Test
     @Rollback
-//	public void findByName() throws Exception {
-//	    User u = userMapper.findByName("yyd");
-//        Assert.assertEquals(22,u.getAge());
-//	}
 
 	public void findPwdByAccount() throws Exception {
 		System.out.println(moduleMapper.selectModule("交大人事"));

@@ -1,6 +1,7 @@
 package com.saas.appmanage.Mapper;
 
 import com.saas.appmanage.Entity.App;
+import com.saas.appmanage.Entity.minApp;
 import org.apache.ibatis.annotations.*;
 
 import java.util.Date;
@@ -100,5 +101,5 @@ public interface AppMapper {
 
     //租户管理系统查询所有在售应用信息
     @Select("SELECT ap.*,s.Company as SVenderName FROM appprice as ap,svender as s where ap.SVID = s.ID AND ap.Status = '在售'")
-    List<App> queryAppsForSale();
+    List<minApp> queryAppsForSale();
 }

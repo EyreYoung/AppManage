@@ -2,6 +2,8 @@ package com.saas.appmanage.Mapper;
 
 import com.saas.appmanage.Entity.Authority;
 import com.saas.appmanage.Entity.Service;
+import com.saas.appmanage.Entity.minService;
+import com.saas.appmanage.Entity.minminService;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -52,5 +54,9 @@ public interface ServiceMapper {
 
     //根据权限ID查询关联服务
     @Select("select s.ID as sID,s.Name as sName,s.Intro as sIntro,s.Version as sVer,s.Status as sStatus from service as s,authorityservice as a where a.service_id = s.ID and a.authority_id = ${auth_id}")
-    List<Service> selectServicesByAuthID(@Param("auth_id") int auth_id);
+    List<minminService> selectServicesByAuthID(@Param("auth_id") int auth_id);
+
+    //根据租户管理模块ID找到所有服务信息
+    @Select("select sID,sName,sDepen,sReq,sVer,sAuth,sIntro,sPrice,sStatus from (select auser.service_id,GROUP_CONCAT(DISTINCT a.auth_name) as sAuth from authority as a,authorityservice as auser where a.auth_id=auser.authority_id GROUP BY service_id) as au RIGHT JOIN serviceplus as sp on sp.sID = au.service_id where mID = ${mID}")
+    List<minService> selectServiceByModuleID(@Param("mID") int mID);
 }

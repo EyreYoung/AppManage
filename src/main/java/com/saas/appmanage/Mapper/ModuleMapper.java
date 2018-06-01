@@ -1,6 +1,7 @@
 package com.saas.appmanage.Mapper;
 
 import com.saas.appmanage.Entity.Module;
+import com.saas.appmanage.Entity.minModule;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -26,7 +27,7 @@ public interface ModuleMapper {
     int updateModule(@Param("module_id") int module_id);
 
     //根据应用名查询该应用所有模块
-    @Select("SELECT mo.ID AS mID,mo.Name AS mName,mo.depen,mo.Version AS ver,mo.Intro AS mIntro,mo.Status AS mStatus FROM (SELECT * FROM module AS m LEFT JOIN (SELECT ModuleID1 AS moid,GROUP_CONCAT( DISTINCT m.Name ) AS depen FROM moduledependence AS md,module AS m WHERE m.ID = md.Depend GROUP BY ModuleID1) AS d ON m.ID = d.moid) AS mo,appmodule AS am,app AS a WHERE mo.ID = am.ModuleID AND a.ID = am.AppID AND a.Name = #{appname} ORDER BY mID")
+    @Select("SELECT mo.ID AS mID,mo.Name AS mName,mo.depen,mo.Version AS ver,mo.Intro AS mIntro,mo.Status AS mStatus,am.Required AS mReq FROM (SELECT * FROM module AS m LEFT JOIN (SELECT ModuleID1 AS moid,GROUP_CONCAT( DISTINCT m.Name ) AS depen FROM moduledependence AS md,module AS m WHERE m.ID = md.Depend GROUP BY ModuleID1) AS d ON m.ID = d.moid) AS mo,appmodule AS am,app AS a WHERE mo.ID = am.ModuleID AND a.ID = am.AppID AND a.Name = #{appname} ORDER BY mID")
     List<Module> selectModule(@Param("appname") String appname);
 
     //插入模块
@@ -47,5 +48,5 @@ public interface ModuleMapper {
 
     //根据应ID查询该应用所有模块
     @Select("SELECT mo.ID AS mID,mo.Name AS mName,mo.depen,mo.Version AS ver,mo.Intro AS mIntro,mo.Status AS mStatus,am.Required AS mReq FROM (SELECT * FROM module AS m LEFT JOIN (SELECT ModuleID1 AS moid,GROUP_CONCAT( DISTINCT m.Name ) AS depen FROM moduledependence AS md,module AS m WHERE m.ID = md.Depend GROUP BY ModuleID1) AS d ON m.ID = d.moid) AS mo,appmodule AS am,app AS a WHERE mo.ID = am.ModuleID AND a.ID = am.AppID AND a.ID = ${app_id} ORDER BY mID")
-    List<Module> selectModuleByAppID(@Param("app_id") int app_id);
+    List<minModule> selectModuleByAppID(@Param("app_id") int app_id);
 }

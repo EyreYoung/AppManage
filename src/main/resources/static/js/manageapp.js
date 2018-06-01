@@ -25,7 +25,7 @@ $('#manage-auth-button').on("click",function () {
         $('#manage').append(step2);
         //等待DOM更新，否则找不到新加入的元素
         window.setTimeout(function() {
-            //默认填好应用名和开发商名
+            //默认填好应用名和提供商名
             $('#showappName0').val(name);
             $('#showcpyName0').val(cpy);
             $('#showappName0').attr("disabled",true);
@@ -114,7 +114,7 @@ $('#manage-module-button').on("click",function () {
         $('#manage').append(step3);
         //等待DOM更新，否则找不到新加入的元素
         window.setTimeout(function() {
-            //默认填好应用名和开发商名
+            //默认填好应用名和提供商名
             $('#showappName').val(name);
             $('#showcpyName').val(cpy);
             $('#showappName').attr("disabled",true);
@@ -250,7 +250,7 @@ $('#manage-service-button').on("click",function () {
         $('#manage').append(step4);
         //等待DOM更新，否则找不到新加入的元素
         window.setTimeout(function() {
-            //默认填好应用名和开发商名
+            //默认填好应用名和提供商名
             $('#showappName2').val(name);
             $('#showcpyName2').val(cpy);
             $('#showappName2').attr("disabled",true);

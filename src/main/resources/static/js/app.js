@@ -38,9 +38,22 @@ $(document).ready(function () {
                     console.log(data);
                     $('#modTable').empty();
                     for(var i = 0;i < data.length;i++){
-                        $('#modTable').append('<h4>' + data[i].mName + '</h4>\n' +
-                            '                            <ul id="mod' + i + '">\n' +
-                            '                            </ul>');
+                        if(data[i].mReq == '是'){
+                            if(data[i].depen != null){
+                                $('#modTable').append('<h4>' + data[i].mName + '(必选)</h4><h5>(依赖模块:' + data[i].depen + ')</h5><ul id="mod' + i + '"></ul>');
+                            }else{
+                                $('#modTable').append('<h4>' + data[i].mName + '(必选)</h4><ul id="mod' + i + '"></ul>');
+                            }
+
+                        }else{
+                            if(data[i].depen != null){
+                                $('#modTable').append('<h4>' + data[i].mName + '</h4><h5>(依赖模块:' + data[i].depen + ')</h5><ul id="mod' + i + '"></ul>');
+                            }else {
+                                $('#modTable').append('<h4>' + data[i].mName + '</h4><ul id="mod' + i + '"></ul>');
+                            }
+
+                        }
+
                     }
                     for(var i = 0;i < data.length;i++){
                         //selectService(data,i);
@@ -126,7 +139,7 @@ $(document).ready(function () {
 
     );
 
-    //开发商信息
+    //提供商信息
     $.post(
         '/queryCpyByAppID',
         {

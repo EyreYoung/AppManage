@@ -1,6 +1,7 @@
 package com.saas.appmanage.Mapper;
 
 import com.saas.appmanage.Entity.Authority;
+import com.saas.appmanage.Entity.minAuth;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -14,7 +15,7 @@ public interface AuthorityMapper {
 
     //根据应用ID查询所有权限
     @Select("select auth_id,auth_name,auth_intro from authority as au where au.app_id = ${app_id}")
-    List<Authority> selectAuthorityByAppID(@Param("app_id") int app_id);
+    List<minAuth> selectAuthorityByAppID(@Param("app_id") int app_id);
 
     //根据App_Name查询所有权限
     @Select("select auth_id,app.Name as app_name,auth_name,auth_intro from authority as au,app where app_id = app.ID and app.Name = #{appname}")
@@ -32,5 +33,5 @@ public interface AuthorityMapper {
 
     //根据服务ID查询需要权限
     @Select("select auth_id,auth_name,auth_intro from authority as a,authorityservice as s where a.auth_id = s.authority_id and s.service_id = ${service_id}")
-    List<Authority> selectAuthByServiceID(@Param("service_id") int service_id);
+    List<minAuth> selectAuthByServiceID(@Param("service_id") int service_id);
 }

@@ -1,4 +1,4 @@
-//开发商注册
+//提供商注册
 $('#companyRegister').click(function (){
     var acc = $('#regAcc').val();
     var pwd = $('#regPwd').val();
@@ -21,14 +21,19 @@ $('#companyRegister').click(function (){
             },
             function (data) {
                 console.log(data);
-                window.alert(data.response);
+                if(data.response == 1){
+                    alert("提供商注册成功，请等待管理员审核。");
+                    location.replace("/index");
+                }else{
+                    alert("注册失败，原因可能为缺少必填项或名称重复。");
+                }
             }
         );
     }
 });
 
 
-//开发商登录
+//提供商登录
 $('#companyLogin').click(function () {
     var acc = $('#cpyLoginAcc').val();
     var pwd = $('#cpyLoginPwd').val();
@@ -82,7 +87,7 @@ function initFileInput(uploadURL) {
     });
 }
 
-//进入页面根据开发商id初始化页面
+//进入页面根据提供商id初始化页面
 $(document).ready(function () {
     var path = "/uploadimg";
     initFileInput(path);
@@ -184,7 +189,7 @@ $('#registerAppStep1').click(function (){
                 $('#reg').append(step2);
                 //等待DOM更新，否则找不到新加入的元素
                 window.setTimeout(function() {
-                    //默认填好应用名和开发商名
+                    //默认填好应用名和提供商名
                     $('#showappName0').val(name);
                     $('#showcpyName0').val(cpy);
                     $('#showappName0').attr("disabled",true);
@@ -245,7 +250,7 @@ $('#registerAppStep1').click(function (){
                     $('#reg').append(step3);
                     //等待DOM更新，否则找不到新加入的元素
                     window.setTimeout(function() {
-                        //默认填好应用名和开发商名
+                        //默认填好应用名和提供商名
                         $('#showappName').val(name);
                         $('#showcpyName').val(cpy);
                         $('#showappName').attr("disabled",true);
@@ -335,7 +340,7 @@ $('#registerAppStep1').click(function (){
                         $('#reg').append(step4);
                         //等待DOM更新，否则找不到新加入的元素
                         window.setTimeout(function() {
-                            //默认填好应用名和开发商名
+                            //默认填好应用名和提供商名
                             $('#showappName2').val(name);
                             $('#showcpyName2').val(cpy);
                             $('#showappName2').attr("disabled",true);
@@ -574,6 +579,9 @@ function InitModuleTable(appname) {
                 field: 'depen',
                 title: '依赖模块'
             }, {
+                field: 'mReq',
+                title: '必选'
+            }, {
                 field: 'ver',
                 title: '版本'
             }, {
@@ -652,7 +660,7 @@ function InitServiceTable() {
     });
 }
 
-//开发商应用管理
+//提供商应用管理
 function initApptable(cpyid) {
     $('#appmanage').bootstrapTable({
         url: '/queryAppByCpyID?cpy_id='+cpyid,

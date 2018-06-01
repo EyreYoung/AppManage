@@ -63,7 +63,7 @@ function InitAdminTable() {
     });
 }
 
-//开发商管理表
+//提供商管理表
 function InitCpyTable() {
     $('#cpyTable').bootstrapTable({
         url: '/admin/queryCpys',
@@ -118,7 +118,7 @@ function InitCpyTable() {
     });
 }
 
-//审核开发商列表
+//审核提供商列表
 function InitRegCpyTable() {
     $('#regCpyTable').bootstrapTable({
         url: '/admin/queryRegCpys',
@@ -152,7 +152,7 @@ function InitRegCpyTable() {
                 checkbox: true
             }, {
                 field: 'id',
-                title: '开发商ID'
+                title: '提供商ID'
             }, {
                 field: 'account',
                 title: '用户名'
@@ -219,7 +219,7 @@ function InitAppTable() {
                 title: '评分'
             }, {
                 field: 'svenderName',
-                title: '开发者'
+                title: '提供商'
             }, {
                 field: 'regDate',
                 title: '注册日期'
@@ -283,7 +283,7 @@ function InitRegAppTable() {
                 title: '评分'
             }, {
                 field: 'svenderName',
-                title: '开发者'
+                title: '提供商'
             }, {
                 field: 'regDate',
                 title: '注册日期'
@@ -313,11 +313,11 @@ $(document).ready(function() {
     $('#appManage').collapse('show');
 });
 
-//审核开发商注册通过按钮
+//审核提供商注册通过按钮
 $('#censorCpy_pass_button').on("click",function () {
     var selectContent = $('#regCpyTable').bootstrapTable('getSelections');
     if(selectContent.length!=1) {
-        alert("请选择一个开发商");
+        alert("请选择一个提供商");
     }else {
         var cpy_id = selectContent[0].id;
         $.post(
@@ -334,11 +334,11 @@ $('#censorCpy_pass_button').on("click",function () {
     }
 });
 
-//审核开发商注册不通过按钮
+//审核提供商注册不通过按钮
 $('#censorCpy_not_pass_button').on("click",function () {
     var selectContent = $('#regCpyTable').bootstrapTable('getSelections');
     if(selectContent.length!=1) {
-        alert("请选择一个开发商");
+        alert("请选择一个提供商");
     }else {
         var cpy_id = selectContent[0].id;
         $.post(
